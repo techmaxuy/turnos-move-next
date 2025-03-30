@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import postgres from 'postgres';
-import { invoices, customers, revenue, users } from '@/app/lib/placeholder-data';
+import { pagos, clientes, revenue, usuarios } from '@/app/lib/placeholder-data';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -16,7 +16,7 @@ async function seedUsers() {
   `;
 
   const insertedUsers = await Promise.all(
-    users.map(async (user) => {
+    usuarios.map(async (user) => {
       const hashedPassword = await bcrypt.hash(user.password, 10);
       return sql`
         INSERT INTO users (id, name, email, password)
@@ -38,12 +38,17 @@ async function seedInvoices() {
       customer_id UUID NOT NULL,
       amount INT NOT NULL,
       status VARCHAR(255) NOT NULL,
-      date DATE NOT NULL
+      date DATE NOT NULL,
+      tipo VARCHAR(255) NOT NULL,
+      banco VARCHAR(255),
+      tarjeta VARCHAR(255),
+      transaccion VARCHAR(255),
+      servicio VARCHAR(255) NOT NULL,
     );
   `;
 
   const insertedInvoices = await Promise.all(
-    invoices.map(
+    pagos.map(
       (invoice) => sql`
         INSERT INTO invoices (customer_id, amount, status, date)
         VALUES (${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date})
@@ -63,15 +68,14 @@ async function seedCustomers() {
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       email VARCHAR(255) NOT NULL,
-      image_url VARCHAR(255) NOT NULL
     );
   `;
 
   const insertedCustomers = await Promise.all(
-    customers.map(
+    clientes.map(
       (customer) => sql`
-        INSERT INTO customers (id, name, email, image_url)
-        VALUES (${customer.id}, ${customer.name}, ${customer.email}, ${customer.image_url})
+        INSERT INTO customers (id, name, email)
+        VALUES (${customer.id}, ${customer.name}, ${customer.email})
         ON CONFLICT (id) DO NOTHING;
       `,
     ),

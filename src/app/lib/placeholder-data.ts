@@ -1,6 +1,6 @@
 // This file contains placeholder data that you'll be replacing with real data in the Data Fetching chapter:
 // https://nextjs.org/learn/dashboard-app/fetching-data
-const users = [
+const usuarios = [
     {
       id: '410544b2-4001-4271-9855-fec4b6a6442a',
       name: 'root',
@@ -9,105 +9,101 @@ const users = [
     },
   ];
   
-  const customers = [
+  const clientes = [
     {
       id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
       name: 'Jhole Maleiro',
       email: 'jmaleiro@gmail.com',
-      image_url: '/customers/evil-rabbit.png',
     },
     {
       id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
       name: 'Claudia Yarza',
       email: 'caiayarza@gmail.com',
-      image_url: '/customers/delba-de-oliveira.png',
     },
     {
       id: '3958dc9e-742f-4377-85e9-fec4b6a6442a',
       name: 'Mateo DUva',
       email: 'mateoduva2007@gmail.com',
-      image_url: '/customers/lee-robinson.png',
     },
   ];
   
-  const invoices = [
+  const pagos = [
     {
-      customer_id: customers[0].id,
-      amount: 15795,
-      status: 'pending',
-      date: '2022-12-06',
+      customer_id: clientes[0].id,
+      amount: 2400,
+      status: 'pago',
+      date: '2025-03-06',
+      tipo: 'efectivo',
+      banco:'', 
+      tarjeta: '',
+      transaccion: '',
+      servicio: '24c',
     },
     {
-      customer_id: customers[1].id,
-      amount: 20348,
-      status: 'pending',
-      date: '2022-11-14',
+      customer_id: clientes[0].id,
+      amount: 2400,
+      status: 'pago',
+      date: '2025-02-06',
+      tipo: 'efectivo',
+      banco:'', 
+      tarjeta: '',
+      transaccion: '',
+      servicio: '24c',
     },
     {
-      customer_id: customers[2].id,
-      amount: 3040,
-      status: 'paid',
-      date: '2022-10-29',
+      customer_id: clientes[0].id,
+      amount: 2400,
+      status: 'pago',
+      date: '2025-01-06',
+      tipo: 'efectivo',
+      banco:'', 
+      tarjeta: '',
+      transaccion: '',
+      servicio: '24c',
     },
     {
-      customer_id: customers[0].id,
-      amount: 44800,
-      status: 'paid',
-      date: '2023-09-10',
+      customer_id: clientes[1].id,
+      amount: 1900,
+      status: 'pago',
+      date: '2025-02-06',
+      tipo: 'tarjeta',
+      banco:'', 
+      tarjeta: 'visa',
+      transaccion: '123456789',
+      servicio: '12c',
     },
     {
-      customer_id: customers[1].id,
-      amount: 34577,
-      status: 'pending',
-      date: '2023-08-05',
+      customer_id: clientes[1].id,
+      amount: 1900,
+      status: 'pago',
+      date: '2025-01-06',
+      tipo: 'tarjeta',
+      banco:'', 
+      tarjeta: 'visa',
+      transaccion: '123456745',
+      servicio: '12c',
     },
     {
-      customer_id: customers[2].id,
-      amount: 54246,
-      status: 'pending',
-      date: '2023-07-16',
+      customer_id: clientes[2].id,
+      amount: 1900,
+      status: 'pendiente',
+      date: '2025-02-06',
+      tipo: 'giro',
+      banco: 'BROU',
+      tarjeta: '',
+      transaccion: '123756745',
+      servicio: '12c',
     },
     {
-      customer_id: customers[0].id,
-      amount: 666,
-      status: 'pending',
-      date: '2023-06-27',
-    },
-    {
-      customer_id: customers[1].id,
-      amount: 32545,
-      status: 'paid',
-      date: '2023-06-09',
-    },
-    {
-      customer_id: customers[2].id,
-      amount: 1250,
-      status: 'paid',
-      date: '2023-06-17',
-    },
-    {
-      customer_id: customers[0].id,
-      amount: 8546,
-      status: 'paid',
-      date: '2023-06-07',
-    },
-    {
-      customer_id: customers[1].id,
-      amount: 500,
-      status: 'paid',
-      date: '2023-08-19',
-    },
-    {
-      customer_id: customers[2].id,
-      amount: 8945,
-      status: 'paid',
-      date: '2023-06-03',
-    },
-    {
-      customer_id: customers[0].id,
-      amount: 1000,
-      status: 'paid',
-      date: '2022-06-05',
+      customer_id: clientes[2].id,
+      amount: 1900,
+      status: 'pago',
+      date: '2025-01-06',
+      tipo: 'giro',
+      banco: 'BROU',
+      tarjeta: '',
+      transaccion: '148456745',
+      servicio: '12c',
     },
   ];
   
@@ -126,4 +122,4 @@ const users = [
     { month: 'Dec', revenue: 4800 },
   ];
   
-  export { users, customers, invoices, revenue };
+  export { usuarios, clientes, pagos, revenue };
