@@ -40,18 +40,18 @@ async function seedInvoices() {
       status VARCHAR(255) NOT NULL,
       date DATE NOT NULL,
       tipo VARCHAR(255) NOT NULL,
-      banco VARCHAR(255),
-      tarjeta VARCHAR(255),
-      transaccion VARCHAR(255),
-      servicio VARCHAR(255) NOT NULL,
+      banco VARCHAR(255) NOT NULL,
+      tarjeta VARCHAR(255) NOT NULL,
+      transaccion VARCHAR(255) NOT NULL,
+      servicio VARCHAR(255) NOT NULL
     );
   `;
 
   const insertedInvoices = await Promise.all(
     pagos.map(
       (invoice) => sql`
-        INSERT INTO invoices (customer_id, amount, status, date)
-        VALUES (${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date})
+        INSERT INTO invoices (customer_id, amount, status, date, tipo, banco, tarjeta, transaccion, servicio)
+        VALUES (${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date}, ${invoice.tipo}, ${invoice.banco}, ${invoice.tarjeta}, ${invoice.transaccion}, ${invoice.servicio})
         ON CONFLICT (id) DO NOTHING;
       `,
     ),
@@ -67,7 +67,7 @@ async function seedCustomers() {
     CREATE TABLE IF NOT EXISTS customers (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
-      email VARCHAR(255) NOT NULL,
+      email VARCHAR(255) NOT NULL
     );
   `;
 
