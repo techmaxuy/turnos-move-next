@@ -8,6 +8,7 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+import { formatDateToLocal } from './utils';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -30,19 +31,22 @@ export async function fetchRevenue() {
   }
 }
 
+//amount: formatCurrency(invoice.amount),
+
 export async function fetchLatestInvoices() {
   try {
     const data = await sql<LatestInvoiceRaw[]>`
-      SELECT invoices.amount, customers.name,  invoices.id
+      SELECT invoices.amount, customers.name,  invoices.id, invoices.date
       FROM invoices
       JOIN customers ON invoices.customer_id = customers.id
       ORDER BY invoices.date DESC
-      LIMIT 7`;
+      LIMIT 5`;
     console.log(data)
     const latestInvoices = data.map((invoice) => ({
       ...invoice,
-      amount: formatCurrency(invoice.amount),
+      date: formatDateToLocal(invoice.date),
     }));
+    console.log(latestInvoices)
     return latestInvoices;
   } catch (error) {
     console.error('Database Error:', error);

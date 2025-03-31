@@ -34,7 +34,7 @@ export type User = {
   export type LatestInvoice = {
     id: string;
     name: string;
-    image_url: string;
+    date: string;
     email: string;
     amount: string;
   };
