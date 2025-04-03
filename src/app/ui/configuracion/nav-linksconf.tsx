@@ -8,11 +8,8 @@ import clsx from 'clsx';
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Configuracion', href: '/configuracion' },
-  { name: 'Portal de Ingreso', href: '/portalingreso' },
-  { name: 'Mis Creditos', href: '/perfil/miscreditos'  },
-  { name: 'Mis Reservas', href: '/perfil/misreservas' },
-  { name: 'Reservar', href: '/perfil/reservar' },
+  { name: 'Clientes', href: '/configuracion/clientes' },
+  { name: 'Pagos', href: '/configuracion/pagos'  },
 ];
 
 export default function NavLinks() {
