@@ -12,13 +12,30 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 const FormSchema = z.object({
   id: z.string(),
   customerId: z.string({
-    invalid_type_error: 'Please select a customer.',
+    invalid_type_error: 'Por favor selecciona un cliente.',
+  }),
+  servicioId: z.string({
+    invalid_type_error: 'Por favor selecciona un servicio.',
   }),
   amount: z.coerce
     .number()
-    .gt(0, { message: 'Please enter an amount greater than $0.' }),
+    .gt(0, { message: 'Por favor ingresa un monto mayor a $0.' }),
+  formaPagoId: z.string({
+    invalid_type_error: 'Por favor selecciona un tipo de pago.',
+  }),
+  banco: z.string().refine((value) => value !== '', {
+     message: 'Por favor ingresa un banco.',
+   }),
+
+   tarjeta: z.string().refine((value) => value !== '', {
+    message: 'Por favor ingresa un tarjeta.',
+  }),
+
+  transaccion: z.string().refine((value) => value !== '', {
+    message: 'Por favor ingresa un transacion.',
+  }),
   status: z.enum(['pending', 'paid'], {
-    invalid_type_error: 'Please select an invoice status.',
+    invalid_type_error: 'Por favor selecciona un estado pago.',
   }),
   date: z.string(),
 });
@@ -29,8 +46,13 @@ const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 export type State = {
   errors?: {
     customerId?: string[];
+    servicioId?: string[];
     amount?: string[];
     status?: string[];
+    formaPagoId?: string[];
+    banco?: string[];
+    tarjeta?: string[];
+    transaccion?: string[];
   };
   message?: string | null;
 };
@@ -39,28 +61,34 @@ export async function createInvoice(prevState: State, formData: FormData) {
   // Validate form fields using Zod
   const validatedFields = CreateInvoice.safeParse({
     customerId: formData.get('customerId'),
+    servicioId: formData.get('servicioId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
+    formaPagoId: formData.get('formaPagoId'),
+    banco: formData.get('banco'),
+    tarjeta: formData.get('tarjeta'),
+    transaccion: formData.get('transaccion'),
   });
+
 
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Create Invoice.',
+      message: 'Faltan llenar campos. Imposible cargar pago.',
     };
   }
 
   // Prepare data for insertion into the database
-  const { customerId, amount, status } = validatedFields.data;
+  const { customerId, servicioId, amount, status,formaPagoId, banco, tarjeta , transaccion} = validatedFields.data;
   const amountInCents = amount * 100;
   const date = new Date().toISOString().split('T')[0];
 
   // Insert data into the database
   try {
     await sql`
-      INSERT INTO invoices (customer_id, amount, status, date)
-      VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
+      INSERT INTO invoices (customer_id, amount, status, date,tipo,banco,tarjeta,transaccion,servicio)
+      VALUES (${customerId}, ${amountInCents}, ${status}, ${date},${formaPagoId},${banco},${tarjeta},${transaccion},${servicioId})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
@@ -70,8 +98,8 @@ export async function createInvoice(prevState: State, formData: FormData) {
   }
 
   // Revalidate the cache for the invoices page and redirect the user.
-  revalidatePath('/dashboard/invoices');
-  redirect('/dashboard/invoices');
+  revalidatePath('/configuracion/pagos');
+  redirect('/configuracion/pagos');
 }
 
 export async function updateInvoice(

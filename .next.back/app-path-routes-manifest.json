@@ -1,0 +1,17 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/query/route": "/query",
+  "/seed/route": "/seed",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/portalingreso/page": "/portalingreso",
+  "/configuracion/clientes/agregar/page": "/configuracion/clientes/agregar",
+  "/configuracion/clientes/page": "/configuracion/clientes",
+  "/configuracion/page": "/configuracion",
+  "/configuracion/pagos/page": "/configuracion/pagos",
+  "/perfil/configuracion/page": "/perfil/configuracion",
+  "/perfil/miscreditos/page": "/perfil/miscreditos",
+  "/perfil/misreservas/page": "/perfil/misreservas",
+  "/perfil/page": "/perfil",
+  "/perfil/reservar/page": "/perfil/reservar"
+}

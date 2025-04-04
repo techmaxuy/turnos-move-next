@@ -1,0 +1,17 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/query/route": "app/query/route.js",
+  "/seed/route": "app/seed/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/portalingreso/page": "app/portalingreso/page.js",
+  "/configuracion/clientes/agregar/page": "app/configuracion/clientes/agregar/page.js",
+  "/configuracion/clientes/page": "app/configuracion/clientes/page.js",
+  "/configuracion/page": "app/configuracion/page.js",
+  "/configuracion/pagos/page": "app/configuracion/pagos/page.js",
+  "/perfil/configuracion/page": "app/perfil/configuracion/page.js",
+  "/perfil/miscreditos/page": "app/perfil/miscreditos/page.js",
+  "/perfil/misreservas/page": "app/perfil/misreservas/page.js",
+  "/perfil/page": "app/perfil/page.js",
+  "/perfil/reservar/page": "app/perfil/reservar/page.js"
+}
