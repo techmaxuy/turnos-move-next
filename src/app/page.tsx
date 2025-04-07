@@ -12,10 +12,10 @@ export default function Home() {
           height={400}
           priority
         />
-        <h1 className="text-center text-4xl p-20">
+        <h1 className="text-center text-4xl pb-5">
           Bienvenido a Move
         </h1>
-        <p className="text-center text-2xl p-20">
+        <p className="text-center text-2xl pb-5">
           Aplicacion de reservas de turnos
         </p>
         <a
