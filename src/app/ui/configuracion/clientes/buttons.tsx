@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { deleteInvoice } from '@/app/lib/actions';
+import { borrarCliente } from '@/app/lib/actions';
 
 export function AgregarUsuario() {
   return (
@@ -14,25 +14,24 @@ export function AgregarUsuario() {
   );
 }
 
-export function UpdateInvoice({ id }: { id: string }) {
+export function ModificarCliente({ id }: { id: string }) {
   return (
     <Link
-      href={`/dashboard/invoices/${id}/edit`}
-      className="rounded-md border p-2 hover:bg-gray-100"
-    >
-      
+      href={`/configuracion/clientes/${id}/editar`}
+      className="rounded-md border p-2 hover:bg-gray-100">
+      Editar
     </Link>
   );
 }
 
-export function DeleteInvoice({ id }: { id: string }) {
-  const deleteInvoiceWithId = deleteInvoice.bind(null, id);
+export function BorrarCliente({ id }: { id: string }) {
+  const borrarClienteWithId = borrarCliente.bind(null, id);
 
   return (
-    <form action={deleteInvoiceWithId}>
+    <form action={borrarClienteWithId}>
       <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
-        <span className="sr-only">Delete</span>
-        
+        <span className="sr-only"></span>
+        Borrar
       </button>
     </form>
   );

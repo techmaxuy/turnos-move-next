@@ -78,6 +78,7 @@ export type User = {
   export type CustomerField = {
     id: string;
     name: string;
+    email: string;
   };
   
   export type InvoiceForm = {
