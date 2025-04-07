@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { fetchLatestInvoices } from '@/app/lib/data';
 
+
 export default async function LatestPagos() {
   const latestInvoices = await fetchLatestInvoices();
 
