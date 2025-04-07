@@ -12,7 +12,7 @@ export default function Home() {
           height={400}
           priority
         />
-        <h1 className="text-center">
+        <h1 className="text-center text-5xl">
           Bienvenido a Move
         </h1>
         <p className="text-center">
