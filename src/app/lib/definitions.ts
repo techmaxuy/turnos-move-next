@@ -13,7 +13,6 @@ export type User = {
     id: string;
     name: string;
     email: string;
-    image_url: string;
   };
   
   export type Invoice = {

@@ -2,7 +2,7 @@
 import Pagination from '@/app/ui/configuracion/clientes/pagination';
 import Search from '@/app/ui/configuracion/search';
 import Table from '@/app/ui/configuracion/clientes/table';
-import { AgregarUsuario } from '@/app/ui/configuracion/clientes/buttons';
+import { AgregarCliente } from '@/app/ui/configuracion/clientes/buttons';
 import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
@@ -27,7 +27,7 @@ export default async function Page(props: {
         <Suspense fallback={<InvoicesTableSkeleton />}>
           <Search placeholder="Buscar clientes..." />
         </Suspense>
-        <AgregarUsuario />
+        <AgregarCliente />
       </div>
       {  <Suspense key={query} fallback={<InvoicesTableSkeleton />}>
         <Table />

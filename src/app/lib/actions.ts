@@ -40,8 +40,19 @@ const FormSchema = z.object({
   date: z.string(),
 });
 
+
+const FormSchemaCliente = z.object({
+  id: z.string(),
+  nombre: z.string({
+    invalid_type_error: 'Por favor ingresa un nombre.',
+  }),
+  email: z.string().email('Por favor ingresa un email valido.'),
+});
+
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
+const CreateCliente = FormSchemaCliente.omit({ id: true });
+const UpdateCliente = FormSchemaCliente.omit({ id: true });
 
 export type State = {
   errors?: {
@@ -56,6 +67,15 @@ export type State = {
   };
   message?: string | null;
 };
+
+export type clienteState = {
+  errors?: {
+    nombre?: string[];
+    email?: string[];
+  };
+  message?: string | null;
+};
+
 
 export async function createInvoice(prevState: State, formData: FormData) {
   // Validate form fields using Zod
@@ -101,6 +121,46 @@ export async function createInvoice(prevState: State, formData: FormData) {
   revalidatePath('/configuracion/pagos');
   redirect('/configuracion/pagos');
 }
+
+export async function createCliente(prevState: clienteState, formData: FormData) {
+  // Validate form fields using Zod
+  const validatedFields = CreateCliente.safeParse({
+    nombre: formData.get('nombre'),
+    email: formData.get('email'),
+  });
+
+  
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+
+
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Faltan llenar campos. Imposible crear cliente.',
+    };
+  }
+
+  // Prepare data for insertion into the database
+  const { nombre, email} = validatedFields.data;
+
+  // Insert data into the database
+  try {
+    await sql`
+      INSERT INTO customers (name, email)
+      VALUES (${nombre}, ${email})
+    `;
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Create Invoice.',
+    };
+  }
+
+  // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath('/configuracion/clientes');
+  redirect('/configuracion/clientes');
+}
+
 
 export async function updateInvoice(
   id: string,
