@@ -19,7 +19,7 @@ export default function Home() {
           Aplicacion de reservas de turnos
         </p>
         <a
-            className="rounded-full border-solid-[#01feab] transition-colors bg-[#212121] hover:bg-[#00885b]"
+            className="rounded-full border-solid-[#01feab] transition-colors bg-[#212121] hover:bg-[#00885b] text-center h-10 w-40"
             href="/perfil"
             rel="noopener noreferrer"
           >
