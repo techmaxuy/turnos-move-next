@@ -5,9 +5,11 @@ export default function Home() {
     <div className="items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col">
         <Image
-          className="dark:invert w-400 h-400"
+          className="dark:invert"
           src="/logonuevo.svg"
           alt="Move logo"
+          width={400}
+          height={400}
           priority
         />
         <h1 className="text-4xl sm:text-5xl  text-center">
