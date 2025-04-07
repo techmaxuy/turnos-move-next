@@ -47,6 +47,9 @@ const FormSchemaCliente = z.object({
     invalid_type_error: 'Por favor ingresa un nombre.',
   }),
   email: z.string().email('Por favor ingresa un email valido.'),
+  telefono: z.string({
+    invalid_type_error: 'Por favor ingresa un telefono.',
+  }),
 });
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
@@ -72,6 +75,7 @@ export type clienteState = {
   errors?: {
     nombre?: string[];
     email?: string[];
+    telefono?: string[];
   };
   message?: string | null;
 };
@@ -127,6 +131,7 @@ export async function createCliente(prevState: clienteState, formData: FormData)
   const validatedFields = CreateCliente.safeParse({
     nombre: formData.get('nombre'),
     email: formData.get('email'),
+    telefono: formData.get('telefono'),
   });
 
   
@@ -141,13 +146,13 @@ export async function createCliente(prevState: clienteState, formData: FormData)
   }
 
   // Prepare data for insertion into the database
-  const { nombre, email} = validatedFields.data;
+  const { nombre, email, telefono} = validatedFields.data;
 
   // Insert data into the database
   try {
     await sql`
-      INSERT INTO customers (name, email)
-      VALUES (${nombre}, ${email})
+      INSERT INTO customers (name, email, telefono)
+      VALUES (${nombre}, ${email}, ${telefono})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
