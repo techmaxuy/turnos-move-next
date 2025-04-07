@@ -12,14 +12,14 @@ export default function Home() {
           height={400}
           priority
         />
-        <h1 className="text-4xl sm:text-5xl  text-center">
+        <h1 className="text-center">
           Bienvenido a Move
         </h1>
-        <p className="text-center text-lg sm:text-xl">
+        <p className="text-center">
           Aplicacion de reservas de turnos
         </p>
         <a
-            className="rounded-full border border-solid border-[#01feab] dark:border-white/[.145] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
+            className="rounded-full border-solid-[#01feab] transition-colors bg-[#212121] hover:bg-[#00885b]"
             href="/perfil"
             rel="noopener noreferrer"
           >
