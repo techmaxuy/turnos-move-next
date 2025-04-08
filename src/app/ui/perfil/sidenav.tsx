@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function SideNav() {
   return (
-    <div className="">
+    <div className="flex h-full flex-col px-3 py-4 md:px-2">
       <Link
         className=""
         href="/"
@@ -20,16 +20,11 @@ export default function SideNav() {
                   />
         </div>
       </Link>
-      <div className="">
+      <div className="flex grow flex-row justify-between space-x-1 md:flex-col md:space-x-0 md:space-y-1">
         <NavLinks />
-        <div className="">
-          
-        </div>
         <form>
-          <button className="">          
-            <div className="">
+          <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-[#212121] p-3 text-xs font-small md:text-sm md:font-medium hover:bg-[#01feab] hover:text-black md:flex-none md:justify-start md:p-2 md:px-3">       
               Cerrar Sesion
-            </div>
           </button>
         </form>
       </div>

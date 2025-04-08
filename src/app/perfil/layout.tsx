@@ -3,7 +3,7 @@ import SideNav from "@/app/ui/perfil/sidenav";
 export default function Layout({  children,}: Readonly<{  children: React.ReactNode;}>) {
   return (
     <div className="flex flex-col"> 
-      <div className="">
+      <div className="w-full md:w-64">
         <SideNav />
       </div>
       <div className="">

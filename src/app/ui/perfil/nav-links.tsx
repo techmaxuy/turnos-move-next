@@ -27,13 +27,13 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-[48px] rounded-md bg-[#212121] hover:bg-[#01feab] hover:text-[#212121]',
+              'flex h-[48px] items-center justify-center gap-2  p-3 rounded-md bg-[#212121] hover:bg-[#01feab] hover:text-[#212121] text-xs font-small md:text-sm md:font-medium md:flex-none md:justify-start md:p-2 md:px-3',
               {
                 'text-[#01feab]': pathname === link.href,
               },
             )}
           >
-            <p className="">{link.name}</p>
+            <p>{link.name}</p>
           </Link>
         );
       })}
