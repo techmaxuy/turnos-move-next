@@ -177,7 +177,10 @@ export async function fetchCustomers() {
       SELECT
         id,
         name,
-        email
+        email,
+        telefono,
+        ci,
+        creditos
       FROM customers
       ORDER BY name ASC
     `;
@@ -185,7 +188,7 @@ export async function fetchCustomers() {
     return customers;
   } catch (err) {
     console.error('Database Error:', err);
-    throw new Error('Failed to fetch all customers.');
+    throw new Error('Fallo para traer todos los clientes.');
   }
 }
 

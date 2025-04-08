@@ -50,6 +50,15 @@ export default async function CustomersTable() {
                 <th scope="col" className="px-3 py-5 font-medium">
                   Email
                 </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Telefono
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  CI
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Creditos
+                </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Editar</span>
                 </th>
@@ -68,6 +77,15 @@ export default async function CustomersTable() {
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     <p>{cliente.email}</p>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <p>{cliente.telefono}</p>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <p>{cliente.ci}</p>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <p>{cliente.creditos}</p>
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">

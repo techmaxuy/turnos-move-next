@@ -50,6 +50,7 @@ const FormSchemaCliente = z.object({
   telefono: z.string({
     invalid_type_error: 'Por favor ingresa un telefono.',
   }),
+  creditos: z.string(),
   ci: z.string({
     invalid_type_error: 'Por favor ingresa un numero de Cedula de identidad.',
   }),
@@ -57,7 +58,7 @@ const FormSchemaCliente = z.object({
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
-const CreateCliente = FormSchemaCliente.omit({ id: true });
+const CreateCliente = FormSchemaCliente.omit({ id: true, creditos: true });
 const UpdateCliente = FormSchemaCliente.omit({ id: true });
 
 export type State = {
@@ -142,8 +143,6 @@ export async function createCliente(prevState: clienteState, formData: FormData)
   
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
-
-
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Faltan llenar campos. Imposible crear cliente.',
@@ -151,20 +150,21 @@ export async function createCliente(prevState: clienteState, formData: FormData)
   }
 
   // Prepare data for insertion into the database
-  const { nombre, email, telefono,ci} = validatedFields.data;
+  const { nombre, email, telefono, ci} = validatedFields.data;
+  const creditos = "0"; // Default value for creditos
 
   
   // Insert data into the database
   try {
 
     await sql`
-      INSERT INTO customers (name, email, telefono,creditos,CI)
-      VALUES (${nombre}, ${email}, ${telefono},'0', ${ci})
+      INSERT INTO customers (name, email, telefono,creditos,ci)
+      VALUES (${nombre}, ${email}, ${telefono},${creditos}, ${ci})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database Error: Fallo en Crear cliente.',
+      message: 'Database Error: Fallo en Crear cliente.' + error,
     };
   }
 
