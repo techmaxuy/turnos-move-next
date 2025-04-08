@@ -50,6 +50,9 @@ const FormSchemaCliente = z.object({
   telefono: z.string({
     invalid_type_error: 'Por favor ingresa un telefono.',
   }),
+  ci: z.string({
+    invalid_type_error: 'Por favor ingresa un numero de Cedula de identidad.',
+  }),
 });
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
@@ -76,6 +79,7 @@ export type clienteState = {
     nombre?: string[];
     email?: string[];
     telefono?: string[];
+    ci?: string[];
   };
   message?: string | null;
 };
@@ -132,6 +136,7 @@ export async function createCliente(prevState: clienteState, formData: FormData)
     nombre: formData.get('nombre'),
     email: formData.get('email'),
     telefono: formData.get('telefono'),
+    ci: formData.get('ci'),
   });
 
   
@@ -146,18 +151,20 @@ export async function createCliente(prevState: clienteState, formData: FormData)
   }
 
   // Prepare data for insertion into the database
-  const { nombre, email, telefono} = validatedFields.data;
+  const { nombre, email, telefono,ci} = validatedFields.data;
 
+  
   // Insert data into the database
   try {
+
     await sql`
-      INSERT INTO customers (name, email, telefono)
-      VALUES (${nombre}, ${email}, ${telefono})
+      INSERT INTO customers (name, email, telefono,creditos,CI)
+      VALUES (${nombre}, ${email}, ${telefono},'0', ${ci})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database Error: Failed to Create Invoice.',
+      message: 'Database Error: Fallo en Crear cliente.',
     };
   }
 

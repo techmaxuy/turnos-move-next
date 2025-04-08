@@ -41,7 +41,7 @@ export async function fetchLatestInvoices() {
       JOIN customers ON invoices.customer_id = customers.id
       ORDER BY invoices.date DESC
       `;
-    console.log(data)
+    //console.log(data)
     const latestInvoices = data.map((invoice) => ({
       ...invoice,
       date: formatDateToLocal(invoice.date),

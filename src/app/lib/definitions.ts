@@ -14,6 +14,8 @@ export type User = {
     name: string;
     email: string;
     telefono : string;
+    ci:string;
+    creditos: number;
   };
   
   export type Invoice = {
