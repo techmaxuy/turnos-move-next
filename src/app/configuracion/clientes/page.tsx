@@ -19,11 +19,11 @@ export default async function Page(props: {
 
 
   return (
-    <div className="w-full">
-      <div className="flex w-full items-center justify-between">
+    <div className="">
+      <div className="">
         <h1 className={`${lusitana.className} text-2xl`}>Clientes</h1>
       </div>
-      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+      <div className="">
         <Suspense fallback={<InvoicesTableSkeleton />}>
           <Search placeholder="Buscar clientes..." />
         </Suspense>
@@ -32,9 +32,15 @@ export default async function Page(props: {
       {  <Suspense key={query} fallback={<InvoicesTableSkeleton />}>
         <Table />
       </Suspense> }
-      <div className="mt-5 flex w-full justify-center">
+      <div className="">
         {/* <Pagination totalPages={totalPages} /> */}
       </div>
     </div>
   );
 }
+
+
+//w-full
+//flex w-full items-center justify-between
+//mt-4 flex items-center justify-between gap-2 md:mt-8
+//mt-5 flex w-full justify-center
