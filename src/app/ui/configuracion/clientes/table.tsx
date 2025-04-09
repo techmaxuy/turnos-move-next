@@ -10,27 +10,22 @@ export default async function CustomersTable() {
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-[#636363] p-2 md:pt-0">
+        <div className="rounded-lg bg-[#568072] p-2 md:pt-0">
+
+
           <div className="md:hidden">
             {clientes?.map((cliente) => (
-              <div
-                key={cliente.id}
-                className="mb-2 w-full rounded-md bg-white p-4"
-              >
+              <div key={cliente.id} className="flex flex-col mb-2 w-full rounded-md bg-white p-4 text-black">
                 <div className="flex items-center justify-between border-b pb-4">
-                  <div>
-                    <div className="mb-2 flex items-center">
-                      <p>{cliente.name}</p>
-                    </div>
-                    <p className="text-sm text-gray-500"> paragrap1</p>
-                  </div>
+                      <p>
+                        {cliente.name}
+                      </p>
                 </div>
-                <div className="flex w-full items-center justify-between pt-4">
+                <div className="flex flex-row w-full items-center justify-between pt-4 text-sm font-medium">
                   <div>
-                    <p className="text-xl font-medium">
-                      paragrap2
+                    <p>
+                    {cliente.email} - {cliente.telefono} - {cliente.ci} - {cliente.creditos}
                     </p>
-                    <p>paragrap3</p>
                   </div>
                   <div className="flex justify-end gap-2">
                     <ModificarCliente id={cliente.id} />
@@ -41,7 +36,7 @@ export default async function CustomersTable() {
             ))}
           </div>
 
-          <table className="hidden min-w-full text-gray-900 md:table">
+          <table className="hidden min-w-full text-white md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
@@ -68,7 +63,7 @@ export default async function CustomersTable() {
               {clientes?.map((cliente) => (
                 <tr
                   key={cliente.id}
-                  className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                  className="w-full border-b py-3 text-black text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">

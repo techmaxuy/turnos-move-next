@@ -21,17 +21,17 @@ export default async function Page(props: {
   return (
     <div className="">
       <div className="">
-        <h1 className={`${lusitana.className} text-2xl`}>Clientes</h1>
+        <h1 className={`${lusitana.className} text-2xl p-x-1`}>Clientes</h1>
       </div>
-      <div className="">
+      <div className="flex flex-row">
         <Suspense fallback={<InvoicesTableSkeleton />}>
           <Search placeholder="Buscar clientes..." />
         </Suspense>
         <AgregarCliente />
       </div>
-      {  <Suspense key={query} fallback={<InvoicesTableSkeleton />}>
+      <Suspense key={query} fallback={<InvoicesTableSkeleton />}>
         <Table />
-      </Suspense> }
+      </Suspense> 
       <div className="">
         {/* <Pagination totalPages={totalPages} /> */}
       </div>
