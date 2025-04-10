@@ -19,10 +19,8 @@ export default async function Page(props: {
 
 
   return (
-    <div className="">
-      <div className="">
+    <div className="mx-2 md:mt-15">
         <h1 className={`${lusitana.className} text-2xl p-x-1`}>Clientes</h1>
-      </div>
       <div className="flex flex-row">
         <Suspense fallback={<InvoicesTableSkeleton />}>
           <Search placeholder="Buscar clientes..." />
