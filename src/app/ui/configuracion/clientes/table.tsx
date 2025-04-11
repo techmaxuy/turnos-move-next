@@ -15,22 +15,17 @@ export default async function CustomersTable() {
 
           <div className="md:hidden">
             {clientes?.map((cliente) => (
-              <div key={cliente.id} className="flex flex-col mb-2 w-full rounded-md bg-white p-4 text-black">
-                <div className="flex items-center justify-between border-b pb-4">
-                      <p>
-                        {cliente.name}
-                      </p>
-                </div>
-                <div className="flex flex-row w-full items-center justify-between pt-4 text-sm font-medium">
-                  <div>
-                    <p>
-                    {cliente.email} - {cliente.telefono} - {cliente.ci} - {cliente.creditos}
-                    </p>
-                  </div>
-                  <div className="flex justify-end gap-2">
-                    <ModificarCliente id={cliente.id} />
-                    <BorrarCliente id={cliente.id} />
-                  </div>
+              <div key={cliente.id} className="flex flex-col mb-2 w-full rounded-md bg-white p-1 text-black">
+                <div className="flex items-center justify-between ">
+                      <div className="flex flex-row w-full items-center justify-between text-sm font-medium">
+                        <p className="px-5">
+                          {cliente.name}
+                        </p>
+                        <div className="flex justify-end gap-2">
+                          <ModificarCliente id={cliente.id} />
+                          <BorrarCliente id={cliente.id} />
+                        </div>
+                      </div>
                 </div>
               </div>
             ))}

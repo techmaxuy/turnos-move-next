@@ -3,7 +3,7 @@ import Breadcrumbs from '@/app/ui/configuracion/clientes/breadcrumbs';
  
 export default async function Page() {
   return (
-    <main>
+    <main className="mx-4 mb-4">
       <Breadcrumbs
         breadcrumbs={[
           { label: 'Clientes', href: '/configuracion/clientes' },
@@ -14,7 +14,10 @@ export default async function Page() {
           },
         ]}
       />
+      <div className="rounded-lg bg-[#212121] p-2 md:pt-0">
       <Form />
+      </div>
+      
     </main>
   );
 }
