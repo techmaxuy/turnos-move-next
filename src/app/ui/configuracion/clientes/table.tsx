@@ -8,15 +8,10 @@ export default async function CustomersTable() {
   const clientes = await fetchCustomers();
 
   return (
-    <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-[#568072] p-2 md:pt-0">
-
-
+        <div className="rounded-lg bg-[#568072] p-2 md:pt-0 mt-2">
           <div className="md:hidden">
             {clientes?.map((cliente) => (
-              <div key={cliente.id} className="flex flex-col mb-2 w-full rounded-md bg-white p-1 text-black">
-                <div className="flex items-center justify-between ">
+              <div key={cliente.id} className="flex flex-col mb-1 w-full rounded-md bg-white p-1 text-black">
                       <div className="flex flex-row w-full items-center justify-between text-sm font-medium">
                         <p className="px-5">
                           {cliente.name}
@@ -26,11 +21,9 @@ export default async function CustomersTable() {
                           <BorrarCliente id={cliente.id} />
                         </div>
                       </div>
-                </div>
               </div>
             ))}
           </div>
-
           <table className="hidden min-w-full text-white md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
@@ -88,7 +81,5 @@ export default async function CustomersTable() {
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
   );
 }

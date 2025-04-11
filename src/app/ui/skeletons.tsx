@@ -1,3 +1,5 @@
+
+import { lusitana } from '@/app/ui/fonts';
 // Loading animation
 const shimmer =
   'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
@@ -85,23 +87,17 @@ export function LatestInvoicesSkeleton() {
 export default function PagosSkeleton() {
     return (
       <>
-       <div className="flex w-full flex-col md:col-span-4">
-             <h2 className={`mb-4 text-xl md:text-2xl`}>
+       <div className="flex flex-col w-full justify-between rounded-xl bg-[#568072] p-4 md:pt-0 mt-2">
+             <h2 className={`${lusitana.className} text-xl px-1`}>
                Ultimos pagos
              </h2>
-             <div className="flex grow flex-col justify-between rounded-xl bg-[#00885b]  p-4">
-               <div className="bg-[#212121] px-6">
-                     <div>
-                       <div className="flex items-center">
-                         <div className="min-w-0">
-                           </div>
-                         <div className="ml-2 hidden sm:block"> 
-                         </div>
-                       </div>
-                       <div className="flex items-center justify-end">
-                       </div>
-                     </div>
-               </div>
+                <div className="flex items-center">
+                  <div className="">
+                  </div>
+                  <div className=""> 
+                  </div>
+                  <div className="">
+                  </div>
                <div className="flex items-center pb-2 pt-6">
                  <h3 className="ml-2 text-sm text-white ">Actualizado justo ahora</h3>
                </div>
