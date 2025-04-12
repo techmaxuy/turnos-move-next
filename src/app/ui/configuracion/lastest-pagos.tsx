@@ -10,13 +10,13 @@ export default async function LatestPagos() {
       <h2 className={`${lusitana.className} text-xl p-4`}>
         Ultimos pagos
       </h2>
-          <div className="border border-1 border-black rounded-lg">
+          <div className="">
             {latestInvoices.map((invoice, i) => {
               return (
                   <div
                     key={invoice.id}
                     className={clsx(
-                      'flex flex-row justify-between py-2 text-sm font-medium text-black',
+                      'flex flex-row justify-between py-2 text-sm font-medium text-black bg-white rounded-lg',
                       {
                         'border-t': i !== 0,
                       },
