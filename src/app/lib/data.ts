@@ -2,6 +2,7 @@ import postgres from 'postgres';
 import {
   CustomerField,
   CustomersTableType,
+  CustomersTableBkpType,
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
@@ -105,17 +106,11 @@ export async function fetchFilteredInvoices(
         invoices.status,
         customers.name,
         customers.email,
-        customers.image_url
       FROM invoices
       JOIN customers ON invoices.customer_id = customers.id
-      WHERE
-        customers.name ILIKE ${`%${query}%`} OR
-        customers.email ILIKE ${`%${query}%`} OR
-        invoices.amount::text ILIKE ${`%${query}%`} OR
-        invoices.date::text ILIKE ${`%${query}%`} OR
-        invoices.status ILIKE ${`%${query}%`}
+
       ORDER BY invoices.date DESC
-      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+      
     `;
 
     return invoices;
@@ -124,6 +119,20 @@ export async function fetchFilteredInvoices(
     throw new Error('Failed to fetch invoices.');
   }
 }
+
+
+/*
+
+      WHERE
+        customers.name ILIKE ${`%${query}%`} OR
+        customers.email ILIKE ${`%${query}%`} OR
+        invoices.amount::text ILIKE ${`%${query}%`} OR
+        invoices.date::text ILIKE ${`%${query}%`} OR
+        invoices.status ILIKE ${`%${query}%`} 
+
+
+        LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+*/
 
 export async function fetchInvoicesPages(query: string) {
   try {
@@ -198,8 +207,28 @@ export async function fetchFilteredCustomers(query: string) {
 		SELECT
 		  customers.id,
 		  customers.name,
+		  customers.ci,
+      customers.creditos
+		FROM customers
+		WHERE
+		  customers.ci ILIKE ${`%${query}%`}
+		ORDER BY customers.name ASC
+	  `;
+
+    return data;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch customer table.');
+  }
+}
+
+export async function fetchFilteredCustomersBkp(query: string) {
+  try {
+    const data = await sql<CustomersTableBkpType[]>`
+		SELECT
+		  customers.id,
+		  customers.name,
 		  customers.email,
-		  customers.image_url,
 		  COUNT(invoices.id) AS total_invoices,
 		  SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,
 		  SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid
@@ -208,7 +237,7 @@ export async function fetchFilteredCustomers(query: string) {
 		WHERE
 		  customers.name ILIKE ${`%${query}%`} OR
         customers.email ILIKE ${`%${query}%`}
-		GROUP BY customers.id, customers.name, customers.email, customers.image_url
+		GROUP BY customers.id, customers.name, customers.email
 		ORDER BY customers.name ASC
 	  `;
 

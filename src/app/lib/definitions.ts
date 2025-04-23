@@ -51,7 +51,6 @@ export type User = {
     customer_id: string;
     name: string;
     email: string;
-    image_url: string;
     date: string;
     amount: number;
     status: 'pending' | 'paid';
@@ -61,7 +60,14 @@ export type User = {
     id: string;
     name: string;
     email: string;
-    image_url: string;
+    ci:string;
+    creditos: string;
+  };
+
+  export type CustomersTableBkpType = {
+    id: string;
+    name: string;
+    email: string;
     total_invoices: number;
     total_pending: number;
     total_paid: number;
