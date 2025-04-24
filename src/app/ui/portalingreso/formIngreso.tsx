@@ -21,12 +21,17 @@ export default async function FormIngreso(props: {
        Identificacion (CI , DNI)
         </h2>
         <div className="flex flex-col items-center pb-2 pt-6">
+            <Suspense fallback={<CustomerPortalIngresoTableSkeleton />}>
+
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
                 <Search placeholder="identificacion..." />
                 
             </div>
            
                 <Table query={query}/>
+
+
+            </Suspense>
 
             <div className="mt-5 flex w-full justify-center">
             {/* <Pagination totalPages={totalPages} /> */}
