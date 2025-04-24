@@ -25,9 +25,9 @@ export default async function FormIngreso(props: {
                 <Search placeholder="identificacion..." />
                 
             </div>
-            {  <Suspense key={query} fallback={<CustomerPortalIngresoTableSkeleton />}>
+           
                 <Table query={query}/>
-            </Suspense> }
+
             <div className="mt-5 flex w-full justify-center">
             {/* <Pagination totalPages={totalPages} /> */}
             </div>
