@@ -203,6 +203,8 @@ export async function fetchCustomers() {
 
 export async function fetchFilteredCustomers(query: string) {
   try {
+
+    console.log(query)
     const data = await sql<CustomersTableType[]>`
 		SELECT
 		  customers.id,
