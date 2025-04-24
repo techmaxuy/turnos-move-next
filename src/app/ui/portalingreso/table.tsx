@@ -17,7 +17,7 @@ export default async function CustomerTable({
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
             {customers?.map((invoice) => (
-              <></>
+              <><p>{invoice.ci}</p></>
             ))}
           </div>
           <table className="hidden min-w-full text-gray-900 md:table">
