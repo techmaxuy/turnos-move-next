@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import postgres from 'postgres';
 import {
   CustomerField,
