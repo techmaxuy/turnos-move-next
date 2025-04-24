@@ -213,7 +213,7 @@ export async function fetchFilteredCustomers(query: string) {
       customers.creditos
 		FROM customers
 		WHERE
-		  customers.ci = "${query}"
+		  customers.ci = ${query}
 		ORDER BY customers.name ASC
 	  `;
 
