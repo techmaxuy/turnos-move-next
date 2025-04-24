@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 
 import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
@@ -13,7 +15,7 @@ export default async function FormIngreso(props: {
 
     const searchParams = await props.searchParams;
     const query = searchParams?.query || '';
-
+    console.log(query)
 
   return (
     <div className="flex flex-col w-full rounded-xl bg-[#568072] p-4 md:pt-0 mt-2 ">
