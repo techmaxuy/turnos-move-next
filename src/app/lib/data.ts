@@ -211,7 +211,7 @@ export async function fetchFilteredCustomers(query: string) {
       customers.creditos
 		FROM customers
 		WHERE
-		  customers.ci ILIKE ${`%${query}%`}
+		  customers.ci ILIKE ${`%$1%`}
 		ORDER BY customers.name ASC
 	  `;
 
