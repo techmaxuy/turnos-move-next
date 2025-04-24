@@ -36,7 +36,7 @@ export default async function CustomerTable({
             </thead>
             <tbody className="bg-white">
               {customers?.map((invoice) => (
-                <></>
+                <><p>invoice.ci</p></>
                ))}
             </tbody>
           </table>
