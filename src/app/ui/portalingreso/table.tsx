@@ -16,7 +16,7 @@ export default async function CustomerTable({
           <div className="flex flex-col justify-between py-2 text-center text-sm font-medium text-black bg-white rounded-lg">
             {customers?.map((invoice) => (
               <>
-                <p className="text-4xl">{invoice.name}</p>
+                <p className="text-4xl py-4">{invoice.name}</p>
                 <p>{invoice.ci}</p>
                 <p>{invoice.creditos}</p>
               </>

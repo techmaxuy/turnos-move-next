@@ -1,4 +1,4 @@
-import FormIngreso from "@/app/ui/portalingreso/formIngreso";
+
 import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
 import { Suspense } from 'react';
