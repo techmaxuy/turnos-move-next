@@ -15,9 +15,6 @@ export default async function Page(props: {
   const searchParams = await props.searchParams;
     const query = searchParams?.query || '';
 
-
-
-
   return (
     <div className="mx-2 mb-4 md:mt-15">
       <h1 className={`${lusitana.className} text-2xl p-x-1 text-center`}>Ingreso</h1>
