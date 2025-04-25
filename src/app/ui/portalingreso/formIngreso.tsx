@@ -29,7 +29,7 @@ export default async function FormIngreso() {
             {/* <Pagination totalPages={totalPages} /> */}
             </div>
             <div>
-                <h3 className="ml-2 text-sm text-white ">Actualizado justo ahora {query}</h3>
+                <h3 className="ml-2 text-sm text-white ">Actualizado justo ahora</h3>
             </div>
         </div>
     </div>
