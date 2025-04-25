@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
 import { Suspense } from 'react';
-import Table from '@/app/ui/portalingreso/table';
+import CustomerTable from '@/app/ui/portalingreso/table';
 import { CustomerPortalIngresoTableSkeleton } from '@/app/ui/skeletons';
 
 export default async function FormIngreso(props: {
@@ -29,7 +29,7 @@ export default async function FormIngreso(props: {
                 </div>
                 
             </Suspense>
-            <Table query={query}/>
+            <CustomerTable query={query}/>
             <div className="mt-5 flex w-full justify-center">
             {/* <Pagination totalPages={totalPages} /> */}
             </div>
