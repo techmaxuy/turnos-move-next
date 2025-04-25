@@ -1,13 +1,21 @@
+"use client";
+
 import Image from 'next/image';
 import { fetchFilteredCustomers } from '@/app/lib/data';
+import { useSearchParams } from 'next/navigation';
 
-export default async function CustomerTable({
-  query,
-}: {
-  query: string;
-}) {
 
-  const customers = await fetchFilteredCustomers(query);
+export default async function CustomerTable() {
+
+
+  
+  
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  
+  const query = params.get('query') || '';
+  
+  const customers = await fetchFilteredCustomers("111111");
 
   return (
     <div className="mt-6 flow-root">

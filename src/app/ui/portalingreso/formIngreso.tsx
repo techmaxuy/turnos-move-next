@@ -7,14 +7,10 @@ import { Suspense } from 'react';
 import CustomerTable from '@/app/ui/portalingreso/table';
 import { CustomerPortalIngresoTableSkeleton } from '@/app/ui/skeletons';
 
-export default async function FormIngreso(props: {
-    searchParams?: Promise<{
-      query?: string;
-    }>;
-  }) {
+export default async function FormIngreso() {
 
-    const searchParams = await props.searchParams;
-    const query = searchParams?.query || '';
+    //const searchParams = await props.searchParams;
+    //const query = searchParams?.query || '';
 
   return (
     <div className="flex flex-col w-full rounded-xl bg-[#568072] p-4 md:pt-0 mt-2 ">
@@ -28,7 +24,7 @@ export default async function FormIngreso(props: {
                 </div>
                 
             </Suspense>
-            <CustomerTable query={query}/>
+            <CustomerTable />
             <div className="mt-5 flex w-full justify-center">
             {/* <Pagination totalPages={totalPages} /> */}
             </div>
