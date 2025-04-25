@@ -27,9 +27,9 @@ export default async function FormIngreso(props: {
                 <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
                     <Search placeholder="identificacion..." />
                 </div>
-                <Table query={query}/>
+                
             </Suspense>
-
+            <Table query={query}/>
             <div className="mt-5 flex w-full justify-center">
             {/* <Pagination totalPages={totalPages} /> */}
             </div>
