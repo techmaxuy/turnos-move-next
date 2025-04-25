@@ -12,7 +12,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     console.log(`Searching... ${term}`);
 
     const params = new URLSearchParams(searchParams);
-    console.log(params.toString());
+    
 
     if (term) {
       params.set('query', term);
@@ -20,6 +20,8 @@ export default function Search({ placeholder }: { placeholder: string }) {
       params.delete('query');
     }
     replace(`${pathname}?${params.toString()}`);
+    
+    console.log(params.toString());
   }, 300);
 
   return (
