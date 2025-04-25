@@ -12,7 +12,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     console.log(`Searching... ${term}`);
 
     const params = new URLSearchParams(searchParams);
-    console.log(params.values);
+    console.log(params.toString());
 
     if (term) {
       params.set('query', term);
