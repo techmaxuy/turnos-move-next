@@ -211,11 +211,13 @@ export async function fetchFilteredCustomers(query: string) {
 		SELECT
 		  customers.id,
 		  customers.name,
+      customers.email,
+      customers.telefono,
 		  customers.ci,
       customers.creditos
 		FROM customers
 		WHERE
-		  customers.ci = ${query}
+		  customers.ci = '${query}'
 		ORDER BY customers.name ASC
 	  `;
 
