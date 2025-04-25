@@ -12,10 +12,8 @@ export default async function CustomerTable({
   const customers = await fetchFilteredCustomers(query);
 
   return (
-    <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
-          <div className="md:hidden">
+    <div className="flex flex-col w-full rounded-xl bg-[#568072] p-4 md:pt-0 mt-2 ">
+          <div className="flex flex-col justify-between py-2 text-center text-sm font-medium text-black bg-white rounded-lg">
             {customers?.map((invoice) => (
               <>
                 <p>{invoice.name}</p>
@@ -24,32 +22,6 @@ export default async function CustomerTable({
               </>
             ))}
           </div>
-          <table className="hidden min-w-full text-gray-900 md:table">
-            <thead className="rounded-lg text-left text-sm font-normal">
-              <tr>
-                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Customer
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  CI
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Creditos
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white">
-              {customers?.map((invoice) => (
-                <>
-                  <p>{invoice.name}</p>
-                  <p>{invoice.ci}</p>
-                  <p>{invoice.creditos}</p>
-                </>
-               ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   );
 }
