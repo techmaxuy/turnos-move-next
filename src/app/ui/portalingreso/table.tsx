@@ -7,7 +7,7 @@ export default async function CustomerTable({
   query: string;
 }) {
 
-  const customers = await fetchFilteredCustomers(query);
+  const customers = await fetchFilteredCustomers("111111");
 
   return (
     <div className="mt-6 flow-root">
