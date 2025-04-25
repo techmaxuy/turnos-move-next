@@ -11,7 +11,7 @@ export default function IngresoPage() {
       <h1 className={`${lusitana.className} text-2xl p-x-1 text-center`}>Ingreso</h1>
 
 
-      <FormIngreso />
+      <FormIngreso /> ("query=111111")
 
     </div>
   );

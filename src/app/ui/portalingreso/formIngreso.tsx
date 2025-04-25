@@ -1,13 +1,10 @@
-export const dynamic = 'force-dynamic';
-
-
 import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
 import { Suspense } from 'react';
 import CustomerTable from '@/app/ui/portalingreso/table';
 import { CustomerPortalIngresoTableSkeleton } from '@/app/ui/skeletons';
 
-export default async function Page(props: {
+export default async function FormIngreso(props: {
     searchParams?: Promise<{
       query?: string;
     }>;
