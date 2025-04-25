@@ -10,12 +10,11 @@ import { CustomerPortalIngresoTableSkeleton } from '@/app/ui/skeletons';
 export default async function Page(props: {
     searchParams?: Promise<{
       query?: string;
-      page?: string;
     }>;
   }) {
 
-    const searchParams = await props.searchParams;
-    const query = searchParams?.query || '';
+    const searchParamsv1 = await props.searchParams;
+    const query = searchParamsv1?.query || '';
 
   return (
     <div className="flex flex-col w-full rounded-xl bg-[#568072] p-4 md:pt-0 mt-2 ">

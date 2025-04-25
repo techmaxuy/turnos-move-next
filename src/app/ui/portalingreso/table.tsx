@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { fetchFilteredCustomers } from '@/app/lib/data';
 
 
-
 export default async function CustomerTable({
   query
 }: {
