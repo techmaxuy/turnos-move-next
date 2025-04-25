@@ -10,8 +10,8 @@ export default async function FormIngreso(props: {
     }>;
   }) {
 
-    const searchParamsv1 = await props.searchParams;
-    const query = searchParamsv1?.query || '';
+    const searchParams = await props.searchParams;
+    const query = searchParams?.query || '';
 
   return (
     <div className="flex flex-col w-full rounded-xl bg-[#568072] p-4 md:pt-0 mt-2 ">
