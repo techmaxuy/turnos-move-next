@@ -36,7 +36,6 @@ export default async function Page(props: {
                 <div className="flex flex-col items-center pb-2 pt-6">
                     <Suspense fallback={null}>
                         <div className="flex items-center w-2/3 justify-between gap-2 md:mt-8">
-                          <label className="text-sm text-white">CI</label>
                             <Search placeholder="identificacion..." />
                         </div>
                     </Suspense>
