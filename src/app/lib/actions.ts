@@ -97,19 +97,19 @@ export async function createInvoice(prevState: State, formData: FormData) {
 
   // Prepare data for insertion into the database
   const { customerId, servicioId, amount, formaPagoId,transaccion} = validatedFields.data;
-  const amountInCents = amount * 100;
+
   const date = new Date().toISOString().split('T')[0];
 
   // Insert data into the database
   try {
     await sql`
-      INSERT INTO invoices (customer_id, amount, status, date,tipo,banco,tarjeta,transaccion,servicio)
-      VALUES (${customerId}, ${amountInCents},${date},${formaPagoId},${transaccion},${servicioId})
+      INSERT INTO invoices (customer_id, amount, date,tipo,transaccion,servicio)
+      VALUES (${customerId}, ${amount},${date},${formaPagoId},${transaccion},${servicioId})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database Error: Failed to Create Invoice.',
+      message: 'Database Error: Failed to Create Invoice. ' + error,
     };
   }
 
