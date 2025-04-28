@@ -106,6 +106,11 @@ export async function createInvoice(prevState: State, formData: FormData) {
       INSERT INTO invoices (customer_id, amount, date,tipo,transaccion,servicio)
       VALUES (${customerId}, ${amount},${date},${formaPagoId},${transaccion},${servicioId})
     `;
+    await sql`
+      UPDATE customers
+      SET creditos = ${servicioId}
+      WHERE id = ${customerId}
+  `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {

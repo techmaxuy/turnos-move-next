@@ -13,8 +13,8 @@ import { useActionState } from 'react';
                       { id: 'transferencia', name: 'Transferencia'},
                       { id: 'credito', name: 'Tarjeta de credito'}];
 
-  const servicio = [{ id: '24c', name: '24 clases'},
-    { id: '12c', name: '12 clases'}];
+  const servicio = [{ id: '24', name: '24 clases'},
+    { id: '12', name: '12 clases'}];
 
   return (
     <form action={formAction}>
