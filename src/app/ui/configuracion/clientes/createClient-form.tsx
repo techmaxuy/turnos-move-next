@@ -24,7 +24,7 @@ import { useActionState } from 'react';
           <div className="relative mt-2 rounded-md">
             <div className="relative">
               <input
-                id="nombre"
+                id="nombre" 
                 name="nombre"
                 type="text"
                 required
@@ -86,7 +86,7 @@ import { useActionState } from 'react';
             <input
               id="telefono"
               name="telefono"
-              type="text"
+              type="number"
               required
               placeholder="Telefono"
               className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
@@ -116,7 +116,7 @@ import { useActionState } from 'react';
             <input
               id="ci"
               name="ci"
-              type="text"
+              type="number"
               required
               placeholder="Cedula de Identidad"
               className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"

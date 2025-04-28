@@ -23,20 +23,8 @@ const FormSchema = z.object({
   formaPagoId: z.string({
     invalid_type_error: 'Por favor selecciona un tipo de pago.',
   }),
-  banco: z.string().refine((value) => value !== '', {
-     message: 'Por favor ingresa un banco.',
-   }),
 
-   tarjeta: z.string().refine((value) => value !== '', {
-    message: 'Por favor ingresa un tarjeta.',
-  }),
-
-  transaccion: z.string().refine((value) => value !== '', {
-    message: 'Por favor ingresa un transacion.',
-  }),
-  status: z.enum(['pending', 'paid'], {
-    invalid_type_error: 'Por favor selecciona un estado pago.',
-  }),
+  transaccion: z.string(),
   date: z.string(),
 });
 
@@ -53,7 +41,12 @@ const FormSchemaCliente = z.object({
   creditos: z.string(),
   ci: z.string({
     invalid_type_error: 'Por favor ingresa un numero de Cedula de identidad.',
-  }),
+  }).min(8, {
+    message: 'El CI debe tener al menos 8 digitos.',
+  }).max(8, {
+    message: 'El CI debe como maximo 8 digitos.',  
+  })
+  
 });
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
@@ -66,10 +59,7 @@ export type State = {
     customerId?: string[];
     servicioId?: string[];
     amount?: string[];
-    status?: string[];
     formaPagoId?: string[];
-    banco?: string[];
-    tarjeta?: string[];
     transaccion?: string[];
   };
   message?: string | null;
@@ -92,10 +82,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
     customerId: formData.get('customerId'),
     servicioId: formData.get('servicioId'),
     amount: formData.get('amount'),
-    status: formData.get('status'),
     formaPagoId: formData.get('formaPagoId'),
-    banco: formData.get('banco'),
-    tarjeta: formData.get('tarjeta'),
     transaccion: formData.get('transaccion'),
   });
 
@@ -109,7 +96,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
   }
 
   // Prepare data for insertion into the database
-  const { customerId, servicioId, amount, status,formaPagoId, banco, tarjeta , transaccion} = validatedFields.data;
+  const { customerId, servicioId, amount, formaPagoId,transaccion} = validatedFields.data;
   const amountInCents = amount * 100;
   const date = new Date().toISOString().split('T')[0];
 
@@ -117,7 +104,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
   try {
     await sql`
       INSERT INTO invoices (customer_id, amount, status, date,tipo,banco,tarjeta,transaccion,servicio)
-      VALUES (${customerId}, ${amountInCents}, ${status}, ${date},${formaPagoId},${banco},${tarjeta},${transaccion},${servicioId})
+      VALUES (${customerId}, ${amountInCents},${date},${formaPagoId},${transaccion},${servicioId})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
@@ -193,13 +180,13 @@ export async function updateInvoice(
     };
   }
 
-  const { customerId, amount, status } = validatedFields.data;
+  const { customerId, amount } = validatedFields.data;
   const amountInCents = amount * 100;
 
   try {
     await sql`
       UPDATE invoices
-      SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
+      SET customer_id = ${customerId}, amount = ${amountInCents}
       WHERE id = ${id}
     `;
   } catch (error) {
