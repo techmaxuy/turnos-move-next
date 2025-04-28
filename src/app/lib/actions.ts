@@ -52,7 +52,7 @@ const FormSchemaCliente = z.object({
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 const CreateCliente = FormSchemaCliente.omit({ id: true, creditos: true });
-const UpdateCliente = FormSchemaCliente.omit({ id: true });
+const EditarCliente = FormSchemaCliente.omit({ id: true, creditos: true });
 
 export type State = {
   errors?: {
@@ -201,6 +201,42 @@ export async function updateInvoice(
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
 }
+
+export async function editarCliente(
+  id: string,
+  prevState: clienteState,
+  formData: FormData,
+) {
+  const validatedFields = EditarCliente.safeParse({
+    nombre: formData.get('nombre'),
+    email: formData.get('email'),
+    telefono: formData.get('telefono'),
+    ci: formData.get('ci'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Campos no llenados. Imposible editar cliente.',
+    };
+  }
+
+  const { nombre, email, telefono, ci } = validatedFields.data;
+  
+  try {
+    await sql`
+      UPDATE customers
+      SET name = ${nombre}, email=${email}, telefono=${telefono}, ci=${ci}
+      WHERE id = ${id}
+    `;
+  } catch (error) {
+    return { message: 'Database Error: Failed to Update Cliente.' };
+  }
+
+  revalidatePath('/configuracion/clientes');
+  redirect('/configuracion/clientes');
+}
+
 
 export async function deleteInvoice(id: string) {
   await sql`DELETE FROM invoices WHERE id = ${id}`;

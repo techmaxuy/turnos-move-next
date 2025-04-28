@@ -98,3 +98,12 @@ export type User = {
     amount: number;
     status: 'pending' | 'paid';
   };
+
+  export type CustomerForm = {
+    id: string;
+    name: string;
+    email: string;
+    telefono : string;
+    ci:string;
+    creditos: string;
+  };

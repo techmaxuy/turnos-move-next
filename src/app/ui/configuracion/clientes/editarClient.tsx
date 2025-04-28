@@ -1,21 +1,27 @@
 'use client';
 
-import { CustomerField } from '@/app/lib/definitions';
+import { CustomerForm } from '@/app/lib/definitions';
 import Link from 'next/link';
 import { Button } from '@/app/ui/configuracion/button';
-import { createCliente, clienteState } from '@/app/lib/actions';
+import { editarCliente, clienteState } from '@/app/lib/actions';
 import { useActionState } from 'react';
 
- export default function Form() {
+ export default function Form({
+    id
+  }: {
+    id: string;
+  }) {
   const initialState: clienteState = { message: null, errors: {} };
-  const [clientestate, formAction] = useActionState(createCliente, initialState);
+  const editarClienteWithId = editarCliente.bind(null, id);
+  const [clientestate, formAction] = useActionState(editarClienteWithId, initialState);
+
 
   return (
   <>
     <form action={formAction}>
         {/* Nombre completo del cliente */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+          <label htmlFor="amount" className="mb-2 block text-sm font-medium">       
             Nombre Completo
           </label>
           <div className="relative mt-2 rounded-md">
