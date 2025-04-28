@@ -11,7 +11,9 @@ import { useActionState } from 'react';
   const [state, formAction] = useActionState(createInvoice, initialState);
   const formaPago = [{ id: 'efectivo', name: 'Efectivo'},
                       { id: 'transferencia', name: 'Transferencia'},
-                      { id: 'credito', name: 'Tarjeta de credito'}];
+                      { id: 'credito', name: 'Tarjeta de credito'},
+                      { id: 'paselibre', name: 'Pase Libre'}
+                    ];
 
   const servicio = [{ id: '24', name: '24 clases'},
     { id: '12', name: '12 clases'}];
