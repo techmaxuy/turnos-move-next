@@ -7,12 +7,12 @@ import { editarCliente, clienteState } from '@/app/lib/actions';
 import { useActionState } from 'react';
 
  export default function Form({
-    id
+    customer
   }: {
-    id: string;
+    customer: CustomerForm;
   }) {
   const initialState: clienteState = { message: null, errors: {} };
-  const editarClienteWithId = editarCliente.bind(null, id);
+  const editarClienteWithId = editarCliente.bind(null, customer.id);
   const [clientestate, formAction] = useActionState(editarClienteWithId, initialState);
 
 
@@ -34,6 +34,7 @@ import { useActionState } from 'react';
                 placeholder="Nombre Completo"
                 className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
                 aria-describedby="nombre-error"
+                defaultValue={customer.name}
               />
             </div>
           </div>
@@ -64,6 +65,7 @@ import { useActionState } from 'react';
                 placeholder="Email"
                 className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
                 aria-describedby="email-error"
+                defaultValue={customer.email}
               />
             </div>
           </div>
@@ -94,6 +96,7 @@ import { useActionState } from 'react';
               placeholder="Telefono"
               className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
               aria-describedby="telefono-error"
+              defaultValue={customer.telefono}
             />
           </div>
         </div>
@@ -124,6 +127,7 @@ import { useActionState } from 'react';
               placeholder="Cedula de Identidad"
               className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
               aria-describedby="ci-error"
+              defaultValue={customer.ci}
             />
           </div>
         </div>
@@ -145,7 +149,7 @@ import { useActionState } from 'react';
         >
           Cancel
         </Link>
-        <Button type="submit">Crear cliente</Button>
+        <Button type="submit">Modificar</Button>
       </div>
     </form>
   </>);
