@@ -1,10 +1,10 @@
-//import NextAuth from 'next-auth';
-//import Credentials from 'next-auth/providers/credentials';
-//import bcrypt from 'bcryptjs';
+import NextAuth from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import bcrypt from 'bcryptjs';
 import postgres from 'postgres';
-//import { z } from 'zod';
+import { z } from 'zod';
 import type { User } from '@/app/lib/definitions';
-//import { authConfig } from './auth.config';
+import { authConfig } from './auth.config';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -19,10 +19,10 @@ async function getUser(email: string): Promise<User | undefined> {
 }
 
 
-export const signIn =() => {
-  return null
-}
-/*
+//export const signIn =() => {
+ // return null
+//}
+
 export const { auth, signIn, signOut } = NextAuth({...authConfig, providers: [Credentials({
       async authorize(credentials) {
         const parsedCredentials = z.object({ email: z.string().email(), password: z.string().min(6) }).safeParse(credentials);
@@ -44,4 +44,3 @@ export const { auth, signIn, signOut } = NextAuth({...authConfig, providers: [Cr
 ],
 });
 
-*/
