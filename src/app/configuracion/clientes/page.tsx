@@ -7,6 +7,7 @@ import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { auth } from "../../auth"
+import NoAutenticado from "../../ui/noAutenticado";
  
 export default async function Page(props: {
   searchParams?: Promise<{
@@ -16,7 +17,7 @@ export default async function Page(props: {
 }) {
 
   const session = await auth()
-  if (!session) return <div>Not authenticated</div>
+ if (!session) return <NoAutenticado />
 
   const searchParams = await props.searchParams;
   const query = searchParams?.query || '';

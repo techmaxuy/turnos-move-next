@@ -3,11 +3,12 @@ import Breadcrumbs from '@/app/ui/configuracion/clientes/breadcrumbs';
 import { fetchClienteById } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
 import { auth } from "../../../../auth"
+import NoAutenticado from "../../../../ui/noAutenticado";
  
 export default async function Page(props: { params: Promise<{ id: string }> }) {
 
   const session = await auth()
-  if (!session) return <div>Not authenticated</div>
+  if (!session) return <NoAutenticado />
 
     const params = await props.params;
     const id = params.id;

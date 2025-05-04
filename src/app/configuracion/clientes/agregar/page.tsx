@@ -1,12 +1,13 @@
 import Form from '@/app/ui/configuracion/clientes/createClient-form';
 import Breadcrumbs from '@/app/ui/configuracion/clientes/breadcrumbs';
 import { auth } from "../../../auth"
+import NoAutenticado from "../../../ui/noAutenticado";
  
 export default async function Page() {
 
 
   const session = await auth()
-  if (!session) return <div>Not authenticated</div>
+  if (!session) return <NoAutenticado />
 
   return (
     <main className="mx-4 mb-4">
