@@ -7,22 +7,28 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
 
-      /*
+      
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith('/perfil');
-      if (isOnDashboard) {
-        if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        return Response.redirect(new URL('perfil', nextUrl));
-      }
-      return true;
-*/
-      if (auth?.user) {
-        return true; // Usuario autenticado, permitir acceso
-      }
-      return false; // Usuario no autenticado, denegar acceso
+      const isOnDashboard = nextUrl.pathname.includes('/perfil');
+      const isOnConfig = nextUrl.pathname.includes('/configuracion');
 
+      if (isOnDashboard && !isLoggedIn) {
+        return Response.redirect(new URL('/login', nextUrl));
+      }
+
+      if (isOnConfig && !isLoggedIn) {
+        return Response.redirect(new URL('/login', nextUrl));
+      }
+
+      if (isOnConfig && isLoggedIn) {
+        return Response.redirect(new URL('/configuracion', nextUrl));
+      }
+
+      if (isOnDashboard && isLoggedIn) {
+        return Response.redirect(new URL('/perfil', nextUrl));
+      }
+      
+      return false;
     },
   },
   providers: [], // Add providers with an empty array for now
