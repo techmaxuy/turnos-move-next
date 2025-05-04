@@ -7,6 +7,7 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
 
+      /*
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/perfil');
       if (isOnDashboard) {
@@ -16,6 +17,11 @@ export const authConfig = {
         return Response.redirect(new URL('perfil', nextUrl));
       }
       return true;
+*/
+      if (auth?.user) {
+        return true; // Usuario autenticado, permitir acceso
+      }
+      return false; // Usuario no autenticado, denegar acceso
 
     },
   },
