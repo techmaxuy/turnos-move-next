@@ -63,7 +63,7 @@ export default function LoginForm() {
         </div>
         <input type="hidden" name="redirectTo" value={callbackUrl} />
         <Button className="mt-4 w-full" aria-disabled={isPending}>
-          iniciar sesion
+          Iniciar sesion
         </Button>
         <div
           className="flex h-8 items-end space-x-1"
@@ -72,7 +72,6 @@ export default function LoginForm() {
         >
           {errorMessage && (
             <>
-              
               <p className="text-sm text-red-500">{errorMessage}</p>
             </>
           )}
