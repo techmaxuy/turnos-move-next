@@ -6,6 +6,7 @@ import { AgregarCliente } from '@/app/ui/configuracion/clientes/buttons';
 import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
+import { auth } from "../../auth"
  
 export default async function Page(props: {
   searchParams?: Promise<{
@@ -13,6 +14,10 @@ export default async function Page(props: {
     page?: string;
   }>;
 }) {
+
+  const session = await auth()
+  if (!session) return <div>Not authenticated</div>
+
   const searchParams = await props.searchParams;
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
