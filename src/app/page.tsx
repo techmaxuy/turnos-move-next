@@ -1,6 +1,13 @@
 import Image from "next/image";
+import { auth } from "./auth"
+import clsx from "clsx";
+import { signOut } from './auth';
 
-export default function Home() {
+export default async function Home() {
+
+     const session = await auth()
+
+
   return (
     <div className="items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col mb-5 items-center justify-center">
@@ -18,11 +25,27 @@ export default function Home() {
         <p className="text-center text-2xl mb-5">
           Aplicacion de reservas de turnos
         </p>
-        <a className="rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40"
-            href="/login"
-            rel="noopener noreferrer">
-            Iniciar Sesion
-        </a>
+        
+        <div className={clsx(
+          session ? "hidden" : "block"
+        )}>
+          <a className="rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40"
+              href="/login"
+              rel="noopener noreferrer">
+              Iniciar Sesion
+          </a>  
+        </div>
+        <div className={clsx(
+          !session ? "hidden" : "block"
+        )}>
+          <form action={async () => {
+                              'use server';
+                              await signOut({ redirectTo: '/' });
+                            }}>
+                    <button className="rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40">Cerrar Sesion
+                    </button>
+            </form>  
+        </div>
       </main>
     </div>
   );
