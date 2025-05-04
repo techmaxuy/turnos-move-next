@@ -1,11 +1,8 @@
 import SideNav from "@/app/ui/configuracion/sidenavconf";
-import { auth } from "../auth"
 
 
-export default async function Layout({  children,}: Readonly<{  children: React.ReactNode;}>) {
 
-  const session = await auth()
-  if (!session) return Response.redirect(new URL('/login'));
+export default function Layout({  children,}: Readonly<{  children: React.ReactNode;}>) {
 
   return (
     <div className="flex flex-col md:flex-row">
