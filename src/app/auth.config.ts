@@ -6,9 +6,14 @@ export const authConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      console.log('Auth:', auth);
 
-      
+      const isLoggedIn = !!auth?.user;
+      const isOnDashboard = nextUrl.pathname.startsWith('/perfil');
+
+      console.log('isLoggedIn:', isLoggedIn);
+      console.log('isOnDashboard:', isOnDashboard);
+
+      /*
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/perfil');
       if (isOnDashboard) {
@@ -18,6 +23,8 @@ export const authConfig = {
         return Response.redirect(new URL('perfil', nextUrl));
       }
       return true;
+      */
+      return !!auth
     },
   },
   providers: [], // Add providers with an empty array for now
