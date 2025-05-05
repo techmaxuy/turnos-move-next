@@ -32,5 +32,5 @@ export const authConfig = {
     },
   },
   providers: [], // Add providers with an empty array for now
-  debug: true,
+  //debug: true,
 } satisfies NextAuthConfig

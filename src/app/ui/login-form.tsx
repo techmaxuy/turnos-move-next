@@ -35,7 +35,7 @@ export default function LoginForm() {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="Enter your email address"
+                placeholder="ingresa tu correo electronico"
                 required
               />
 
@@ -54,7 +54,7 @@ export default function LoginForm() {
                 id="password"
                 type="password"
                 name="password"
-                placeholder="Enter password"
+                placeholder="Ingresa tu contraseña"
                 required
                 minLength={6}
               />

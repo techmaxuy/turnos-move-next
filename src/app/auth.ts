@@ -23,7 +23,7 @@ async function getUser(email: string): Promise<User | undefined> {
  // return null
 //}
 
-export const { auth, signIn, signOut } = NextAuth({...authConfig, providers: [Credentials({
+export const { handlers, auth, signIn, signOut } = NextAuth({...authConfig, providers: [Credentials({
       async authorize(credentials) {
         const parsedCredentials = 
         z.object({ 
