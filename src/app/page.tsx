@@ -35,6 +35,22 @@ export default async function Home() {
               Iniciar Sesion
           </a>  
         </div>
+        <div className={clsx("my-2",
+          !session ? "hidden" : "block"
+        )}> 
+          <a className="rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40"
+              href="/perfil"
+              rel="noopener noreferrer">
+              Mi Perfil
+          </a>  
+        </div>
+        <div className="my-2"> 
+          <a className="rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40"
+              href="/register"
+              rel="noopener noreferrer">
+              Registrar Usuario
+          </a>  
+        </div>
         <div className={clsx(
           !session ? "hidden" : "block"
         )}>

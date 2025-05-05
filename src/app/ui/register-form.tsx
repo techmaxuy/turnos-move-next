@@ -7,7 +7,7 @@ import { useActionState } from 'react';
 import { authenticate } from '@/app/lib/actions';
 import { useSearchParams } from 'next/navigation';
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/perfil';
   const [errorMessage, formAction, isPending] = useActionState(
@@ -18,9 +18,9 @@ export default function LoginForm() {
   return (
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-[#212121] px-6 pb-4 pt-8 border-2 border-white">
-        <h1 className={`${lusitana.className} mb-3 text-2xl`}>
-          Por favor inicie sesion para continuar
-        </h1>
+        <p className={`${lusitana.className} mb-3 text-2xl`}>
+          Registro de usuario
+        </p>
         <div className="w-full">
           <div>
             <label
@@ -35,7 +35,7 @@ export default function LoginForm() {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="Enter your email address"
+                placeholder="ingresa tu correo electronico"
                 required
               />
 
@@ -54,7 +54,7 @@ export default function LoginForm() {
                 id="password"
                 type="password"
                 name="password"
-                placeholder="Enter password"
+                placeholder="Ingresa tu contraseña"
                 required
                 minLength={6}
               />
@@ -63,7 +63,7 @@ export default function LoginForm() {
         </div>
         <input type="hidden" name="redirectTo" value={callbackUrl} />
         <Button className="mt-4 w-full" aria-disabled={isPending}>
-          Iniciar sesion
+          Registrar
         </Button>
         <div
           className="flex h-8 items-end space-x-1"
