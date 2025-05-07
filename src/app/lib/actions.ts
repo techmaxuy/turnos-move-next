@@ -6,6 +6,8 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn } from '../auth';
 import { AuthError } from 'next-auth';
+import bcrypt from 'bcryptjs';
+import { NODE_BASE_ESM_RESOLVE_OPTIONS } from 'next/dist/build/webpack-config';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -266,3 +268,62 @@ export async function authenticate(
     throw error;
   }
 }
+
+const RegisterSchema = z.object({
+  nombre: z.string({
+    invalid_type_error: 'Por favor ingresa un nombre.',
+  }),
+  email: z.string().email(),
+  password: z.string().min(6,{'message': 'La contraseña debe tener al menos 6 caracteres.'}), 
+  password2: z.string().min(6,{'message': 'La contraseña debe tener al menos 6 caracteres.'}),
+}).refine((data) => data.password === data.password2, {
+  message: 'Las contraseñas no coinciden.',
+  path: ['password2'],
+});
+
+export type registerState = {
+  nombre?: string;
+  email?: string;
+  password?: string;
+  password2?: string;
+
+  errors?: {
+    nombre?: string[];
+    email?: string[];
+    password?: string[];
+    password2?: string[];
+  };
+  message?: string | null;
+};
+
+
+export async function signup(prevState: registerState | undefined,
+  formData: FormData): Promise<registerState> {
+
+
+  const validatedFields = RegisterSchema.safeParse({
+    nombre: formData.get('nombre'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+    password2: formData.get('password2'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Campos no llenados. Imposible crear usuario.' + validatedFields.error.message,
+    };
+
+  }
+  const { nombre,email, password } = validatedFields.data;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  try { 
+    await sql`
+      INSERT INTO users (name, email, password) 
+      VALUES (${nombre},${email}, ${hashedPassword})
+    `; 
+  } catch (error) {
+    return { message: 'Database Error: Failed to Create User.' + error };   
+  }
+  return { message: 'Usuario creado con exito.' };
+} 

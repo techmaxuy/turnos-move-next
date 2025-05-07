@@ -18,7 +18,6 @@ async function getUser(email: string): Promise<User | undefined> {
   }
 }
 
-export async function signup(formData: FormData) {}
 //export const signIn =() => {
  // return null
 //}

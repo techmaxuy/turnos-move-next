@@ -5,25 +5,47 @@ import { lusitana } from '@/app/ui/fonts';
 import { Button } from '@/app/ui/button';
 import { useActionState } from 'react';
 import { authenticate } from '@/app/lib/actions';
-import { useSearchParams } from 'next/navigation';
 
-import { signup } from '../auth'
+import { signup } from '../lib/actions';
 
 export default function RegisterForm() {
-  //const searchParams = useSearchParams();
-  //const callbackUrl = searchParams.get('callbackUrl') || '/perfil';
-  //const [errorMessage, formAction, isPending] = useActionState(
-  //  authenticate,
-  //  undefined,
-  //);
+
+  const [errorMessage, formAction] = useActionState(
+    signup,
+    undefined,
+  );
 
   return (
-    <form action={signup} className="space-y-3">
+    <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-[#212121] px-6 pb-4 pt-8 border-2 border-white">
         <p className={`${lusitana.className} mb-3 text-2xl`}>
           Registro de usuario
         </p>
           <div className="w-full">
+
+          <div>
+              <label
+                className="mb-3 mt-5 block text-xs font-medium text-white"
+                htmlFor="nombre"
+              >
+                Correo electronico
+              </label>
+              <div className="relative">
+                <input
+                  className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                  id="nombre"
+                  type="text"
+                  name="nombre"
+                  placeholder="ingresa tu nombre"
+                  required
+                />
+
+              </div>
+            </div>
+
+
+
+
             <div>
               <label
                 className="mb-3 mt-5 block text-xs font-medium text-white"
@@ -82,11 +104,15 @@ export default function RegisterForm() {
             </div>
           </div>
         </div>
-        {/*<input type="hidden" name="redirectTo" value={callbackUrl} />*/}{/*aria-disabled={isPending}*/}
-        <Button className="mt-4 w-full" >
+       
+        <Button type="submit" className="mt-4 w-full " >
           Registrar
         </Button>
-
+        {errorMessage && (
+            <>
+              <p className="text-sm text-red-500">{errorMessage.message}</p>
+            </>
+          )}
       </div>
     </form>
   );
@@ -94,12 +120,13 @@ export default function RegisterForm() {
 
 
 /*
+        <input type="hidden" name="redirectTo" value={callbackUrl} />*//*aria-disabled={isPending}
         <div
           className="flex h-8 items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
         >
-
+ <input type="hidden" name="redirectTo" value={callbackUrl} />
           {errorMessage && (
             <>
               <p className="text-sm text-red-500">{errorMessage}</p>
