@@ -2,6 +2,7 @@ import Image from "next/image";
 import { auth } from "./auth"
 import clsx from "clsx";
 import { signOut } from './auth';
+import { quicksand } from '@/app/ui/fonts';
 
 export default async function Home() {
 
@@ -19,36 +20,36 @@ export default async function Home() {
           height={400}
           priority
         />
-        <h1 className="text-center text-4xl mb-5">
-          Bienvenido a Move
+        <h1 className={`${quicksand.className} text-center text-4xl mb-5`}>
+          Bienvenido
         </h1>
-        <p className="text-center text-2xl mb-5">
-          Aplicacion de reservas de turnos
+        <p className={`${quicksand.className} text-center text-2xl mb-5`}>
+          Reservar clases
         </p>
         
         <div className={clsx(
           session ? "hidden" : "block"
         )}>
-          <a className="rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40"
+          <a className={`${quicksand.className} rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40`}
               href="/login"
               rel="noopener noreferrer">
-              Iniciar Sesion
+              INICIAR
           </a>  
         </div>
         <div className={clsx("my-2",
           !session ? "hidden" : "block"
         )}> 
-          <a className="rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40"
+          <a className={`${quicksand.className} rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40`}
               href="/perfil"
               rel="noopener noreferrer">
               Mi Perfil
           </a>  
         </div>
         <div className="my-2"> 
-          <a className="rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40"
+          <a className={`${quicksand.className} rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40`}
               href="/register"
               rel="noopener noreferrer">
-              Registrar Usuario
+              REGISTRARSE
           </a>  
         </div>
         <div className={clsx(
