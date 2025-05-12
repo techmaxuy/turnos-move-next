@@ -1,12 +1,21 @@
 'use client';
 
+
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
+import * as React from 'react';
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
+
+
+  React.useEffect(() => {
+    // window is accessible here.
+     //alert(window.innerHeight + " " + window.innerWidth); 
+  }, []);
+
   let message=""
 
   const handleSearch = useDebouncedCallback((term: string) => {
