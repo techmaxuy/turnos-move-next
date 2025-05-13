@@ -362,8 +362,6 @@ export async function signup(prevState: registerState | undefined,
   }
 
   SendEmail(email, 'Bienvenido a TurnosMove', 'Gracias por registrarte en TurnosMove. Tu cuenta ha sido creada con exito.');
-  revalidatePath('/login');
-  redirect('/login');
 
   return { message: 'Usuario creado con exito.' };
 } 
