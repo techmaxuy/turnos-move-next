@@ -8,8 +8,33 @@ import { signIn } from '../auth';
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcryptjs';
 import { NODE_BASE_ESM_RESOLVE_OPTIONS } from 'next/dist/build/webpack-config';
+import { Resend } from "resend";
+
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+
+export async  function SendEmail($email: string , $subject: string , $message: string ) {
+  try {
+    
+    const emailObject = await resend.emails.send({
+        from: 'turnosmove@portal21.work',
+        to: $email,
+        subject: $subject,
+        html: `<p>${$message}</p>`,
+      });
+  }
+  catch (error) {  
+    return {
+      message: 'Error al enviar el correo: ' + error, 
+    };
+  } 
+
+    return {
+      message: 'Correo enviado con exito.',
+    };
+}
 
 const FormSchema = z.object({
   id: z.string(),
@@ -316,6 +341,16 @@ export async function signup(prevState: registerState | undefined,
 
   }
   const { nombre,email, password } = validatedFields.data;
+
+  // Check if the email already exists in the database
+  const existingUser = await sql`
+    SELECT * FROM users WHERE email = ${email}
+  `;
+
+  if (existingUser.length > 0) {
+    return { message: 'El correo electrónico ya está registrado.' };
+  }
+         
   const hashedPassword = await bcrypt.hash(password, 10);
   try { 
     await sql`
@@ -325,5 +360,10 @@ export async function signup(prevState: registerState | undefined,
   } catch (error) {
     return { message: 'Database Error: Failed to Create User.' + error };   
   }
+
+  SendEmail(email, 'Bienvenido a TurnosMove', 'Gracias por registrarte en TurnosMove. Tu cuenta ha sido creada con exito.');
+  revalidatePath('/login');
+  redirect('/login');
+
   return { message: 'Usuario creado con exito.' };
 } 

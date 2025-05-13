@@ -28,7 +28,7 @@ export default function RegisterForm() {
                 className="mb-3 mt-5 block text-xs font-medium text-white"
                 htmlFor="nombre"
               >
-                Correo electronico
+                Nombre
               </label>
               <div className="relative">
                 <input
@@ -42,10 +42,6 @@ export default function RegisterForm() {
 
               </div>
             </div>
-
-
-
-
             <div>
               <label
                 className="mb-3 mt-5 block text-xs font-medium text-white"
