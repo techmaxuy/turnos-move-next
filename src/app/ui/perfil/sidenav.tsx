@@ -3,7 +3,10 @@ import NavLinks from "./nav-links";
 import Image from "next/image";
 import { signOut } from '../../auth';
 
+
 export default function SideNav() {
+
+
   return (
         <div className="flex grow flex-row justify-between space-x-1 md:flex-col md:space-x-0 md:space-y-1 place-items-center md:place-items-stretch px-1">
           <Link

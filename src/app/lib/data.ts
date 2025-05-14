@@ -35,6 +35,23 @@ export async function fetchRevenue() {
   }
 }
 
+
+export async function fetchisAdmin() {
+  try {
+    const data = await sql`SELECT * FROM users JOIN admins ON users.id = admins.user_id`;
+
+    if (data.length === 0) {
+      return false;
+    } else {
+    return true;
+    }
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch admin data.');
+  }
+}
+
+
 //amount: formatCurrency(invoice.amount),
 
 export async function fetchLatestInvoices() {

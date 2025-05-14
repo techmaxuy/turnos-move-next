@@ -34,9 +34,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({...authConfig, prov
           const { email, password } = parsedCredentials.data;
 
           const user = await getUser(email);
-          if (!user) return null;
+          
+
+          if (!user) {
+            return null;
+          } else {
+            const isAdmin = await sql`SELECT * FROM admins WHERE user_id = ${user?.id}`;
+            const passwordsMatch = await bcrypt.compare(password, user.password);
+            if (passwordsMatch) {
+              return { ...user, isAdmin: isAdmin.length > 0 };
+            }
+
+          }
 
           const passwordsMatch = await bcrypt.compare(password, user.password);
+
           if (passwordsMatch) return user;
         }
 
