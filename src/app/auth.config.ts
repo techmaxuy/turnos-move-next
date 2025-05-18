@@ -1,4 +1,6 @@
 import type { NextAuthConfig } from 'next-auth';
+import { fetchisAdmin } from './lib/data';
+
  
 export const authConfig = {
   pages: {
@@ -10,26 +12,26 @@ export const authConfig = {
       
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.includes('/perfil');
-      const isOnConfig = nextUrl.pathname.includes('/configuracion');
-
-      if (isOnDashboard && !isLoggedIn) {
-        return Response.redirect(new URL('/login', nextUrl));
+   
+      if (isOnDashboard) {
+          if (isLoggedIn) return true;
+          return false; // Redirect unauthenticated users to login page
+      } else if (isLoggedIn) {
+          return Response.redirect(new URL('/perfil', nextUrl));
       }
-
-      if (isOnConfig && !isLoggedIn) {
-        return Response.redirect(new URL('/login', nextUrl));
-      }
-
-      if (isOnConfig && isLoggedIn) {
-        return Response.redirect(new URL('/configuracion', nextUrl));
-      }
-
-      if (isOnDashboard && isLoggedIn) {
-        return Response.redirect(new URL('/perfil', nextUrl));
-      }
+      return true;
       
-      return false;
     },
+
+
+
+    async session({ session }) {
+            const isAdmin: boolean = await fetchisAdmin(session?.user?.email);
+            (session as any).isAdmin = isAdmin;
+            return session
+    },
+
+
   },
   providers: [], // Add providers with an empty array for now
   //debug: true,

@@ -17,6 +17,7 @@ export default async function Page(props: {
 }) {
 
   const session = await auth()
+
  if (!session) return <NoAutenticado />
 
   const searchParams = await props.searchParams;
