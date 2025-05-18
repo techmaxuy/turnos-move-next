@@ -36,9 +36,11 @@ export async function fetchRevenue() {
 }
 
 
-export async function fetchisAdmin(email: string) {
+export async function fetchisAdmin(id: string) {
   try {
-    const data = await sql`SELECT * FROM users JOIN admins ON users.id = admins.user_id`;
+    const data = await sql`SELECT * FROM users
+      WHERE id = ${id} 
+      JOIN admins ON users.id = admins.user_id`;
 
     if (data.length === 0) {
       return false;
