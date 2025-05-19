@@ -22,8 +22,9 @@ export const authConfig = {
       return true;
       
     },
-     session({ session, user }) {
+     async session({ session, user }) {
       session.user.id = user.id
+
       return session
     },
 
