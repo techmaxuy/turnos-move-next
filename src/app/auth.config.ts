@@ -24,14 +24,6 @@ export const authConfig = {
     },
 
 
-
-    async session({ session }) {
-            const isAdmin: boolean = await fetchisAdmin(session?.user?.id);
-            (session as any).isAdmin = isAdmin;
-            return session
-    },
-
-
   },
   providers: [], // Add providers with an empty array for now
   //debug: true,
