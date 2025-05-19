@@ -26,9 +26,11 @@ export const authConfig = {
     },
     async session({ session }) {
             const user: User = await fetchUser(session?.user?.email);
+            const isAdmin = await fetchisAdmin(user.id);
+            session.isAdmin = isAdmin;
             session.userId = user.id;
             return session
-      },
+    },
 
 
   },
