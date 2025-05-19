@@ -47,11 +47,15 @@ export async function fetchUser(email: string): Promise<User> {
 }
 
 
-export async function fetchisAdmin(id: string) {
+export async function fetchisAdmin(id: string | undefined) {
+  if (!id) {
+    return false;
+  }
   try {
     const data = await sql`SELECT * FROM users
-      WHERE id = ${id} 
-      JOIN admins ON users.id = admins.user_id`;
+      JOIN admins ON admins.user_id = users.id::text
+      WHERE users.id = ${id} 
+      `;
 
     if (data.length === 0) {
       return false;
