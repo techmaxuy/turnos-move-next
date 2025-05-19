@@ -10,7 +10,9 @@ export default async function UserAvatar() {
   return (
     <div>
       <p className="text-white m-6">{session.user.email}</p>
-
+       <p className="text-white m-6">{session.user.name}</p>
+        <p className="text-white m-6">{session.expires}</p>
+      <p className="text-white m-6">{session.userId}</p>
     </div>
   )
 }

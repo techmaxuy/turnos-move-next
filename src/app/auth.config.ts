@@ -1,5 +1,7 @@
 import type { NextAuthConfig } from 'next-auth';
 import { fetchisAdmin } from './lib/data';
+import type { User } from '@/app/lib/definitions';
+import { fetchUser } from './lib/data';
 
  
 export const authConfig = {
@@ -22,6 +24,11 @@ export const authConfig = {
       return true;
       
     },
+    async session({ session }) {
+            const user: User = await fetchUser(session?.user?.email);
+            session.userId = user.id;
+            return session
+      },
 
 
   },
