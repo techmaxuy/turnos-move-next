@@ -26,7 +26,7 @@ export const authConfig = {
     },
     async session({ session }) {
             const user: User = await fetchUser(session?.user?.email);
-            const isAdmin = await fetchisAdmin(user.id);
+            const isAdmin = await fetchisAdmin(session?.userId);
             session.isAdmin = isAdmin;
             session.userId = user.id;
             return session
