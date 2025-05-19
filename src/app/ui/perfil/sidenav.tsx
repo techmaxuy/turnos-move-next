@@ -2,10 +2,13 @@ import Link from 'next/link';
 import NavLinks from "./nav-links";
 import Image from "next/image";
 import { signOut } from '../../auth';
+import { auth } from "../../auth"
 
 
-export default function SideNav() {
 
+export default async function SideNav() {
+
+const session = await auth()
 
   return (
         <div className="flex grow flex-row justify-between space-x-1 md:flex-col md:space-x-0 md:space-y-1 place-items-center md:place-items-stretch px-1">
@@ -22,7 +25,7 @@ export default function SideNav() {
               priority
             />
           </Link>
-          <NavLinks />
+          <NavLinks isAdmin={Boolean(session?.isAdmin)}/>
           <form action={async () => {
             'use server';
             await signOut({ redirectTo: '/' });

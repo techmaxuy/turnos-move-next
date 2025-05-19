@@ -9,11 +9,9 @@ import clsx from 'clsx';
 // Depending on the size of the application, this would be stored in a database.
 let links = [];
 
-export default function NavLinks(
+export default function NavLinks({ isAdmin }: { isAdmin: boolean  } = { isAdmin: false }) {
 
-) {
-
-  if (true) {
+  if (isAdmin) {
 
    links = [
   { name: 'Configuracion', href: '/configuracion' },
