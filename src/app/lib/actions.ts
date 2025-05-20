@@ -352,18 +352,28 @@ export async function signup(prevState: registerState | undefined,
   }
          
   const hashedPassword = await bcrypt.hash(password, 10);
+  const creditos = "5"; // Default value for creditos
+  const telefono = "090000000"; // Default value for telefono
+  const ci = "30000000"; // Default value for ci
+
   try { 
     await sql`
       INSERT INTO users (name, email, password) 
       VALUES (${nombre},${email}, ${hashedPassword})
-    `; 
+    `;
+     await sql`
+      INSERT INTO customers (name, email, telefono, creditos, ci)
+      VALUES (${nombre}, ${email}, ${telefono}, ${creditos}, ${ci})
+    `;
+
   } catch (error) {
     return { message: 'Database Error: Failed to Create User.' + error };   
   }
 
   SendEmail(email, 'Bienvenido a TurnosMove', 'Gracias por registrarte en TurnosMove. Tu cuenta ha sido creada con exito.');
 
-  return { message: 'Usuario creado con exito.' };
+  revalidatePath('/login');
+  redirect('/login');
 } 
 
 
