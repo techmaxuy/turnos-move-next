@@ -6,6 +6,8 @@ import CustomerTable from '@/app/ui/portalingreso/table';
 import { CustomerPortalIngresoTableSkeleton } from '@/app/ui/skeletons';
 import Link from 'next/link';
 import Image from "next/image";
+import { auth } from "../auth"
+import NoAutenticado from "../ui/noAutenticado";
 
 
 export default async function Page(props: {
@@ -13,6 +15,10 @@ export default async function Page(props: {
     query?: string;
   }>;
 }) {
+
+
+  const session = await auth()
+  if (!session) return <NoAutenticado />
 
   const searchParams = await props.searchParams;
     const query = searchParams?.query || '';
