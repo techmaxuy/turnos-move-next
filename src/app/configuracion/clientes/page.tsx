@@ -3,7 +3,7 @@ import Pagination from '@/app/ui/configuracion/clientes/pagination';
 import Search from '@/app/ui/configuracion/search';
 import Table from '@/app/ui/configuracion/clientes/table';
 import { AgregarCliente } from '@/app/ui/configuracion/clientes/buttons';
-import { lusitana } from '@/app/ui/fonts';
+import { quicksand } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { auth } from "../../auth"
@@ -27,7 +27,7 @@ export default async function Page(props: {
 
   return (
     <div className="mx-2 mb-4 md:mt-15">
-        <h1 className={`${lusitana.className} text-2xl p-x-1`}>Clientes</h1>
+        <h1 className={`${quicksand.className} text-2xl p-x-1`}>Clientes</h1>
       <div className="flex flex-row">
         <Suspense fallback={<InvoicesTableSkeleton />}>
           <Search placeholder="Buscar clientes..." />
