@@ -264,6 +264,41 @@ export async function editarCliente(
   redirect('/configuracion/clientes');
 }
 
+export async function editarPerfil(
+  id: string,
+  prevState: clienteState,
+  formData: FormData,
+) {
+  const validatedFields = EditarCliente.safeParse({
+    nombre: formData.get('nombre'),
+    email: formData.get('email'),
+    telefono: formData.get('telefono'),
+    ci: formData.get('ci'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Campos no llenados. Imposible editar cliente.',
+    };
+  }
+
+  const { nombre, email, telefono, ci } = validatedFields.data;
+  
+  try {
+    await sql`
+      UPDATE customers
+      SET name = ${nombre}, email=${email}, telefono=${telefono}, ci=${ci}
+      WHERE id = ${id}
+    `;
+  } catch (error) {
+    return { message: 'Database Error: Failed to Update Cliente.' };
+  }
+
+  revalidatePath('/perfil');
+  redirect('/perfil');
+}
+
 
 export async function deleteInvoice(id: string) {
   await sql`DELETE FROM invoices WHERE id = ${id}`;

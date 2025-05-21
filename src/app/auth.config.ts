@@ -30,8 +30,12 @@ export const authConfig = {
             session.userId = user.id;
             const isAdmin: boolean = await fetchisAdmin(session?.userId);
             session.isAdmin = isAdmin;
-            const customer: Customer = await fetchClienteByEmail(session?.user?.email);
-            session.customerId = customer.id
+
+            if (!isAdmin) {
+
+              const customer: Customer = await fetchClienteByEmail(session?.user?.email);
+              session.customerId = customer.id
+            }
             return session
     },
 

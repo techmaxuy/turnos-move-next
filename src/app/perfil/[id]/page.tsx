@@ -1,4 +1,4 @@
-import Form from '@/app/ui/configuracion/clientes/editarClient';
+import Form from '@/app/ui/perfil/editarPerfil';
 import { fetchClienteById } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
 import { auth } from "../../auth"
