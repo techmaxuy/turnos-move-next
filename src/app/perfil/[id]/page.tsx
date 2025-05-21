@@ -16,7 +16,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
     ]);
 
   return (
-    <main className="mx-4 mb-4">
+    <main className="mx-4 mb-4 md:mt-15">
       <div className="rounded-lg bg-[#212121] p-2 md:pt-0">
       <Form customer={cliente[0]}/>
       </div>
