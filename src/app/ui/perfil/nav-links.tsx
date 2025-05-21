@@ -19,7 +19,7 @@ export default function NavLinks({ isAdmin }: { isAdmin: boolean  } = { isAdmin:
   ];
   } else {
   links = [
-    { name: 'Mis Creditos', href: '/perfil/miscreditos'  },
+    { name: 'Mi Perfil', href: '/perfil'  },
     { name: 'Mis Reservas', href: '/perfil/misreservas' },
     { name: 'Reservar', href: '/perfil/reservar' },
   ];
