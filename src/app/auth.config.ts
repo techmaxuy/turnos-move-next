@@ -1,7 +1,8 @@
 import type { NextAuthConfig } from 'next-auth';
 import { fetchisAdmin } from './lib/data';
-import type { User } from '@/app/lib/definitions';
+import type { User , Customer } from '@/app/lib/definitions';
 import { fetchUser } from './lib/data';
+import { fetchClienteByEmail } from './lib/data';
 
  
 export const authConfig = {
@@ -29,7 +30,8 @@ export const authConfig = {
             session.userId = user.id;
             const isAdmin: boolean = await fetchisAdmin(session?.userId);
             session.isAdmin = isAdmin;
-
+            const customer: Customer = await fetchClienteByEmail(session?.user?.email);
+            session.customerId = customer.id
             return session
     },
 

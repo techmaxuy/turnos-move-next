@@ -240,6 +240,29 @@ export async function fetchClienteById(id: string) {
   }
 }
 
+export async function fetchClienteByEmail(email: string) {
+  try {
+    const data = await sql<CustomerForm[]>`
+		SELECT
+		  customers.id,
+		  customers.name,
+      customers.email,
+      customers.telefono,
+		  customers.ci,
+      customers.creditos
+		FROM customers
+		WHERE
+		  customers.email = ${email}
+		ORDER BY customers.name ASC
+	  `;
+
+    return data[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch cliente.');
+  }
+}
+
 
 export async function fetchCustomers() {
   try {

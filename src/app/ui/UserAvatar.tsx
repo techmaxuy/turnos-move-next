@@ -12,6 +12,7 @@ export default async function UserAvatar() {
         <p className="text-white m-6">{session.expires}</p>
       <p className="text-white m-6">{session.userId}</p>
       <p className="text-white m-6">{session.isAdmin.toString()}</p>
+      <p className="text-white m-6">{session.customerId}</p>
     </div>
   )
 }
