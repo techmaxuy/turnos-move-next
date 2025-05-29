@@ -40,6 +40,14 @@ export type User = {
     email: string;
     amount: string;
   };
+
+  export type LatestReservas = {
+    id: string;
+    clase_id: string;
+    create_date: string;
+    hora: string;
+    utilizada: string;
+  };
   
   // The database returns a number for amount, but we later format it to a string with the formatCurrency function
   export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
@@ -99,7 +107,7 @@ export type User = {
     status: 'pending' | 'paid';
   };
 
-  export type CustomerForm = {
+  export type  CustomerForm = {
     id: string;
     name: string;
     email: string;

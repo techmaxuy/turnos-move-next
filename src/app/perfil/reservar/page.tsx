@@ -1,8 +1,58 @@
-export default function Reservar() {
+import ReservaForm from '@/app/ui/perfil/reservas/reservar-form';
+import { fetchCustomers } from '@/app/lib/data';
+import { auth } from "../../auth"
+import NoAutenticado from "../../ui/noAutenticado";
+import Calendar from '@/app/ui/perfil/reservas/calendar';
+ 
+export default async function Reservar(props: {
+  searchParams?: Promise<{
+    query?: string;
+    message?: string
+  }>;
+}) {
+
+     const session = await auth()
+    if (!session) return <NoAutenticado />
+
+    const clases = [{ id: 'funcional', name: 'Funcional'},
+                      { id: 'crossfit', name: 'Crossfit'}
+                    ];
+
+                    const horas = [{ id: '19', name: '19 horas'},
+    { id: '20', name: '20 horas'},
+    { id: '21', name: '21 horas'},];
+
+
+    const searchParams = await props.searchParams;
+    const query = searchParams?.query || '';
+    const message = searchParams?.message || '';
+
+
+
+
+  const customers = await fetchCustomers();
+ 
   return (
-    <div className="flex flex-col gap-4 items-center justify-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-2xl font-bold">Aqui sera el proceso de reservar</h1>
+    <main>
       
-    </div>
+      <Calendar />
+      <ReservaForm clases={clases} horas={horas} /> 
+      <div>
+        <p>
+          {message && (
+            <span className="text-green-500">
+              {message}
+            </span>
+          )}
+        </p>
+        <p>
+          {query && (
+            <span className="text-green-500">
+              {query}
+            </span>
+          )}
+        </p>
+      </div>
+    </main>
   );
-}   
+}  

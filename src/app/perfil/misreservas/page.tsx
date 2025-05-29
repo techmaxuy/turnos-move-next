@@ -1,8 +1,23 @@
-export default function MisReservas() {
+import LatestReservas from "@/app/ui/perfil/reservas/latest-reservas";
+import { lusitana } from '@/app/ui/fonts';
+import { AgregarReserva } from "@/app/ui/perfil/reservas/buttons";
+import { auth } from "../../auth"
+import NoAutenticado from "../../ui/noAutenticado";
+
+
+export default async function MisReservas() {
+
+      const session = await auth()
+    if (!session) return <NoAutenticado />
+
+
   return (
-    <div className="flex flex-col gap-4 items-center justify-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-2xl font-bold">Estas son mis reservas</h1>
-      <p className="text-lg">Aqui veo la reserva actual y el historial de reservas.</p>
+    <div className="mx-2 mb-4 md:mt-15">
+      <h1 className={`${lusitana.className} text-2xl p-x-1`}>Reservas</h1>
+      <div className="flex justify-end">
+        <AgregarReserva />
+      </div>
+      <LatestReservas  />
     </div>
   );
-}   
+}  

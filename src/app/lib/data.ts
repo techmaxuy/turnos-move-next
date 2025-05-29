@@ -13,7 +13,7 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 import { formatDateToLocal } from './utils';
-import type { User } from '@/app/lib/definitions';
+import type { LatestReservas, User } from '@/app/lib/definitions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -89,6 +89,27 @@ export async function fetchLatestInvoices() {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
+  }
+}
+
+
+export async function fetchLatestReservas() {
+  try {
+    const data = await sql<LatestReservas[]>`
+      SELECT id, clase_id, hora,  utilizada, create_date
+      FROM reservas
+      ORDER BY reservas.create_date DESC
+      `;
+    //console.log(data)
+    const latestReservas = data.map((reserva) => ({
+      ...reserva,
+      create_date: formatDateToLocal(reserva.create_date),
+    }));
+    //console.log(latestInvoices)
+    return latestReservas;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the latest reservas.');
   }
 }
 

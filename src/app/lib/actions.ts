@@ -76,10 +76,25 @@ const FormSchemaCliente = z.object({
   
 });
 
+
+const FormSchemaReserva = z.object({
+  id: z.string(),
+  clase: z.string({
+    invalid_type_error: 'Por favor ingresa una clase.',
+  }),
+  hora: z.string({
+    invalid_type_error: 'Por favor ingresa una hora.',
+  }),
+  utilizada: z.string(),
+  create_date: z.string(),
+});
+
+
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 const CreateCliente = FormSchemaCliente.omit({ id: true, creditos: true });
 const EditarCliente = FormSchemaCliente.omit({ id: true, creditos: true });
+const CreateReserva = FormSchemaReserva.omit({ id: true, utilizada: true, create_date: true });
 
 export type State = {
   errors?: {
@@ -88,6 +103,14 @@ export type State = {
     amount?: string[];
     formaPagoId?: string[];
     transaccion?: string[];
+  };
+  message?: string | null;
+};
+
+export type reservaState = {
+  errors?: {
+    clase?: string[];
+    hora?: string[];
   };
   message?: string | null;
 };
@@ -101,6 +124,47 @@ export type clienteState = {
   };
   message?: string | null;
 };
+
+export async function createReserva(prevState: reservaState, formData: FormData) {
+  // Validate form fields using Zod
+  const validatedFields = CreateReserva.safeParse({
+    clase: formData.get('clase'),
+    hora: formData.get('hora'),
+  });
+
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Faltan llenar campos. Imposible cargar reserva.',
+    };
+  }
+
+  // Prepare data for insertion into the database
+  const { clase , hora} = validatedFields.data;
+
+  const date = new Date().toISOString().split('T')[0];
+  const utilizada = "false"; // Default value for utilizada
+
+  // Insert data into the database
+  try {
+    await sql`
+      INSERT INTO reservas (clase_id, hora, utilizada, create_date)
+      VALUES (${clase}, ${hora}, ${utilizada}, ${date})
+    `;
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Create Reserva. ' + error,
+    };
+  }
+
+  // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath('/perfil/misreservas');
+  redirect('/perfil/misreservas');
+}
+
 
 
 export async function createInvoice(prevState: State, formData: FormData) {
