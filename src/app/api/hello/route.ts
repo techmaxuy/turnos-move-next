@@ -3,11 +3,10 @@ import { auth } from "../../auth"
 
 
 
-export async function GET(request: Request) {
+export  function GET(request: Request) {
 
 
-  const session = await auth()
-      if (!session) new Response('No autorizado', { status: 401 });
+
 
   // Voy a crear una reserva de ejemplo para probar la api y para dejar un registro de la invocación
  
