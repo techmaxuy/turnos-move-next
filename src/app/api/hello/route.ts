@@ -1,9 +1,9 @@
-import { createReserva } from "@/app/lib/actions";
+import { createReservaV2 } from "@/app/lib/actions";
 import { auth } from "../../auth"
 
 
 
-export  function GET(request: Request) {
+export  async function GET(request: Request) {
 
   // Voy a crear una reserva de ejemplo para probar la api y para dejar un registro de la invocación
  
@@ -16,7 +16,7 @@ export  function GET(request: Request) {
 formData.append('clase', reserva.clase);
 formData.append('hora', reserva.hora);
 
-createReserva({}, formData);
+await createReservaV2({}, formData);
     
 
   

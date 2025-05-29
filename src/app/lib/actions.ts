@@ -125,6 +125,44 @@ export type clienteState = {
   message?: string | null;
 };
 
+export async function createReservaV2(prevState: reservaState, formData: FormData) {
+  // Validate form fields using Zod
+  const validatedFields = CreateReserva.safeParse({
+    clase: formData.get('clase'),
+    hora: formData.get('hora'),
+  });
+
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Faltan llenar campos. Imposible cargar reserva.',
+    };
+  }
+
+  // Prepare data for insertion into the database
+  const { clase , hora} = validatedFields.data;
+
+  const date = new Date().toISOString().split('T')[0];
+  const utilizada = "false"; // Default value for utilizada
+
+  // Insert data into the database
+  try {
+    await sql`
+      INSERT INTO reservas (clase_id, hora, utilizada, create_date)
+      VALUES (${clase}, ${hora}, ${utilizada}, ${date})
+    `;
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Create Reserva. ' + error,
+    };
+  }
+
+}
+
+
 export async function createReserva(prevState: reservaState, formData: FormData) {
   // Validate form fields using Zod
   const validatedFields = CreateReserva.safeParse({
