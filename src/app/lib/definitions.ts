@@ -65,6 +65,7 @@ export type User = {
     create_date: string;
     hora: string;
     utilizada: string;
+    customerId: string;
   };
   
   // The database returns a number for amount, but we later format it to a string with the formatCurrency function

@@ -190,7 +190,7 @@ export async function createReserva(prevState: reservaState, formData: FormData)
   // Insert data into the database
   try {
     await sql`
-      INSERT INTO reservas (clase_id, hora, utilizada, create_date, customer_id)
+      INSERT INTO reservas (clase_id, hora, utilizada, create_date, customerid)
       VALUES (${clase}, ${hora}, ${utilizada}, ${date}, ${customerId})
     `;
   } catch (error) {
