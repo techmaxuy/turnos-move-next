@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import { fetchLatestReservas } from '@/app/lib/data';
 import { lusitana } from '@/app/ui/fonts';
 
-export default async function LatestReservas() {
-  const latestReservas = await fetchLatestReservas();
+export default async function LatestReservas( { customerId }: { customerId: string }) {
+  const latestReservas = await fetchLatestReservas(customerId);
 
   return (
     <div className="flex flex-col w-full rounded-xl bg-[#568072] p-4 md:pt-0 mt-2 ">

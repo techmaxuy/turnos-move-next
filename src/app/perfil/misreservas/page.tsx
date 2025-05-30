@@ -10,6 +10,8 @@ export default async function MisReservas() {
       const session = await auth()
     if (!session) return <NoAutenticado />
 
+    const loginId = session?.customerId || '';
+
 
   return (
     <div className="mx-2 mb-4 md:mt-15">
@@ -17,7 +19,7 @@ export default async function MisReservas() {
       <div className="flex justify-end">
         <AgregarReserva />
       </div>
-      <LatestReservas  />
+      <LatestReservas customerId={loginId} />
     </div>
   );
 }  

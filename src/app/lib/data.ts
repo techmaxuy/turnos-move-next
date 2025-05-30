@@ -110,11 +110,12 @@ export async function fetchClases() {
 }
 
 
-export async function fetchLatestReservas() {
+export async function fetchLatestReservas(id: string) {
   try {
     const data = await sql<LatestReservas[]>`
-      SELECT id, clase_id, hora,  utilizada, create_date
+      SELECT id, clase_id, hora,  utilizada, create_date,customerId
       FROM reservas
+      WHERE customerId = ${id}
       ORDER BY reservas.create_date DESC
       `;
     //console.log(data)
