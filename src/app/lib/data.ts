@@ -10,6 +10,7 @@ import {
   LatestInvoiceRaw,
   Revenue,
   CustomerForm,
+  Clases
 } from './definitions';
 import { formatCurrency } from './utils';
 import { formatDateToLocal } from './utils';
@@ -89,6 +90,22 @@ export async function fetchLatestInvoices() {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
+  }
+}
+
+export async function fetchClases() {
+  try {
+    const data = await sql<Clases[]>`
+      SELECT invoices.amount, customers.name,  invoices.id, invoices.date
+      FROM invoices
+      JOIN customers ON invoices.customer_id = customers.id
+      ORDER BY invoices.date DESC
+      `;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch clases.');
   }
 }
 

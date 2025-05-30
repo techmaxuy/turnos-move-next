@@ -7,7 +7,7 @@ import { useActionState } from 'react';
 import { useState } from 'react';
 import { promises } from 'dns';
 
- export default function ReservaForm( {clases, horas}:{clases:  Array<{ id: string; name: string }>,horas:  Array<{ id: string; name: string }>}  ) {
+ export default function ReservaForm( {clases, horas, customerId}:{clases:  Array<{ id: string; name: string }>,horas:  Array<{ id: string; name: string }>, customerId: string}  ) {
   const initialState: reservaState = { message: null, errors: {} };
   const [state, formAction] = useActionState(createReserva, initialState);
   const [selectedValue, setSelectedValue] = useState('');
@@ -17,6 +17,9 @@ import { promises } from 'dns';
 
   return (
     <form action={formAction}>
+      <div className="hidden">
+        <input type="hidden" name="customerId" value={customerId} />
+      </div>
       <div className="rounded-md bg-[#484848] p-4 md:p-6">
 
         {/* Clase */}

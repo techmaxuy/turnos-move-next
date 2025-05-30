@@ -87,6 +87,7 @@ const FormSchemaReserva = z.object({
   }),
   utilizada: z.string(),
   create_date: z.string(),
+  customerId: z.string(), 
 });
 
 
@@ -168,6 +169,7 @@ export async function createReserva(prevState: reservaState, formData: FormData)
   const validatedFields = CreateReserva.safeParse({
     clase: formData.get('clase'),
     hora: formData.get('hora'),
+    customerId: formData.get('customerId'),
   });
 
 
@@ -180,7 +182,7 @@ export async function createReserva(prevState: reservaState, formData: FormData)
   }
 
   // Prepare data for insertion into the database
-  const { clase , hora} = validatedFields.data;
+  const { clase , hora, customerId} = validatedFields.data;
 
   const date = new Date().toISOString().split('T')[0];
   const utilizada = "false"; // Default value for utilizada
@@ -188,8 +190,8 @@ export async function createReserva(prevState: reservaState, formData: FormData)
   // Insert data into the database
   try {
     await sql`
-      INSERT INTO reservas (clase_id, hora, utilizada, create_date)
-      VALUES (${clase}, ${hora}, ${utilizada}, ${date})
+      INSERT INTO reservas (clase_id, hora, utilizada, create_date, customer_id)
+      VALUES (${clase}, ${hora}, ${utilizada}, ${date}, ${customerId})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.

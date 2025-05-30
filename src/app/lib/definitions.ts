@@ -41,6 +41,24 @@ export type User = {
     amount: string;
   };
 
+
+  export type Clases = {
+    id: string;
+    name: string;
+    dia: string;
+    hora: string;
+  };
+
+  export type Dias = {
+    id: string;
+    name: string;
+  };
+
+  export type Horas = {
+    id: string;
+    name: string;
+  };
+
   export type LatestReservas = {
     id: string;
     clase_id: string;

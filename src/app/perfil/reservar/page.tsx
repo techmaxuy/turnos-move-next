@@ -13,6 +13,7 @@ export default async function Reservar(props: {
 
      const session = await auth()
     if (!session) return <NoAutenticado />
+    const loginId = session?.customerId || '';
 
     const clases = [{ id: 'funcional', name: 'Funcional'},
                       { id: 'crossfit', name: 'Crossfit'}
@@ -36,7 +37,7 @@ export default async function Reservar(props: {
     <main>
       
       <Calendar />
-      <ReservaForm clases={clases} horas={horas} /> 
+      <ReservaForm clases={clases} horas={horas} customerId={loginId}/> 
       <div>
         <p>
           {message && (
