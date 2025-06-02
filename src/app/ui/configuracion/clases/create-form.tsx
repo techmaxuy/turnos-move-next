@@ -36,14 +36,11 @@ import { useActionState } from 'react';
     { id: '21', name: '21:00'},
     { id: '22', name: '22:00'},
     { id: '23', name: '23:00'},
-    
 ];
 
   return (
     <form action={formAction}>
       <div className="rounded-md bg-[#484848] p-4 md:p-6">
-
-
         {/* Nombre Clase */}
          <div className="mb-4">
           <label htmlFor="clase" className="mb-2 block text-sm font-medium">

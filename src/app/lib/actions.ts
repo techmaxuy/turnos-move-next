@@ -281,6 +281,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
 
 export async function crearClase(prevState: claseState | undefined, formData: FormData) {
 
+  console.log("formData", formData);
   
   // Validate form fields using Zod
   const validatedFields = CrearClase.safeParse({
@@ -299,8 +300,8 @@ export async function crearClase(prevState: claseState | undefined, formData: Fo
   }
 
   // Prepare data for insertion into the database
-  const { clase, dias, horas} = validatedFields.data;
-console.log(clase, dias, horas);
+ // const { clase, dias, horas} = validatedFields.data;
+//console.log(clase, dias, horas);
 
   /*
   const date = new Date().toISOString().split('T')[0];
@@ -322,11 +323,11 @@ console.log(clase, dias, horas);
       message: 'Database Error: Failed to Create Invoice. ' + error,
     };
   }
-
+*/
   // Revalidate the cache for the invoices page and redirect the user.
-  revalidatePath('/configuracion/pagos');
-  redirect('/configuracion/pagos');
-  */
+  revalidatePath('/configuracion');
+  redirect('/configuracion');
+  
 }
 
 
