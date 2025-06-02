@@ -90,14 +90,7 @@ import { useActionState } from 'react';
             
           </div>
 
-          <div id="dias-error" aria-live="polite" aria-atomic="true">
-            {state?.errors?.dias &&
-              state?.errors.dias.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))}
-          </div>
+
         </div>
 
        {/* Horas */}
@@ -123,14 +116,7 @@ import { useActionState } from 'react';
             
           </div>
 
-          <div id="horas-error" aria-live="polite" aria-atomic="true">
-            {state?.errors?.horas &&
-              state?.errors.horas.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))}
-          </div>
+  
         </div>
 
         

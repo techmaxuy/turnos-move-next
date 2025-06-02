@@ -127,8 +127,8 @@ export type State = {
 export type claseState = {
   errors?: {
     clase?: string[];
-    dias?: string[];
-    horas?: string[];
+    //dias?: string[];
+    //horas?: string[];
   };
   message?: string | null;
 };
