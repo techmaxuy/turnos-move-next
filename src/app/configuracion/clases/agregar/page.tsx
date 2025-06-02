@@ -7,9 +7,6 @@ export default async function Page() {
 
      const session = await auth()
     if (!session) return <NoAutenticado />
-
-
-  const customers = await fetchCustomers();
  
   return (
     <main>

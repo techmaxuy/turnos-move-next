@@ -82,16 +82,10 @@ import { useActionState } from 'react';
             
               
               {dias.map((dia) => (
-                <>
-                <input aria-describedby='dias-error' type="checkbox"  key={dia.id}/> 
-                <label
-                  className="inline-flex items-center mr-4 mb-2 cursor-pointer"
-                >
+                <div key={dia.id}>
+                    <input  aria-describedby='dias-error' type="checkbox"  /> 
                   <span className="mr-2 text-sm text-white">{dia.name}</span>  
-                </label>
-
-                
-                </>
+                </div>
               ))}
             
           </div>
@@ -115,8 +109,8 @@ import { useActionState } from 'react';
             
               
               {horas.map((hora) => (
-                <>
-                <input aria-describedby='horas-error' type="checkbox"  key={hora.id}/> 
+                <div key={hora.id}>
+                <input aria-describedby='horas-error' type="checkbox"  /> 
                 <label
                   className="inline-flex items-center mr-4 mb-2 cursor-pointer"
                 >
@@ -124,7 +118,7 @@ import { useActionState } from 'react';
                 </label>
 
                 
-                </>
+                </div>
               ))}
             
           </div>
