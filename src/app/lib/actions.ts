@@ -281,7 +281,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
 
 export async function crearClase(prevState: claseState | undefined, formData: FormData) {
 
-  console.log("hol");
+  console.log(formData);
   
   // Validate form fields using Zod
   const validatedFields = CrearClase.safeParse({
