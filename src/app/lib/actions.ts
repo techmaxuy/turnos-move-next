@@ -9,6 +9,7 @@ import { AuthError } from 'next-auth';
 import bcrypt from 'bcryptjs';
 import { NODE_BASE_ESM_RESOLVE_OPTIONS } from 'next/dist/build/webpack-config';
 import { Resend } from "resend";
+import Form from '../ui/perfil/editarPerfil';
 
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
@@ -90,12 +91,27 @@ const FormSchemaReserva = z.object({
   customerId: z.string(), 
 });
 
+const FormSchemaClase = z.object({
+  id: z.string(),
+  clase: z.string({
+    invalid_type_error: 'Por favor ingresa una clase.',
+  }),
+  dias: z.array(z.string()).min(1, {
+    message: 'Por favor selecciona al menos un dia.',
+  }),
+  horas: z.array(z.string()).min(1, {
+    message: 'Por favor selecciona al menos una hora.',
+    
+  }),
+});
+
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 const CreateCliente = FormSchemaCliente.omit({ id: true, creditos: true });
 const EditarCliente = FormSchemaCliente.omit({ id: true, creditos: true });
 const CreateReserva = FormSchemaReserva.omit({ id: true, utilizada: true, create_date: true });
+const CrearClase = FormSchemaClase.omit({ id: true });
 
 export type State = {
   errors?: {
@@ -104,6 +120,15 @@ export type State = {
     amount?: string[];
     formaPagoId?: string[];
     transaccion?: string[];
+  };
+  message?: string | null;
+};
+
+export type claseState = {
+  errors?: {
+    clase?: string[];
+    dias?: string[];
+    horas?: string[];
   };
   message?: string | null;
 };
@@ -184,7 +209,7 @@ export async function createReserva(prevState: reservaState, formData: FormData)
   // Prepare data for insertion into the database
   const { clase , hora, customerId} = validatedFields.data;
 
-  const date = new Date().toISOString().split('T')[0];
+  const date = new Date().toLocaleDateString();
   const utilizada = "false"; // Default value for utilizada
 
   // Insert data into the database
@@ -253,6 +278,58 @@ export async function createInvoice(prevState: State, formData: FormData) {
   revalidatePath('/configuracion/pagos');
   redirect('/configuracion/pagos');
 }
+
+export async function crearClase(prevState: claseState | undefined, formData: FormData) {
+
+  
+  // Validate form fields using Zod
+  const validatedFields = CrearClase.safeParse({
+    clase: formData.get('clase'),
+    dias: formData.getAll('dias') as string[],
+    horas: formData.getAll('horas') as string[],
+  });
+
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Faltan llenar campos. Imposible crear clase.',
+    };
+  }
+
+  // Prepare data for insertion into the database
+  const { clase, dias, horas} = validatedFields.data;
+console.log(clase, dias, horas);
+
+  /*
+  const date = new Date().toISOString().split('T')[0];
+
+  // Insert data into the database
+  try {
+    await sql`
+      INSERT INTO invoices (customer_id, amount, date,tipo,transaccion,servicio)
+      VALUES (${customerId}, ${amount},${date},${formaPagoId},${transaccion},${servicioId})
+    `;
+    await sql`
+      UPDATE customers
+      SET creditos = ${servicioId}
+      WHERE id = ${customerId}
+  `;
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Create Invoice. ' + error,
+    };
+  }
+
+  // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath('/configuracion/pagos');
+  redirect('/configuracion/pagos');
+  */
+}
+
+
 
 
 export async function createCliente(prevState: clienteState, formData: FormData) {

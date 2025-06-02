@@ -8,7 +8,7 @@ export default async function LatestReservas( { customerId }: { customerId: stri
   return (
     <div className="flex flex-col w-full rounded-xl bg-[#568072] p-4 md:pt-0 mt-2 ">
       <h2 className={`${lusitana.className} text-xl p-4`}>
-        Mis ultimas reservas
+        Mis reservas
       </h2>
           <div className="">
             {latestReservas.map((reserva, i) => {
@@ -22,9 +22,11 @@ export default async function LatestReservas( { customerId }: { customerId: stri
                       },
                     )}
                   >
+                    <div className="ml-4">
+                      {reserva.create_date}
+                      </div>
                       <div className="ml-4">
                       {reserva.clase_id}
-                        
                       </div>
                       <div className=""> 
                       {reserva.hora}

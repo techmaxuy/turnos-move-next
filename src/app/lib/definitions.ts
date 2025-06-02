@@ -118,6 +118,13 @@ export type User = {
     ci:string;
     creditos: string;
   };
+
+  export type ClasesField = {
+    id: string;
+    name: string;
+    dias: string[];
+    horas: string[];
+  };
   
   export type InvoiceForm = {
     id: string;
