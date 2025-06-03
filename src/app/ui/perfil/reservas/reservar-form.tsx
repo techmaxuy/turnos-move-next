@@ -90,7 +90,7 @@ import clsx from 'clsx';
                 <option className="text-black" value="" disabled>
                     Seleccionar hora a reservar
                 </option>
-                {datosDisponibles[0].horas.map((hora) => (
+                {datosDisponibles[0]?.horas.map((hora) => (
                     <option  key={hora} value={hora}>
                     {hora}
                     </option>

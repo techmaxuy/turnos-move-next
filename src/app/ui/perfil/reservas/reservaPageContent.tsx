@@ -13,7 +13,7 @@ interface ReservaPageContentProps {
 
 export default function ReservaPageContent({ initialData, onDiaChange, diaInicial, customerId }: ReservaPageContentProps) {
 
-  const [currentData, setCurrentClases] = useState(initialData);
+  const [currentData, setCurrentData] = useState(initialData);
   const [currentCustomerId, setCurrentCustomerId] = useState(customerId || '');
   const [selectedDayFromCalendar, setSelectedDayFromCalendar] = useState(diaInicial);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +23,7 @@ export default function ReservaPageContent({ initialData, onDiaChange, diaInicia
     setIsLoading(true);
     const data = await onDiaChange(day); // Invoca la Server Action
     setIsLoading(false);
+    setCurrentData(data);
     return data
   };
 

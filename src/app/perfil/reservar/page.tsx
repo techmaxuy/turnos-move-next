@@ -31,8 +31,6 @@ export default async function Reservar() {
   
   return (
     <main>
-      <Calendar onDiaChange={getServerClasesYHorasPorDia}/>
-      <ReservaForm initialData={initialData}  customerId={loginId} />
 
       <ReservaPageContent 
         initialData={initialData}

@@ -18,8 +18,15 @@ export default function Calendar({ onDiaChange }: CalendarioProps) {
 
  
   const handlePickDate = async (event:any) => {
+    
     setStartDate(event);
+    if ((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase() === 'sábado') {
+      onDiaChange('sabado')
+    } else if ((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase() === 'miércoles') {
+      onDiaChange('miercoles')
+    } else {
     onDiaChange((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase())
+    }
   }
 
     return (
