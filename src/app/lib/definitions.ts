@@ -43,7 +43,7 @@ export type User = {
 
 
   export type Clases = {
-    id: string;
+    clase_id: string;
     nombre: string;
     dias: [string];
     horas: [string];

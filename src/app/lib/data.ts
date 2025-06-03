@@ -107,10 +107,38 @@ LEFT JOIN
     clases_dias cd ON c.id::text = cd.clases_id
 LEFT JOIN
     clases_horas ch ON c.id::text = ch.clases_id
+
 GROUP BY
     c.id, c.nombre -- ¡Es crucial agrupar por los campos de la tabla principal 'clases'!
 ORDER BY
     c.nombre ASC; -- El ordenamiento final debe ser sobre la clase principal
+      `;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch clases.');
+  }
+}
+
+export async function fetchClasesByDay(dia: string = 'lunes') {
+  try {
+    const data = await sql<Clases[]>`
+      SELECT
+    c.id AS clase_id,
+        c.nombre,
+            ARRAY_AGG(DISTINCT cd.dia ORDER BY cd.dia ASC) AS dias,
+                ARRAY_AGG(DISTINCT ch.hora ORDER BY ch.hora ASC) AS horas
+                FROM
+                    clases c
+                    LEFT JOIN
+                        clases_dias cd ON c.id::text = cd.clases_id
+                        LEFT JOIN
+                            clases_horas ch ON c.id::text = ch.clases_id
+                            WHERE
+                                cd.dia = '${dia}'
+                                GROUP BY
+                                    c.id, c.nombre
       `;
 
     return data;

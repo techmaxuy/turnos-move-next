@@ -6,11 +6,27 @@ import { createReserva, reservaState } from '@/app/lib/actions';
 import { useActionState } from 'react';
 import { useState } from 'react';
 import { promises } from 'dns';
+import clsx from 'clsx';
 
- export default function ReservaForm( {clases, horas, customerId}:{clases:  Array<{ id: string; name: string }>,horas:  Array<{ id: string; name: string }>, customerId: string}  ) {
+ export default function ReservaForm(
+   {initialData, customerId}:
+    {
+      initialData:  Array<{ clase_id: string; nombre: string; dias: string[]; horas: string[] }>,
+      customerId: string
+    })
+
+    {
   const initialState: reservaState = { message: null, errors: {} };
   const [state, formAction] = useActionState(createReserva, initialState);
   const [selectedValue, setSelectedValue] = useState('');
+  const [datosDisponibles, setDatosDisponibles] = useState(initialData);
+  const [claseSeleccionada, setClaseSeleccionada] = useState('');
+  const [horaSeleccionada, setHoraSeleccionada] = useState('');
+
+//  const [clasesDisponibles, setClasesDisponibles] = useState(initialClases);
+ // const [horasDisponibles, setHorasDisponibles] = useState(initialHoras);
+
+
   const handleSelectChange = (event:any) => {
     setSelectedValue(event.target.value);
   };
@@ -39,9 +55,9 @@ import { promises } from 'dns';
               <option className="text-black" value="" disabled>
                 Seleccionar clase a reservar
               </option>
-              {clases.map((clase) => (
-                <option  key={clase.id} value={clase.id}>
-                  {clase.name}
+              {datosDisponibles.map((clase) => (
+                <option  key={clase.clase_id} value={clase.nombre}>
+                  {clase.nombre}
                 </option>
               ))}
             </select>
@@ -74,9 +90,9 @@ import { promises } from 'dns';
                 <option className="text-black" value="" disabled>
                     Seleccionar hora a reservar
                 </option>
-                {horas.map((hora) => (
-                    <option  key={hora.id} value={hora.id}>
-                    {hora.name}
+                {datosDisponibles[0].horas.map((hora) => (
+                    <option  key={hora} value={hora}>
+                    {hora}
                     </option>
                 ))}
                 </select>
