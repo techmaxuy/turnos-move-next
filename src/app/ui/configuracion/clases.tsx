@@ -42,9 +42,9 @@ export default async function TableClases() {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {clases?.map((clase) => (
+              
                 <tr
-                  key={clase.id}
+                  
                   className="w-full border-b py-3 text-black text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
@@ -52,21 +52,23 @@ export default async function TableClases() {
                       <p>{clases[0].nombre}</p>
                     </div>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  {clases?.map((clase) => (
+                  <td className="whitespace-nowrap px-3 py-3" key={clase.id}>
 
                     <p>{clase.dia}</p>
                   </td> 
+                       ))}
                   <td className="whitespace-nowrap px-3 py-3">
-                    <p>{clase.hora}</p>
+                    <p>{clases[0].hora}</p>
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      <ModificarCliente id={clase.id} />
-                      <BorrarCliente id={clase.id} />
+                      <ModificarCliente id={clases[0].id} />
+                      <BorrarCliente id={clases[0].id} />
                     </div>
                   </td>
                 </tr>
-              ))}
+         
             </tbody>
           </table>
         </div>
