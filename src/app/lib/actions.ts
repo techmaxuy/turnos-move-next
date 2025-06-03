@@ -323,13 +323,15 @@ console.log(clase, dias, horas);
       
     }
 
-    /*
-    await sql`
-      UPDATE customers
-      SET creditos = ${servicioId}
-      WHERE id = ${customerId}
-  `;
-  */
+    for (let i = 0; i < horas.length; i++) {
+      const hora = horas[i];
+      
+      await sql`
+        INSERT INTO clases_horas (clases_id, dia)
+        VALUES (${claseId}, ${hora})
+      `;
+      
+    }
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
