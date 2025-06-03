@@ -14,7 +14,7 @@ export default async function TableClases() {
               <div key={clase.id} className="flex flex-col mb-1 w-full rounded-md bg-white p-1 text-black">
                       <div className="flex flex-row w-full items-center justify-between text-sm font-medium">
                         <p className="px-5">
-                          {clase.name}
+                          {clase.nombre}
                         </p>
                         <div className="flex justify-end gap-2">
                           <ModificarCliente id={clase.id} />
@@ -49,7 +49,7 @@ export default async function TableClases() {
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
-                      <p>{clase.name}</p>
+                      <p>{clase.nombre}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">

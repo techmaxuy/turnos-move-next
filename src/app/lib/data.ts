@@ -96,10 +96,11 @@ export async function fetchLatestInvoices() {
 export async function fetchClases() {
   try {
     const data = await sql<Clases[]>`
-      SELECT invoices.amount, customers.name,  invoices.id, invoices.date
-      FROM invoices
-      JOIN customers ON invoices.customer_id = customers.id
-      ORDER BY invoices.date DESC
+      SELECT clases.id, clases.nombre,  clases_dias.dia, clases_dias.clases_id, clases_horas.hora, clases_horas.clases_id
+      FROM clases
+      JOIN clases_dias ON clases.id::text = clases_dias.clases_id
+      JOIN clases_horas ON clases.id::text = clases_horas.clases_id
+      ORDER BY clases.nombre ASC, clases_dias.dia ASC, clases_horas.hora ASC
       `;
 
     return data;
