@@ -1,6 +1,5 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import * as React from 'react';
 import { useState } from 'react';
 import clsx from 'clsx';
@@ -12,7 +11,7 @@ interface CalendarioProps {
 }
 
 export default function Calendar({ onDiaChange }: CalendarioProps) {
-  const searchParams = useSearchParams();
+
   const [startDate, setStartDate] = useState(new Date());
 
   const currentDate =startDate.toLocaleDateString();
@@ -24,7 +23,7 @@ export default function Calendar({ onDiaChange }: CalendarioProps) {
               {(date) => date && setStartDate(date)} 
               />
                <div>
-             <p>{searchParams.get('query')?.toString() || currentDate }</p>
+             <p>{currentDate}</p>
         </div>
     </div>
     )
