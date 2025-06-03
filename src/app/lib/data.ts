@@ -136,7 +136,7 @@ export async function fetchClasesByDay(dia: string = 'lunes') {
                         LEFT JOIN
                             clases_horas ch ON c.id::text = ch.clases_id
                             WHERE
-                                cd.dia = '${dia}'
+                                cd.dia = ${dia}
                                 GROUP BY
                                     c.id, c.nombre
       `;
