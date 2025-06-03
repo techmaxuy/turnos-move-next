@@ -307,10 +307,22 @@ console.log(clase, dias, horas);
 
   // Insert data into the database
   try {
-    await sql`
+    const claseId = (await sql`
       INSERT INTO clases (nombre)
-      VALUES (${clase})
-    `;
+      VALUES (${clase}) RETURNING id
+    `)[0].id;
+    
+    // Insert the days and hours into the database
+    for (let i = 0; i < dias.length; i++) {
+      const dia = dias[i];
+      
+      await sql`
+        INSERT INTO clases_dias (clases_id, dia)
+        VALUES (${claseId}, ${dia})
+      `;
+      
+    }
+
     /*
     await sql`
       UPDATE customers
