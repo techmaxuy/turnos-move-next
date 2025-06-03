@@ -100,6 +100,7 @@ export async function fetchClases() {
       FROM clases
       JOIN clases_dias ON clases.id::text = clases_dias.clases_id
       JOIN clases_horas ON clases.id::text = clases_horas.clases_id
+      GROUP BY clases_dias.dia, clases_horas.hora
       ORDER BY clases.nombre ASC, clases_dias.dia ASC, clases_horas.hora ASC
       `;
 
