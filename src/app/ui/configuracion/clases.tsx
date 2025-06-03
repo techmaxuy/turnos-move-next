@@ -6,6 +6,7 @@ import { fetchClases } from '@/app/lib/data';
 
 export default async function TableClases() {
   const clases= await fetchClases();
+  console.log(clases);
   //const nombre=clases[0].nombre
   //const dias = clases[0].dias;
   //const horas = clases[0].horas;
@@ -41,8 +42,8 @@ export default async function TableClases() {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {clases.map(({ id, nombre, dias, horas }) => (
-                <tr key={id} 
+              {clases.map(({  nombre, dias, horas }) => (
+                <tr key={nombre} 
                   className="w-full border-b py-3 text-black text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
