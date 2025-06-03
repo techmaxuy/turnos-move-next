@@ -303,27 +303,27 @@ export async function crearClase(prevState: claseState | undefined, formData: Fo
  const { clase, dias, horas} = validatedFields.data;
 console.log(clase, dias, horas);
 
-  /*
-  const date = new Date().toISOString().split('T')[0];
 
   // Insert data into the database
   try {
     await sql`
-      INSERT INTO invoices (customer_id, amount, date,tipo,transaccion,servicio)
-      VALUES (${customerId}, ${amount},${date},${formaPagoId},${transaccion},${servicioId})
+      INSERT INTO clases (nombre)
+      VALUES (${clase})
     `;
+    /*
     await sql`
       UPDATE customers
       SET creditos = ${servicioId}
       WHERE id = ${customerId}
   `;
+  */
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database Error: Failed to Create Invoice. ' + error,
+      message: 'Database Error: Failed to Create Clase. ' + error,
     };
   }
-*/
+
   // Revalidate the cache for the invoices page and redirect the user.
   revalidatePath('/configuracion');
   redirect('/configuracion');
