@@ -93,8 +93,8 @@ const FormSchemaReserva = z.object({
 
 const FormSchemaClase = z.object({
   id: z.string(),
-  clase: z.string({
-    invalid_type_error: 'Por favor ingresa una clase.',
+  clase: z.string().min(1, {
+    message: 'Por favor ingresa un nombre para la clase.',
   }),
   dias: z.array(z.string()).min(1, {
     message: 'Por favor selecciona al menos un dia.',
@@ -302,6 +302,7 @@ export async function crearClase(prevState: claseState | undefined, formData: Fo
   // Prepare data for insertion into the database
  const { clase, dias, horas} = validatedFields.data;
 console.log(clase, dias, horas);
+
 
 
   // Insert data into the database
