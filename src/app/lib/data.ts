@@ -98,9 +98,9 @@ export async function fetchClases() {
     const data = await sql<Clases[]>`
       SELECT
     c.id AS clase_id,
-    c.nombre AS nombre_clase,
-    ARRAY_AGG(DISTINCT cd.dia ORDER BY cd.dia ASC) AS dias_seleccionados,
-    ARRAY_AGG(DISTINCT ch.hora ORDER BY ch.hora ASC) AS horas_seleccionadas
+    c.nombre,
+    ARRAY_AGG(DISTINCT cd.dia ORDER BY cd.dia ASC) AS dias,
+    ARRAY_AGG(DISTINCT ch.hora ORDER BY ch.hora ASC) AS horas
 FROM
     clases c
 LEFT JOIN

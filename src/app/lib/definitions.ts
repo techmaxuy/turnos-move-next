@@ -45,8 +45,8 @@ export type User = {
   export type Clases = {
     id: string;
     nombre: string;
-    dia: string;
-    hora: string;
+    dias: [string];
+    horas: [string];
   };
 
   export type Dias = {
