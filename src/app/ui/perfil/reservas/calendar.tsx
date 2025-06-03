@@ -5,6 +5,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { start } from 'repl';
 
 interface CalendarioProps {
   onDiaChange: (dia : string) => Promise<{ clase_id: string, nombre: string, dias: string[], horas: string[] }[]>; // Server Action como prop
@@ -15,10 +16,8 @@ export default function Calendar({ onDiaChange }: CalendarioProps) {
 
   const [startDate, setStartDate] = useState(new Date());
 
-  const currentDate =startDate.toLocaleDateString();
-
-
-  const handlePickDate = (event:any) => {
+ 
+  const handlePickDate = async (event:any) => {
     setStartDate(event);
     onDiaChange((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase())
   }
@@ -29,7 +28,7 @@ export default function Calendar({ onDiaChange }: CalendarioProps) {
       <DatePicker selected={startDate} onChange={handlePickDate}
               />
                <div>
-             <p>{currentDate}</p>
+             <p>{(startDate.toLocaleDateString('es-ES', { weekday: 'long' })).toLocaleLowerCase()}</p>
         </div>
     </div>
     )

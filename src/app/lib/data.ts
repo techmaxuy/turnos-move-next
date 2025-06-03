@@ -121,7 +121,7 @@ ORDER BY
   }
 }
 
-export async function fetchClasesByDay(dia: string = 'lunes') {
+export async function fetchClasesByDay(dia: string) {
   try {
     const data = await sql<Clases[]>`
       SELECT

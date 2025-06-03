@@ -3,6 +3,7 @@ import {  fetchClasesByDay } from '@/app/lib/data';
 import { auth } from "../../auth"
 import NoAutenticado from "../../ui/noAutenticado";
 import Calendar from '@/app/ui/perfil/reservas/calendar';
+import ReservaPageContent from '@/app/ui/perfil/reservas/reservaPageContent';
 
 async function getServerClasesYHorasPorDia(diaSeleccionado: string) {
   'use server'; // ¡Directiva de Server Action!
@@ -31,7 +32,14 @@ export default async function Reservar() {
   return (
     <main>
       <Calendar onDiaChange={getServerClasesYHorasPorDia}/>
-      <ReservaForm initialData={initialData}  customerId={loginId} /> 
+      <ReservaForm initialData={initialData}  customerId={loginId} />
+
+      <ReservaPageContent 
+        initialData={initialData}
+        customerId={loginId} 
+        onDiaChange={getServerClasesYHorasPorDia} 
+        diaInicial={diaPorDefecto}
+      />
     </main>
   );
 }  
