@@ -10,17 +10,23 @@ interface CalendarioProps {
   onDiaChange: (dia : string) => Promise<{ clase_id: string, nombre: string, dias: string[], horas: string[] }[]>; // Server Action como prop
 }
 
+
 export default function Calendar({ onDiaChange }: CalendarioProps) {
 
   const [startDate, setStartDate] = useState(new Date());
 
   const currentDate =startDate.toLocaleDateString();
 
+
+  const handlePickDate = (event:any) => {
+    setStartDate(event);
+    onDiaChange((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase())
+  }
+
     return (
         <div>
       <h4>Seleccionar una fecha</h4>
-      <DatePicker selected={startDate} onChange=
-              {(date) => date && setStartDate(date)} 
+      <DatePicker selected={startDate} onChange={handlePickDate}
               />
                <div>
              <p>{currentDate}</p>
