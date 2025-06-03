@@ -327,7 +327,7 @@ console.log(clase, dias, horas);
       const hora = horas[i];
       
       await sql`
-        INSERT INTO clases_horas (clases_id, dia)
+        INSERT INTO clases_horas (clases_id, hora)
         VALUES (${claseId}, ${hora})
       `;
       
