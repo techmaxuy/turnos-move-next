@@ -25,6 +25,7 @@ export default async function Reservar() {
     const loginId = session?.customerId || '';
 
     const diaPorDefecto = (new Date().toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase();
+    console.log(`Día por defecto: ${diaPorDefecto}`);
 
     // Obtiene los datos iniciales en el servidor para el día por defecto
   const initialData = await fetchClasesByDay(diaPorDefecto);
