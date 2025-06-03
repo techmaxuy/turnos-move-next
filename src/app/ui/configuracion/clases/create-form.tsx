@@ -69,10 +69,6 @@ import { useActionState } from 'react';
           </div>
         </div>
 
-
-
-
-
         {/* Dias */}
         <div className="mb-4">
           <label htmlFor="dias" className="mb-2 block text-sm font-medium">
@@ -110,20 +106,11 @@ import { useActionState } from 'react';
                   <span className="mr-2 text-sm text-white">{hora.name}</span>  
                 </label>
 
-                
+        
                 </div>
-              ))}
-            
-          </div>
-
-  
+              ))}           
+          </div> 
         </div>
-
-        
-
-        
-
-
 
         <div aria-live="polite" aria-atomic="true">
           {state?.message ? (

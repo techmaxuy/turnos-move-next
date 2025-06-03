@@ -111,7 +111,7 @@ const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 const CreateCliente = FormSchemaCliente.omit({ id: true, creditos: true });
 const EditarCliente = FormSchemaCliente.omit({ id: true, creditos: true });
 const CreateReserva = FormSchemaReserva.omit({ id: true, utilizada: true, create_date: true });
-const CrearClase = FormSchemaClase.omit({ id: true,dias: true, horas: true });
+const CrearClase = FormSchemaClase.omit({ id: true});
 
 export type State = {
   errors?: {
@@ -300,8 +300,8 @@ export async function crearClase(prevState: claseState | undefined, formData: Fo
   }
 
   // Prepare data for insertion into the database
- // const { clase, dias, horas} = validatedFields.data;
-//console.log(clase, dias, horas);
+ const { clase, dias, horas} = validatedFields.data;
+console.log(clase, dias, horas);
 
   /*
   const date = new Date().toISOString().split('T')[0];
