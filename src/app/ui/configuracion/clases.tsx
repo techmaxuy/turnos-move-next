@@ -49,10 +49,11 @@ export default async function TableClases() {
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
-                      <p>{clase.nombre}</p>
+                      <p>{clases[0].nombre}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
+
                     <p>{clase.dia}</p>
                   </td> 
                   <td className="whitespace-nowrap px-3 py-3">
