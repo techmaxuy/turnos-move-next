@@ -2,13 +2,12 @@
 
 import * as React from 'react';
 import { useState } from 'react';
-import clsx from 'clsx';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import { start } from 'repl';
+
 
 interface CalendarioProps {
-  onDiaChange: (dia : string) => Promise<{ clase_id: string, nombre: string, dias: string[], horas: string[] }[]>; // Server Action como prop
+  onDiaChange: (nuevoDia : Date) => Promise<{ clase_id: string, nombre: string, dias: string[], horas: string[] }[]>; // Server Action como prop
 }
 
 
@@ -20,13 +19,14 @@ export default function Calendar({ onDiaChange }: CalendarioProps) {
   const handlePickDate = async (event:any) => {
     
     setStartDate(event);
-    if ((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase() === 'sábado') {
-      onDiaChange('sabado')
-    } else if ((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase() === 'miércoles') {
-      onDiaChange('miercoles')
-    } else {
-    onDiaChange((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase())
-    }
+    onDiaChange(event); // Invoca la Server Action con el nuevo día seleccionado
+    //if ((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase() === 'sábado') {
+      //onDiaChange('sabado')
+    //} else if ((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase() === 'miércoles') {
+      //onDiaChange('miercoles')
+    //} else {
+    //onDiaChange((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase())
+    //}
   }
 
     return (
