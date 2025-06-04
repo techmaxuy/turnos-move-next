@@ -50,7 +50,7 @@ import { useState } from 'react';
                     </div>
                     <p>{clase.nombre} - {hora} hs.</p>
 
-                      <Button type="submit">Reservar</Button>
+                      <Button type="submit"> - Reservar - </Button>
 
                   </div>
                 ); 
