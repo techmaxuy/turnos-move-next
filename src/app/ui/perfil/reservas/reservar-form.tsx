@@ -41,7 +41,13 @@ import { useState } from 'react';
             datosDisponibles.map((clase) => (
               clase.horas.map((hora) => {
                 return (
-                  <div key={hora} className="flex flex-row rounded-lg border-2 border-[#01feab]  text-sm text-white font-semibold mb-2 p-2 items-center text-center justify-between">
+                  <div key={hora}  className="flex flex-row rounded-lg border-2 border-[#01feab]  text-sm text-white font-semibold mb-2 p-2 items-center text-center justify-between">
+                    <div className="hidden">
+                      <input type="hidden" name="clase" value={clase.nombre} />
+                    </div>
+                    <div className="hidden">
+                      <input type="hidden" name="hora" value={hora} />
+                    </div>
                     <p>{clase.nombre} - {hora} hs.</p>
 
                       <Button type="submit">Reservar</Button>
