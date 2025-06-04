@@ -6,7 +6,7 @@ export default async function Perfil() {
   //const latestInvoices = await fetchLatestInvoices();
 
   return (
-    <div className="mx-2 mb-4 md:mt-15">
+    <div>
       <PerfilDashboard />
     </div>
   );

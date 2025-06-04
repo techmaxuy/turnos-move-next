@@ -1,9 +1,9 @@
-import ReservaForm from '@/app/ui/perfil/reservas/reservar-form';
+
 import {  fetchClasesByDay } from '@/app/lib/data';
 import { auth } from "../../auth"
 import NoAutenticado from "../../ui/noAutenticado";
-import Calendar from '@/app/ui/perfil/reservas/calendar';
 import ReservaPageContent from '@/app/ui/perfil/reservas/reservaPageContent';
+import { quicksand } from '@/app/ui/fonts';
 
 async function getServerClasesYHorasPorDia(diaSeleccionado: string) {
   'use server'; // ¡Directiva de Server Action!
@@ -30,14 +30,15 @@ export default async function Reservar() {
   const initialData = await fetchClasesByDay(diaPorDefecto);
   
   return (
-    <main>
-
-      <ReservaPageContent 
-        initialData={initialData}
-        customerId={loginId} 
-        onDiaChange={getServerClasesYHorasPorDia} 
-        diaInicial={diaPorDefecto}
-      />
-    </main>
+    <div className={`${quicksand.className} text-2xl p-x-1 rounded border-2 border-solid  border-[#01feab] align-center m-6 p-6 md:mt-40 bg-[#303030]`}>
+      <main>
+        <ReservaPageContent 
+          initialData={initialData}
+          customerId={loginId} 
+          onDiaChange={getServerClasesYHorasPorDia} 
+          diaInicial={diaPorDefecto}
+        />
+      </main>
+    </div>
   );
 }  

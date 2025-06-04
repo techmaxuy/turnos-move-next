@@ -1,5 +1,4 @@
 import Form from '@/app/ui/configuracion/clases/create-form';
-import { fetchCustomers } from '@/app/lib/data';
 import { auth } from "../../../auth"
 import NoAutenticado from "../../../ui/noAutenticado";
  

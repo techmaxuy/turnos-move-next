@@ -23,18 +23,16 @@ export default async function Configuracion(props: {
 
     return (
    
-      <div className="mx-2 mb-4 md:mt-15">
-              <h1 className={`${quicksand.className} text-2xl p-x-1`}>Pagina de configuracion</h1>
-            <div className="flex flex-row">
-              <AgregarClase />
-            </div>
+      <div className={`${quicksand.className} text-2xl p-x-1 rounded border-2 border-solid  border-[grey] bg-[#212121] align-center m-6 p-6 md:mt-40`}>
+              <p className="text-2xl p-x-1">Pagina de configuracion</p>
+
             <Suspense key={query} fallback={<InvoicesTableSkeleton />}>
               <TableClases />
             </Suspense> 
-            <div className="">
-              {/* <Pagination totalPages={totalPages} /> */}
+            <div className="flex justify-end mt-4">
+              <AgregarClase />
             </div>
-          </div>
+      </div>
     );
   }  
 

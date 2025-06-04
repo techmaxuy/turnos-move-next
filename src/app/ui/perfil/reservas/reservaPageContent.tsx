@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Calendario from '../../../ui/perfil/reservas/calendar';
 import ReservaForm from '../../../ui/perfil/reservas/reservar-form';
 
@@ -28,13 +28,13 @@ export default function ReservaPageContent({ initialData, onDiaChange, diaInicia
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="flex min-h-100dvh flex-col items-center w-full">
       <h1>Sistema de Reservas</h1>
       <Calendario
         onDiaChange={handleCalendarDayChange}
       />
       {isLoading ? (
-        <p>Cargando clases y horas para {selectedDayFromCalendar}...</p>
+        <p className="text-xs">Cargando clases y horas para {selectedDayFromCalendar}...</p>
       ) : (
         <ReservaForm
           initialData={currentData} customerId={currentCustomerId}/>

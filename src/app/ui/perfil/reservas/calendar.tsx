@@ -30,14 +30,18 @@ export default function Calendar({ onDiaChange }: CalendarioProps) {
   }
 
     return (
-        <div>
-      <h4>Seleccionar una fecha</h4>
-      <DatePicker selected={startDate} onChange={handlePickDate}
-              />
-               <div>
-             <p>{(startDate.toLocaleDateString('es-ES', { weekday: 'long' })).toLocaleLowerCase()}</p>
-        </div>
-    </div>
+          <div className="flex flex-row justify-between items-center">
+            <div>
+            <p className="text-base">Fecha</p>
+            </div>
+            <div>
+            <DatePicker className="text-base mx-2 rounded-lg border border-solid border-[#01feab] text-center" selected={startDate} onChange={handlePickDate}
+            />
+            </div>
+            <div>
+              <p className="text-base">{(startDate.toLocaleDateString('es-ES', { weekday: 'long' }))}</p>
+            </div>
+          </div>
     )
 }
 

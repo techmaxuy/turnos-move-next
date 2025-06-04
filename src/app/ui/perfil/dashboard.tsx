@@ -6,21 +6,21 @@ export default async function PerfilDashboard() {
   const session = await auth()
  
   if (!session?.user) return null
- 
+
   return (
-    <div >
-      <h1 className={`${quicksand.className} text-2xl p-x-1`}>Mis datos</h1>
-      <p className="text-white m-6">Email: {session.user.email}</p>
-       <p className="text-white m-6">Nombre: {session.user.name}</p>
+    <div className="rounded border-2 border-solid  border-[#01feab] align-center m-6 p-6 md:mt-40 bg-[#303030]" >
+      <h1 className={`${quicksand.className} text-2xl p-x-1`}>Mis datos personales</h1>
+      <p className={`${quicksand.className} text-white m-6`}>Email: {session.user.email}</p>
+       <p className={`${quicksand.className} text-white m-6`}>Nombre: {session.user.name}</p>
 
+      <div className="flex justify-end">
       <Link
-        className={`${quicksand.className} rounded-full border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-10 w-40`}
+        className={`${quicksand.className} rounded-lg border border-solid border-[#01feab] transition-colors flex items-center justify-center bg-[#212121] hover:bg-[#00885b] h-8 w-25 mt-10`}
         href={`/perfil/${session.customerId}/`}
-
-
       >
-        Editar perfil
+        Editar
       </Link>
+      </div>
     </div>
   )
 } 

@@ -6,6 +6,7 @@ import { Button } from '@/app/ui/configuracion/button';
 import { editarPerfil, clienteState } from '@/app/lib/actions';
 import { useActionState } from 'react';
 
+
  export default function Form({
     customer
   }: {
@@ -17,7 +18,7 @@ import { useActionState } from 'react';
 
 
   return (
-  <>
+  <div className="p-2">
     <form action={formAction}>
         {/* Nombre completo del cliente */}
         <div className="mb-4">
@@ -32,7 +33,7 @@ import { useActionState } from 'react';
                 type="text"
                 required
                 placeholder="Nombre Completo"
-                className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
+                className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm text-black placeholder:text-black"
                 aria-describedby="nombre-error"
                 defaultValue={customer.name}
               />
@@ -63,7 +64,7 @@ import { useActionState } from 'react';
                 type="email"
                 required
                 placeholder="Email"
-                className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
+                className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm text-black  placeholder:text-black"
                 aria-describedby="email-error"
                 defaultValue={customer.email}
               />
@@ -94,7 +95,7 @@ import { useActionState } from 'react';
               type="number"
               required
               placeholder="Telefono"
-              className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
+              className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm text-black  placeholder:text-black"
               aria-describedby="telefono-error"
               defaultValue={customer.telefono}
             />
@@ -125,7 +126,7 @@ import { useActionState } from 'react';
               type="number"
               required
               placeholder="Cedula de Identidad"
-              className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
+              className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm text-black  placeholder:text-black"
               aria-describedby="ci-error"
               defaultValue={customer.ci}
             />
@@ -152,5 +153,5 @@ import { useActionState } from 'react';
         <Button type="submit">Modificar</Button>
       </div>
     </form>
-  </>);
+  </div>);
 }

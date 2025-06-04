@@ -10,7 +10,7 @@ export default async function Layout({  children,}: Readonly<{  children: React.
     if (!session) return <NoAutenticado />
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row h-100dvh">
       <div className="md:w-64">
         <SideNav />
       </div>
