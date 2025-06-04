@@ -24,7 +24,13 @@ export default async function Reservar() {
      const session = await auth()
     if (!session) return <NoAutenticado />
     const loginId = session?.customerId || '';
-    const diaPorDefecto = (new Date().toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase();
+    let diaPorDefecto = (new Date().toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase();
+
+    if (diaPorDefecto === 'sábado') {
+      diaPorDefecto = 'sabado'
+    } else if (diaPorDefecto === 'miércoles') {
+      diaPorDefecto = 'miercoles'
+    } 
 
     // Obtiene los datos iniciales en el servidor para el día por defecto
   const initialData = await fetchClasesByDay(diaPorDefecto);

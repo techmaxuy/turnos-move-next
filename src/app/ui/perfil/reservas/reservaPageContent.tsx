@@ -27,6 +27,8 @@ export default function ReservaPageContent({ initialData, onDiaChange, diaInicia
     return data
   };
 
+  console.log('ReservaPageContent - currentData:', currentData);
+
   return (
     <main className="flex min-h-100dvh flex-col items-center w-full">
       <h1>Sistema de Reservas</h1>
