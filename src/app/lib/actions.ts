@@ -190,6 +190,8 @@ export async function createReservaV2(prevState: reservaState, formData: FormDat
 
 
 export async function createReserva(prevState: reservaState, formData: FormData) {
+
+  console.log('Form Data:', formData);
   // Validate form fields using Zod
   const validatedFields = CreateReserva.safeParse({
     clase: formData.get('clase'),
