@@ -1,10 +1,7 @@
 'use client';
 
-import { lusitana } from '@/app/ui/fonts';
-
 import { Button } from '@/app/ui/button';
 import { useActionState } from 'react';
-import { authenticate } from '@/app/lib/actions';
 
 import { signup } from '../lib/actions';
 
@@ -18,7 +15,7 @@ export default function RegisterForm() {
   return (
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-[#212121] px-6 pb-4 pt-8 border-2 border-white">
-        <p className={`${lusitana.className} mb-3 text-2xl`}>
+        <p className="mb-3 text-2xl">
           Registro de usuario
         </p>
           <div className="w-full">
@@ -113,23 +110,3 @@ export default function RegisterForm() {
     </form>
   );
 }
-
-
-/*
-        <input type="hidden" name="redirectTo" value={callbackUrl} />*//*aria-disabled={isPending}
-        <div
-          className="flex h-8 items-end space-x-1"
-          aria-live="polite"
-          aria-atomic="true"
-        >
- <input type="hidden" name="redirectTo" value={callbackUrl} />
-          {errorMessage && (
-            <>
-              <p className="text-sm text-red-500">{errorMessage}</p>
-            </>
-          )}
-
-          
-        </div>
-
-        */

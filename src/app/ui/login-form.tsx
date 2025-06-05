@@ -1,7 +1,5 @@
 'use client';
 
-import { lusitana } from '@/app/ui/fonts';
-
 import { Button } from '@/app/ui/button';
 import { useActionState } from 'react';
 import { authenticate } from '@/app/lib/actions';
@@ -18,7 +16,7 @@ export default function LoginForm() {
   return (
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-[#212121] px-6 pb-4 pt-8 border-2 border-white">
-        <h1 className={`${lusitana.className} mb-3 text-2xl`}>
+        <h1 className="mb-3 text-2xl">
           Por favor inicie sesion para continuar
         </h1>
         <div className="w-full">
