@@ -88,7 +88,10 @@ const FormSchemaReserva = z.object({
   }),
   utilizada: z.string(),
   create_date: z.string(),
-  customerId: z.string(), 
+  customerId: z.string(),
+  diaSeleccionado: z.string({
+    invalid_type_error: 'Por favor selecciona un dia.',
+  }),
 });
 
 const FormSchemaClase = z.object({
@@ -197,6 +200,7 @@ export async function createReserva(prevState: reservaState, formData: FormData)
     clase: formData.get('clase'),
     hora: formData.get('hora'),
     customerId: formData.get('customerId'),
+    diaSeleccionado: formData.get('diaseleccionado'),
   });
 
 
@@ -209,7 +213,7 @@ export async function createReserva(prevState: reservaState, formData: FormData)
   }
 
   // Prepare data for insertion into the database
-  const { clase , hora, customerId} = validatedFields.data;
+  const { clase , hora, customerId,diaSeleccionado} = validatedFields.data;
 
   const date = new Date().toLocaleDateString();
   const utilizada = "false"; // Default value for utilizada
@@ -217,8 +221,8 @@ export async function createReserva(prevState: reservaState, formData: FormData)
   // Insert data into the database
   try {
     await sql`
-      INSERT INTO reservas (clase_id, hora, utilizada, create_date, customerid)
-      VALUES (${clase}, ${hora}, ${utilizada}, ${date}, ${customerId})
+      INSERT INTO reservas (clase_id, hora, utilizada, create_date, customerid,fechareserva)
+      VALUES (${clase}, ${hora}, ${utilizada}, ${date}, ${customerId}, ${diaSeleccionado})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.

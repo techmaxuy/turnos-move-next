@@ -19,16 +19,7 @@ export default function ReservaPageContent({ initialData, onDiaChange, fechaInic
   const [currentCustomerId, setCurrentCustomerId] = useState(customerId || '');
   const [selectedDayFromCalendar, setSelectedDayFromCalendar] = useState(fechaInicial);
   const [isLoading, setIsLoading] = useState(false);
-/*
-  const handleCalendarDayChange = async (day: string) => {
-    setSelectedDayFromCalendar(day);
-    setIsLoading(true);
-    const data = await onDiaChange(day); // Invoca la Server Action
-    setIsLoading(false);
-    setCurrentData(data);
-    return data
-  };
-  */
+
 
    const handleCalendarDayChange = async (nuevoDia: Date) => {
     setSelectedDayFromCalendar(nuevoDia);
@@ -49,7 +40,7 @@ export default function ReservaPageContent({ initialData, onDiaChange, fechaInic
         <p className="text-xs">Cargando clases y horas para {selectedDayFromCalendar.toLocaleDateString('es-ES', { weekday: 'long' })}...</p>
       ) : (
         <ReservaForm
-          initialData={currentData} customerId={currentCustomerId}/>
+          initialData={currentData} customerId={currentCustomerId} diaSeleccionado={selectedDayFromCalendar}/>
       )}
     </main>
   );

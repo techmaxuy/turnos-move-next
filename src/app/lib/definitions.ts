@@ -66,6 +66,7 @@ export type User = {
     hora: string;
     utilizada: string;
     customerId: string;
+    fechareserva: string;
   };
   
   // The database returns a number for amount, but we later format it to a string with the formatCurrency function

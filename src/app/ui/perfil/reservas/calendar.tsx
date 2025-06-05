@@ -17,16 +17,8 @@ export default function Calendar({ onDiaChange }: CalendarioProps) {
 
  
   const handlePickDate = async (event:any) => {
-    
     setStartDate(event);
     onDiaChange(event); // Invoca la Server Action con el nuevo día seleccionado
-    //if ((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase() === 'sábado') {
-      //onDiaChange('sabado')
-    //} else if ((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase() === 'miércoles') {
-      //onDiaChange('miercoles')
-    //} else {
-    //onDiaChange((event.toLocaleDateString('es-ES', { weekday: 'long' })).toLowerCase())
-    //}
   }
 
     return (
@@ -45,18 +37,4 @@ export default function Calendar({ onDiaChange }: CalendarioProps) {
     )
 }
 
-/*
-<div>
-  
-            <input 
-            type="date"
-            onChange={(e) => {
-          handleSearch(e.target.value);
-        }}
-        value={clsx( searchParams.get('query')
-          ? searchParams.get('query')?.toString()
-          : currentDate.toString()
-        )}
-             />
-*/
        

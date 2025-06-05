@@ -8,10 +8,11 @@ import { useState } from 'react';
 
 
  export default function ReservaForm(
-   {initialData, customerId}:
+   {initialData, customerId, diaSeleccionado}:
     {
       initialData:  Array<{ clase_id: string; nombre: string; dias: string[]; horas: string[] }>,
-      customerId: string
+      customerId: string,
+      diaSeleccionado: Date
     })
 
     {
@@ -30,6 +31,8 @@ import { useState } from 'react';
     setSelectedValue(event.target.value);
   };
 
+  console.log(`Dia seleccionado: ${diaSeleccionado.toDateString()}`);
+  
   return (
     <div className="my-4 w-full">      
         <div className="rounded-md bg-[#484848] p-2 md:p-6">
@@ -47,6 +50,9 @@ import { useState } from 'react';
                     </div>
                     <div className="hidden">
                       <input type="hidden" name="hora" value={hora} />
+                    </div>
+                    <div className="hidden">
+                      <input type="hidden" name="diaseleccionado" value={diaSeleccionado.toDateString()} />
                     </div>
                     <p>{clase.nombre} - {hora} hs.</p>
                       <Button type="submit">Reservar</Button>

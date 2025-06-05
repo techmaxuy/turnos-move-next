@@ -152,15 +152,16 @@ export async function fetchClasesByDay(dia: string) {
 export async function fetchLatestReservas(id: string) {
   try {
     const data = await sql<LatestReservas[]>`
-      SELECT id, clase_id, hora,  utilizada, create_date,customerId
+      SELECT id, clase_id, hora,  utilizada, create_date,customerId,fechareserva
       FROM reservas
       WHERE customerId = ${id}
-      ORDER BY reservas.create_date DESC
+      ORDER BY reservas.fechareserva DESC
       `;
     //console.log(data)
     const latestReservas = data.map((reserva) => ({
       ...reserva,
       create_date: formatDateToLocal(reserva.create_date),
+      fechareserva: formatDateToLocal(reserva.fechareserva),
     }));
     //console.log(latestInvoices)
     return latestReservas;

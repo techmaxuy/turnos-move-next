@@ -5,19 +5,6 @@ import NoAutenticado from "../../ui/noAutenticado";
 import ReservaPageContent from '@/app/ui/perfil/reservas/reservaPageContent';
 import { quicksand } from '@/app/ui/fonts';
 
-async function getServerClasesYHorasPorDia(diaSeleccionado: string) {
-  'use server'; // ¡Directiva de Server Action!
-  console.log(`Server Action: Obteniendo datos para el día: ${diaSeleccionado}`);
-  // Aquí invocas tu lógica de base de datos
-  const data = await fetchClasesByDay(diaSeleccionado);
-  const clases = data.map((clase) => ({
-    clase_id: clase.clase_id,
-    nombre: clase.nombre,
-    dias: clase.dias,
-    horas: clase.horas,
-  }));
-  return clases; // { clases: [], horas: [] }
-}
 
 async function getServerClasesYHorasPorDiaV2(nuevoDia: Date) {
   'use server'; // ¡Directiva de Server Action!
