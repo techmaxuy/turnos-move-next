@@ -16,7 +16,7 @@ export default function RegisterForm() {
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-[#212121] px-6 pb-4 pt-8 border-2 border-white">
         <p className="mb-3 text-2xl">
-          Registro de usuario
+          Registroen Move trainging
         </p>
           <div className="w-full">
 
