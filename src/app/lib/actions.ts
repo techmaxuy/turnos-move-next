@@ -235,6 +235,21 @@ export async function eliminarReserva(prevState: eliminarReservaState, formData:
       DELETE FROM reservas
       WHERE id = ${reservaId}
     `;
+
+    // Optionally, you can also update the customer's creditos if needed
+    const  creditos = await sql`
+      SELECT creditos FROM customers WHERE id = ${customerId}
+    `;
+
+    const creditosActuales = Number(creditos[0].creditos);
+    const creditosRestantes = creditosActuales + 1; // Add one credit back
+
+    await sql`
+      UPDATE customers
+      SET creditos = ${creditosRestantes}
+      WHERE id = ${customerId}
+    `;
+
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
