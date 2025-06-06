@@ -4,6 +4,7 @@ import { Button } from '@/app/ui/button';
 import { useActionState } from 'react';
 import { authenticate } from '@/app/lib/actions';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function LoginForm() {
   const searchParams = useSearchParams();
@@ -14,10 +15,10 @@ export default function LoginForm() {
   );
 
   return (
-    <form action={formAction} className="space-y-3">
-      <div className="flex-1 rounded-lg bg-[#212121] px-6 pb-4 pt-8 border-2 border-white">
+    <form action={formAction}>
+      <div className="flex flex-col rounded-lg bg-[#212121] border-2 border-white p-6">
         <h1 className="mb-3 text-2xl">
-          Ingresar a Move training
+          Ingresar a Move training center
         </h1>
         <div className="w-full">
           <div>
@@ -74,6 +75,12 @@ export default function LoginForm() {
             </>
           )}
         </div>
+        <div className="text-center  text-sm  text-white hover:text-gray-700 rounded-lg bg-blue-500 mt-6 p-2">
+          <Link href={"/register"} >
+          No tienes cuenta? Registrate
+        </Link>
+        </div>
+        
       </div>
     </form>
   );

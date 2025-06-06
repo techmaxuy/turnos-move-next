@@ -1,5 +1,5 @@
 
-import { lusitana } from '@/app/ui/fonts';
+import { quicksand } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
 import { Suspense } from 'react';
 import CustomerTable from '@/app/ui/portalingreso/table';
@@ -24,10 +24,10 @@ export default async function Page(props: {
     const query = searchParams?.query || '';
 
   return (
-    <div className="mx-2 mb-4 md:mt-15 place-items-center">
+    <div className={`${quicksand.className} mx-2 mb-4 md:mt-15 place-items-center`} >
           <Link
             className=""
-              href="/"
+              href="/perfil"
           > 
             <Image
               className="dark:invert min-h-[100px] min-w-[100px]"
@@ -41,8 +41,8 @@ export default async function Page(props: {
         <div className="flex flex-col w-full rounded-xl bg-[#568072] p-4 md:pt-0 mt-2 ">
                 <div className="flex flex-col items-center pb-2 pt-6">
                     <Suspense fallback={null}>
-                        <div className="flex items-center w-2/3 justify-between gap-2 md:mt-8">
-                            <Search placeholder="identificacion..." />
+                        <div className="flex items-center w-2/3 justify-between gap-2 md:mt-8 placeholder:font-semibold ">
+                            <Search placeholder="CEDULA DE IDENTIDAD..." />
                         </div>
                     </Suspense>
                     <CustomerTable query={query}/>

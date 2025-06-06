@@ -45,7 +45,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   return (
     <div className="relative flex flex-col flex-1 flex-shrink-0">
       <input
-        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-white"
+        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-white placeholder:text-xl"
         placeholder={placeholder}
         onChange={(e) => {
           handleSearch(e.target.value);
