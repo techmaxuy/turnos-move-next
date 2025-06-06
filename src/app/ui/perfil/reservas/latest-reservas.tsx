@@ -15,7 +15,7 @@ export default function misReservasForm( { latestReservas,customerId }: {  lates
     <div >
         {latestReservas.map((reserva, i) => {
           return (
-            <form key={reserva.id} >
+            <form action={formAction} key={reserva.id} >
               <div
                 key={reserva.id}
                 className={clsx(

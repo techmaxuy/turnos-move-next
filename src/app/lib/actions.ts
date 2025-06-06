@@ -233,7 +233,7 @@ export async function eliminarReserva(prevState: eliminarReservaState, formData:
   try {
     await sql`
       DELETE FROM reservas
-      WHERE id = ${reservaId} AND customerid = ${customerId}
+      WHERE id = ${reservaId}
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
