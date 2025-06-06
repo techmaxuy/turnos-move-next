@@ -4,9 +4,9 @@
 // However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
     id: string;
-    name: string;
     email: string;
     password: string;
+    userdetalleid: string;
   };
   
   export type Customer = {
@@ -16,6 +16,7 @@ export type User = {
     telefono : string;
     ci:string;
     creditos: string;
+    userdetalleid: string;
   };
   
   export type Invoice = {
@@ -141,4 +142,5 @@ export type User = {
     telefono : string;
     ci:string;
     creditos: string;
+    userdetalleid: string;
   };

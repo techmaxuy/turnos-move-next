@@ -18,10 +18,6 @@ async function getUser(email: string): Promise<User | undefined> {
   }
 }
 
-//export const signIn =() => {
- // return null
-//}
-
 export const { handlers, auth, signIn, signOut } = NextAuth({...authConfig, providers: [Credentials({
       async authorize(credentials) {
         const parsedCredentials = 

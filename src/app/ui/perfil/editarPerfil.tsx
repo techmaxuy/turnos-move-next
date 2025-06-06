@@ -62,6 +62,7 @@ import { useActionState } from 'react';
                 id="email"
                 name="email"
                 type="email"
+                disabled
                 required
                 placeholder="Email"
                 className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm text-black  placeholder:text-black"

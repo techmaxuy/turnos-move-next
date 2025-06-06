@@ -7,9 +7,9 @@ import { redirect } from 'next/navigation';
 import { signIn } from '../auth';
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcryptjs';
-import { NODE_BASE_ESM_RESOLVE_OPTIONS } from 'next/dist/build/webpack-config';
 import { Resend } from "resend";
-import Form from '../ui/perfil/editarPerfil';
+import { randomUUID } from 'crypto';
+
 
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
@@ -94,6 +94,13 @@ const FormSchemaReserva = z.object({
   }),
 });
 
+const FormSchemaEliminarReserva = z.object({
+  reservaId: z.string(),
+  customerId: z.string({
+    invalid_type_error: 'Por favor selecciona una reserva.',
+  }),
+});
+
 const FormSchemaClase = z.object({
   id: z.string(),
   clase: z.string().min(1, {
@@ -132,6 +139,13 @@ export type claseState = {
     clase?: string[];
     //dias?: string[];
     //horas?: string[];
+  };
+  message?: string | null;
+};
+
+export type eliminarReservaState = {
+  errors?: {
+    reservaId?: string[];
   };
   message?: string | null;
 };
@@ -191,10 +205,52 @@ export async function createReservaV2(prevState: reservaState, formData: FormDat
 
 }
 
+export async function eliminarReserva(prevState: eliminarReservaState, formData: FormData) {
+
+  console.log(formData)
+
+  
+  // Validate form fields using Zod
+  const validatedFields = FormSchemaEliminarReserva.safeParse({
+    reservaId: formData.get('reservaId'),
+    customerId: formData.get('customerId'),
+  });
+
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Faltan llenar campos. Imposible eliminar reserva.',
+    };
+  }
+
+  // Prepare data for insertion into the database
+  const { reservaId, customerId} = validatedFields.data;
+  
+  
+  // Insert data into the database
+  try {
+    await sql`
+      DELETE FROM reservas
+      WHERE id = ${reservaId} AND customerid = ${customerId}
+    `;
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Eliminar Reserva. ' + error,
+    };
+  }
+
+  // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath('/perfil/misreservas');
+  redirect('/perfil/misreservas');
+
+}
+
+
 
 export async function createReserva(prevState: reservaState, formData: FormData) {
-
-  console.log('Form Data:', formData);
   // Validate form fields using Zod
   const validatedFields = CreateReserva.safeParse({
     clase: formData.get('clase'),
@@ -218,6 +274,9 @@ export async function createReserva(prevState: reservaState, formData: FormData)
   const date = new Date().toLocaleDateString();
   const utilizada = "false"; // Default value for utilizada
 
+  
+  
+  
   // Insert data into the database
   try {
     await sql`
@@ -593,15 +652,16 @@ export async function signup(prevState: registerState | undefined,
   const creditos = "5"; // Default value for creditos
   const telefono = "090000000"; // Default value for telefono
   const ci = "30000000"; // Default value for ci
+  const Rid = randomUUID(); // Generate a unique ID for the user
 
   try { 
     await sql`
-      INSERT INTO users (name, email, password) 
-      VALUES (${nombre},${email}, ${hashedPassword})
+      INSERT INTO users (email, password, userdetalleid) 
+      VALUES (${email}, ${hashedPassword}, ${Rid})
     `;
      await sql`
-      INSERT INTO customers (name, email, telefono, creditos, ci)
-      VALUES (${nombre}, ${email}, ${telefono}, ${creditos}, ${ci})
+      INSERT INTO customers (name, email, telefono, creditos, ci, userdetalleid)
+      VALUES (${nombre}, ${email}, ${telefono}, ${creditos}, ${ci}, ${Rid})
     `;
 
   } catch (error) {

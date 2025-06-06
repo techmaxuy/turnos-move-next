@@ -305,10 +305,11 @@ export async function fetchClienteById(id: string) {
       customers.email,
       customers.telefono,
 		  customers.ci,
-      customers.creditos
+      customers.creditos,
+      customers.userdetalleid
 		FROM customers
 		WHERE
-		  customers.id = ${id}
+		  customers.id::text = ${id}
 		ORDER BY customers.name ASC
 	  `;
 

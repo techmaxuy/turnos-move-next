@@ -31,11 +31,13 @@ export const authConfig = {
             const isAdmin: boolean = await fetchisAdmin(session?.userId);
             session.isAdmin = isAdmin;
 
-            if (!isAdmin) {
+            //if (!isAdmin) {
 
               const customer: Customer = await fetchClienteByEmail(session?.user?.email);
               session.customerId = customer.id
-            }
+              session.name = customer.name;
+            //}
+
             return session
     },
 

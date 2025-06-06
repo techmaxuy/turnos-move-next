@@ -5,5 +5,6 @@ declare module 'next-auth' {
         userId: string;
         isAdmin: boolean;
         customerId: string;
+        name: string;
     }
 }
