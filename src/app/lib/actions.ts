@@ -274,8 +274,35 @@ export async function createReserva(prevState: reservaState, formData: FormData)
   const date = new Date().toLocaleDateString();
   const utilizada = "false"; // Default value for utilizada
 
-  
-  
+  //consulta si el usuario tiene creditos
+  try {
+    const creditos = await sql`
+    SELECT creditos FROM customers WHERE id = ${customerId}
+  `;
+
+    // Si el usuario no tiene creditos, retorna un mensaje de error
+    if (creditos.length === 0 || Number(creditos[0].creditos) <= 0) {
+      return {
+        message: 'No tienes creditos suficientes para realizar esta reserva.',
+      };
+    }
+
+    // Si el usuario tiene creditos, resta uno y actualiza la base de datos
+    const creditosActuales = Number(creditos[0].creditos);
+    const creditosRestantes = creditosActuales - 1;
+
+    await sql`
+      UPDATE customers
+      SET creditos = ${creditosRestantes}
+      WHERE id = ${customerId}
+    `;
+
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to consultar los creditos. ' + error,
+    };
+  }
   
   // Insert data into the database
   try {
