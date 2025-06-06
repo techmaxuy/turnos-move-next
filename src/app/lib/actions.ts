@@ -290,7 +290,23 @@ export async function createReserva(prevState: reservaState, formData: FormData)
   const utilizada = "false"; // Default value for utilizada
 
   //consulta si el usuario tiene creditos
+  //consulta si no reservo ese mismo dia hora clase
   try {
+    const existingReserva = await sql`
+      SELECT * FROM reservas 
+      WHERE clase_id = ${clase} 
+      AND hora = ${hora} 
+      AND customerid = ${customerId}
+      AND fechareserva = ${diaSeleccionado}
+    `;
+
+    // Si ya existe una reserva para esa clase, hora y dia, retorna un mensaje de error
+    if (existingReserva.length > 0) {
+      return {
+        message: 'Ya tienes una reserva para esta clase, hora y dia.',
+      };
+    }
+
     const creditos = await sql`
     SELECT creditos FROM customers WHERE id = ${customerId}
   `;
