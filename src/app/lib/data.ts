@@ -48,6 +48,30 @@ export async function fetchUser(email: string): Promise<User> {
 }
 
 
+
+export async function fetchReservasByClaseDiaHora(claseid: string, dia: string, hora: string) {
+  if (!claseid || !dia || !hora) {
+    return false;
+  }
+  try {
+    const data = await sql`
+      SELECT reservas.id, reservas.clase_id, reservas.hora, reservas.utilizada, reservas.create_date, reservas.customerId, reservas.fechareserva,
+             customers.name AS customerName, customers.email AS customerEmail
+      FROM reservas
+      JOIN customers ON reservas.customerId = customers.id::text
+      `;
+    return data
+
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('');
+  }
+}
+
+//AND reservas.fechareserva = ${dia}
+//  AND reservas.hora = ${hora}
+//WHERE reservas.clase_id = ${claseid}
+
 export async function fetchisAdmin(id: string | undefined) {
   if (!id) {
     return false;

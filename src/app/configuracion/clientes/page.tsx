@@ -1,5 +1,4 @@
 
-import Pagination from '@/app/ui/configuracion/clientes/pagination';
 import Search from '@/app/ui/configuracion/search';
 import Table from '@/app/ui/configuracion/clientes/table';
 import { AgregarCliente } from '@/app/ui/configuracion/clientes/buttons';
@@ -22,8 +21,7 @@ export default async function Page(props: {
 
   const searchParams = await props.searchParams;
   const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
-
+  
 
   return (
     <div className="mx-2 mb-4 md:mt-15">

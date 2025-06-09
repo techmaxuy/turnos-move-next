@@ -3,7 +3,6 @@ import { quicksand } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
 import { Suspense } from 'react';
 import CustomerTable from '@/app/ui/portalingreso/table';
-import { CustomerPortalIngresoTableSkeleton } from '@/app/ui/skeletons';
 import Link from 'next/link';
 import Image from "next/image";
 import { auth } from "../auth"

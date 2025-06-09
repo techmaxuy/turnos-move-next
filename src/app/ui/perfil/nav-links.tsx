@@ -16,8 +16,7 @@ export default function NavLinks({ isAdmin }: { isAdmin: boolean  } = { isAdmin:
    links = [
 
   { name: 'Configuracion', href: '/configuracion' },
-  { name: 'Portal de Ingreso', href: '/portalingreso' },
-  { name: 'Reservas', href: '/reservas' },
+  { name: 'Reporte Clases', href: '/configuracion/clasesAdmin' },
   ];
   } else {
   links = [

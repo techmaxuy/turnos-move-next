@@ -121,6 +121,7 @@ const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 const CreateCliente = FormSchemaCliente.omit({ id: true, creditos: true });
 const EditarCliente = FormSchemaCliente.omit({ id: true, creditos: true });
 const CreateReserva = FormSchemaReserva.omit({ id: true, utilizada: true, create_date: true });
+const verReserva = FormSchemaReserva.omit({ id: true, utilizada: true, create_date: true, customerId: true });
 const CrearClase = FormSchemaClase.omit({ id: true});
 
 export type State = {
@@ -263,6 +264,97 @@ export async function eliminarReserva(prevState: eliminarReservaState, formData:
 
 }
 
+export async function createReservaYcompleto(prevState: reservaState, formData: FormData) {
+  // Validate form fields using Zod
+  const validatedFields = CreateReserva.safeParse({
+    clase: formData.get('clase'),
+    hora: formData.get('hora'),
+    customerId: formData.get('customerId'),
+    diaSeleccionado: formData.get('diaseleccionado'),
+  });
+
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Faltan llenar campos. Imposible cargar reserva.',
+    };
+  }
+
+  // Prepare data for insertion into the database
+  const { clase , hora, customerId,diaSeleccionado} = validatedFields.data;
+
+  const date = new Date().toLocaleDateString();
+  const utilizada = "false"; // Default value for utilizada
+
+  //consulta si el usuario tiene creditos
+  //consulta si no reservo ese mismo dia hora clase
+  try {
+    const existingReserva = await sql`
+      SELECT * FROM reservas 
+      WHERE clase_id = ${clase} 
+      AND hora = ${hora} 
+      AND customerid = ${customerId}
+      AND fechareserva = ${diaSeleccionado}
+    `;
+
+    // Si ya existe una reserva para esa clase, hora y dia, retorna un mensaje de error
+    if (existingReserva.length > 0) {
+      return {
+        message: 'Ya tienes una reserva para esta clase, hora y dia.',
+      };
+    }
+
+    const creditos = await sql`
+    SELECT creditos FROM customers WHERE id = ${customerId}
+  `;
+
+    // Si el usuario no tiene creditos, retorna un mensaje de error
+    if (creditos.length === 0 || Number(creditos[0].creditos) <= 0) {
+      return {
+        message: 'No tienes creditos suficientes para realizar esta reserva.',
+      };
+    }
+
+    // Si el usuario tiene creditos, resta uno y actualiza la base de datos
+    const creditosActuales = Number(creditos[0].creditos);
+    const creditosRestantes = creditosActuales - 1;
+
+    await sql`
+      UPDATE customers
+      SET creditos = ${creditosRestantes}
+      WHERE id = ${customerId}
+    `;
+
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to consultar los creditos. ' + error,
+    };
+  }
+  
+  // Insert data into the database
+  try {
+    await sql`
+      INSERT INTO reservas (clase_id, hora, utilizada, create_date, customerid,fechareserva)
+      VALUES (${clase}, ${hora}, ${utilizada}, ${date}, ${customerId}, ${diaSeleccionado})
+    `;
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Create Reserva. ' + error,
+    };
+  }
+
+  // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath('/perfil/misreservas');
+  redirect('/perfil/misreservas');
+}
+
+
+
+
 
 
 export async function createReserva(prevState: reservaState, formData: FormData) {
@@ -354,6 +446,44 @@ export async function createReserva(prevState: reservaState, formData: FormData)
 }
 
 
+export async function verReservas(prevState: reservaState, formData: FormData) {
+
+    // Validate form fields using Zod
+  const validatedFields = verReserva.safeParse({
+    clase: formData.get('clase'),
+    hora: formData.get('hora'),
+    diaSeleccionado: formData.get('diaseleccionado'),
+  });
+
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Faltan parámetros para ver las reservas.',
+    };
+  }
+
+  console.log(validatedFields.data);
+  // Prepare data for insertion into the database
+  const claseId = validatedFields.data.clase as string;
+  const diaSeleccionado = validatedFields.data.diaSeleccionado as string; // String de la fecha (ej. "Mon Jun 09 2025")
+  const hora = validatedFields.data.hora as string;
+  
+
+  // Codifica los parámetros para la URL
+  const encodedClaseId = encodeURIComponent(claseId);
+  const encodedDia = encodeURIComponent(diaSeleccionado);
+  const encodedHora = encodeURIComponent(hora);
+
+  // ⭐ REDIRECCIONA a la página de detalles de reservas
+  // La URL debe ser una ruta que ya existe o que vas a crear.
+  // Puedes usar search params como aquí, o rutas dinámicas [claseId]/[dia]/[hora]
+  redirect(`/configuracion/claseDetails?claseId=\{encodedClaseId\}&dia\={encodedDia}&hora=\{encodedHora\}`);
+
+  // NOTA: El código después de `redirect()` no se ejecutará.
+  // El `Promise<reservaState>` en la firma es solo para satisfacer el tipo de useActionState.
+}
 
 export async function createInvoice(prevState: State, formData: FormData) {
   // Validate form fields using Zod

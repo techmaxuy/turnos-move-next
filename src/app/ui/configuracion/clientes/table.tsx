@@ -1,7 +1,5 @@
-import Image from 'next/image';
+
 import { ModificarCliente, BorrarCliente } from '@/app/ui/configuracion/clientes/buttons';
-//import InvoiceStatus from '@/app/ui/configuracion/clientes/status';
-import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchCustomers } from '@/app/lib/data';
 
 export default async function CustomersTable() {
