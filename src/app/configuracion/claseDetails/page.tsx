@@ -8,9 +8,9 @@ import { quicksand } from '@/app/ui/fonts';
 
 interface ReservasDetallesPageProps {
   searchParams: {
-    claseId?: string;
-    dia?: string;
-    hora?: string;
+    claseId?: string | undefined;
+    dia?: string | undefined;
+    hora?: string   | undefined;
   };
 }
 
