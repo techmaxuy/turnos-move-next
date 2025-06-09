@@ -7,18 +7,21 @@ import { quicksand } from '@/app/ui/fonts';
 //import { marcarAsistencia } from '@/app/lib/admin-actions'; // Crea esta acción
 
 interface ReservasDetallesPageProps {
-  searchParams: {
-    claseId?: string | undefined;
-    dia?: string | undefined;
-    hora?: string   | undefined;
-  };
+  searchParams?: Promise<{
+    claseId?: string;
+    dia?: string;
+    hora?: string;
+  }>;
 }
 
-export default async function ReservasDetallesPage({ searchParams }: ReservasDetallesPageProps) {
+export default async function ReservasDetallesPage(props: ReservasDetallesPageProps) {
   const session = await auth();
   if (!session) return <NoAutenticado />; // Asegura que solo admins accedan
 
-  const { claseId, dia, hora } = searchParams;
+  const searchParams = await props.searchParams;
+  const claseId = searchParams?.claseId;
+  const dia = searchParams?.dia;
+  const hora = searchParams?.hora;
 
   if (!claseId || !dia || !hora) {
     return (
