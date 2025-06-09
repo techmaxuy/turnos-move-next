@@ -479,7 +479,8 @@ export async function verReservas(prevState: reservaState, formData: FormData) {
   // ⭐ REDIRECCIONA a la página de detalles de reservas
   // La URL debe ser una ruta que ya existe o que vas a crear.
   // Puedes usar search params como aquí, o rutas dinámicas [claseId]/[dia]/[hora]
-  redirect(`/configuracion/claseDetails?claseId=\{encodedClaseId\}&dia\={encodedDia}&hora=\{encodedHora\}`);
+  redirect(`/configuracion/claseDetails?claseId=${encodedClaseId}&dia=${encodedDia}&hora=${encodedHora}`);
+
 
   // NOTA: El código después de `redirect()` no se ejecutará.
   // El `Promise<reservaState>` en la firma es solo para satisfacer el tipo de useActionState.
