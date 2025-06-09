@@ -59,6 +59,9 @@ export async function fetchReservasByClaseDiaHora(claseid: string, dia: string, 
              customers.name AS customerName, customers.email AS customerEmail
       FROM reservas
       JOIN customers ON reservas.customerId = customers.id::text
+      WHERE reservas.clase_id = ${claseid}
+      AND reservas.hora = ${hora}
+      AND reservas.fechareserva = ${dia}
       `;
     return data
 
