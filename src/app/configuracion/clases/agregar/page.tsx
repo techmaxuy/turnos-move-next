@@ -4,8 +4,8 @@ import NoAutenticado from "../../../ui/noAutenticado";
  
 export default async function Page() {
 
-     const session = await auth()
-    if (!session) return <NoAutenticado />
+  const session = await auth()
+  if (!session) return <NoAutenticado />
  
   return (
     <main>

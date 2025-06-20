@@ -1,21 +1,21 @@
 'use client';
 
-import { CustomerField } from '@/app/lib/definitions';
 import Link from 'next/link';
 import { Button } from '@/app/ui/configuracion/button';
 import { createCliente, clienteState } from '@/app/lib/actions';
 import { useActionState } from 'react';
+import { quicksand } from '@/app/ui/fonts';
 
  export default function Form() {
   const initialState: clienteState = { message: null, errors: {} };
   const [clientestate, formAction] = useActionState(createCliente, initialState);
 
   return (
-  <>
+  <div className={`${quicksand.className} border-2 border-solid border-[grey] text-2xl p-x-1 rounded-md bg-[#484848] p-4 m-6 md:p-6 md:mt-40`}>
     <form action={formAction}>
         {/* Nombre completo del cliente */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+          <label htmlFor="amount" className="mb-2 block text-sm font-semibold  font-medium">
             Nombre Completo
           </label>
           <div className="relative mt-2 rounded-md">
@@ -26,7 +26,7 @@ import { useActionState } from 'react';
                 type="text"
                 required
                 placeholder="Nombre Completo"
-                className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
+                className="peer block w-full rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-white"
                 aria-describedby="nombre-error"
               />
             </div>
@@ -45,7 +45,7 @@ import { useActionState } from 'react';
         {/* Email */}
         <div className="mb-4"> 
 
-          <label htmlFor="email" className="mb-2 block text-sm font-medium">
+          <label htmlFor="email" className="mb-2 block text-sm font-semibold  font-medium">
             Email
           </label>
           <div className="relative mt-2 rounded-md">
@@ -56,7 +56,7 @@ import { useActionState } from 'react';
                 type="email"
                 required
                 placeholder="Email"
-                className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
+                className="peer block w-full rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-white"
                 aria-describedby="email-error"
               />
             </div>
@@ -75,7 +75,7 @@ import { useActionState } from 'react';
                 {/* Telefono*/}
                 <div className="mb-4"> 
 
-        <label htmlFor="telefono" className="mb-2 block text-sm font-medium">
+        <label htmlFor="telefono" className="mb-2 block text-sm font-semibold  font-medium">
           Telefono
         </label>
         <div className="relative mt-2 rounded-md">
@@ -86,7 +86,7 @@ import { useActionState } from 'react';
               type="number"
               required
               placeholder="Telefono"
-              className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
+              className="peer block w-full rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-white"
               aria-describedby="telefono-error"
             />
           </div>
@@ -105,7 +105,7 @@ import { useActionState } from 'react';
                                 {/* CI*/}
                                 <div className="mb-4"> 
 
-        <label htmlFor="ci" className="mb-2 block text-sm font-medium">
+        <label htmlFor="ci" className="mb-2 block text-sm font-semibold  font-medium">
           CI
         </label>
         <div className="relative mt-2 rounded-md">
@@ -116,7 +116,7 @@ import { useActionState } from 'react';
               type="number"
               required
               placeholder="Cedula de Identidad"
-              className="peer w-full rounded-md border border-[#212121] bg-[#78bba5] py-[9px] pl-10 text-sm  placeholder:text-black"
+              className="peer block w-full rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-white"
               aria-describedby="ci-error"
             />
           </div>
@@ -135,12 +135,13 @@ import { useActionState } from 'react';
       <div className="mt-6 flex justify-end gap-4">
         <Link
           href="/configuracion/clientes"
-          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium font-semibold text-gray-600 transition-colors hover:bg-gray-200"
         >
-          Cancel
+          Cancelar
         </Link>
         <Button type="submit">Crear cliente</Button>
       </div>
     </form>
-  </>);
+  </div>
+  );
 }

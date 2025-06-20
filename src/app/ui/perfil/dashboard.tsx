@@ -2,11 +2,10 @@ import Link from "next/link"
 import { auth } from "../../auth"
 import { quicksand } from '@/app/ui/fonts';
 import { fetchClienteByEmail } from '../../lib/data';
-import type { User , Customer } from '@/app/lib/definitions';
  
 export default async function PerfilDashboard() {
+  
   const session = await auth()
- 
   if (!session?.user) return null
 
   const user = await fetchClienteByEmail(session?.user?.email ?? '');
@@ -27,7 +26,6 @@ export default async function PerfilDashboard() {
           </Link>
         </div>
       </div>
-
       <div className="rounded border-2 border-solid  border-[#01feab] align-center m-6 p-6 bg-[#303030]" >
         <div>
           <h1 className={`${quicksand.className} text-2xl p-x-1`}>Creditos Disponibles</h1>

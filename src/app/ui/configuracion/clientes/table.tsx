@@ -1,12 +1,12 @@
 
-import { ModificarCliente, BorrarCliente } from '@/app/ui/configuracion/clientes/buttons';
+import { ModificarCliente, BorrarCliente } from '@/app/ui/buttons';
 import { fetchCustomers } from '@/app/lib/data';
 
 export default async function CustomersTable() {
   const clientes = await fetchCustomers();
 
   return (
-        <div className="rounded-lg bg-[#568072] p-2 md:pt-0 mt-2">
+        <div className="rounded-lg bg-[#636363] p-2 md:pt-0 mt-2">
           <div className="md:hidden">
             {clientes?.map((cliente) => (
               <div key={cliente.id} className="flex flex-col mb-1 w-full rounded-md bg-white p-1 text-black">

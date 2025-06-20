@@ -2,7 +2,6 @@
 
 import { Button } from '@/app/ui/button';
 import { useActionState } from 'react';
-
 import { signup } from '../lib/actions';
 
 export default function RegisterForm() {

@@ -40,10 +40,6 @@ import { quicksand } from '@/app/ui/fonts';
 
   return (
     <div className={`${quicksand.className} border-2 border-solid border-[grey] text-2xl p-x-1 rounded-md bg-[#484848] p-4 m-6 md:p-6 md:mt-40`}>
-      <p className="mb-4 text-lg font-semibold text-white">
-        Formulario de creacion de Clase
-      </p>
-
       <form action={formAction}>
         
           {/* Nombre Clase */}
@@ -57,7 +53,7 @@ import { quicksand } from '@/app/ui/fonts';
                   name="clase"
                   type="text"
                   placeholder="Ingresar un nombre para la clase"
-                  className="peer block w-full rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-black"
+                  className="peer block w-full rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-white"
                   aria-describedby="clase-error"
                 />
             </div>
@@ -95,9 +91,10 @@ import { quicksand } from '@/app/ui/fonts';
             <div  className="flex flex-wrap">        
                 {horas.map((hora) => (
                   <div key={hora.id}>
-                  <input aria-describedby='horas-error' type="checkbox" name="horas" value={hora.id}  /> 
-                  <label
-                    className="inline-flex items-center mr-4 mb-2 cursor-pointer"
+                   
+                  <input aria-describedby='horas-error' type="checkbox" name="horas" value={hora.id}  />
+                   <label
+                    className="flex-col items-center mr-4 mb-2 cursor-pointer"
                   >
                     <span className="mr-2 text-sm text-white">{hora.name}</span>  
                   </label>
@@ -115,9 +112,9 @@ import { quicksand } from '@/app/ui/fonts';
         <div className="mt-6 flex justify-end gap-4">
           <Link
             href="/configuracion"
-            className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+            className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium font-semibold text-gray-600 transition-colors hover:bg-gray-200"
           >
-            Cancel
+            Cancelar
           </Link>
           <Button type="submit">Crear Clase</Button>
         </div>

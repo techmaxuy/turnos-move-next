@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/app/ui/configuracion/button';
 import { createInvoice, State } from '@/app/lib/actions';
 import { useActionState } from 'react';
+import { quicksand } from '@/app/ui/fonts';
 
  export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState: State = { message: null, errors: {} };
@@ -19,12 +20,11 @@ import { useActionState } from 'react';
     { id: '12', name: '12 clases'}];
 
   return (
+    <div className={`${quicksand.className} border-2 border-solid border-[grey] text-2xl p-x-1 rounded-md bg-[#484848] p-4 m-6 md:p-6 md:mt-40`}>
     <form action={formAction}>
-      <div className="rounded-md bg-[#484848] p-4 md:p-6">
-
         {/* Customer Name */}
         <div className="mb-4">
-          <label htmlFor="customer" className="mb-2 block text-sm font-medium">
+          <label htmlFor="customer" className="mb-2 block text-sm font-semibold  font-medium">
             Elegir cliente
           </label>
           <div className="relative">
@@ -58,7 +58,7 @@ import { useActionState } from 'react';
 
         {/* Servicio */}
         <div className="mb-4">
-          <label htmlFor="servicio" className="mb-2 block text-sm font-medium">
+          <label htmlFor="servicio" className="mb-2 block text-sm font-semibold  font-medium">
            Tipo de Servicio
           </label>
           <div className="relative">
@@ -92,7 +92,7 @@ import { useActionState } from 'react';
 
         {/* Invoice Amount */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+          <label htmlFor="amount" className="mb-2 block text-sm font-semibold  font-medium">
             Monto
           </label>
           <div className="relative mt-2 rounded-md">
@@ -102,8 +102,8 @@ import { useActionState } from 'react';
                 name="amount"
                 type="number"
                 step="0.01"
-                placeholder="Enter USD amount"
-                className="peer block w-full rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                placeholder="Ingresar monto en $"
+                className="peer block w-full rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-white"
                 aria-describedby="amount-error"
               />
             </div>
@@ -121,14 +121,14 @@ import { useActionState } from 'react';
 
         {/* Tipo */}
         <div className="mb-4">
-          <label htmlFor="formaPago" className="mb-2 block text-sm font-medium">
+          <label htmlFor="formaPago" className="mb-2 block text-sm font-semibold  font-medium">
            Forma de pago
           </label>
           <div className="relative">
             <select
               id="formaPago"
               name="formaPagoId"
-              className="peer block w-full cursor-pointer rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-black"
+              className="peer block w-full cursor-pointer rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-white"
               defaultValue=""
               aria-describedby="formaPago-error"
             >
@@ -151,11 +151,11 @@ import { useActionState } from 'react';
                 </p>
               ))}
           </div>
-        </div>
+       
 
          {/* transaccion */}
-         <div className="mb-4">
-          <label htmlFor="transaccion" className="mb-2 block text-sm font-medium">
+         <div className="mt-4">
+          <label htmlFor="transaccion" className="mb-2 block text-sm font-semibold  font-medium">
             Nº de transaccion
           </label>
           <div className="relative mt-2 rounded-md">
@@ -165,7 +165,7 @@ import { useActionState } from 'react';
                 name="transaccion"
                 type="text"
                 placeholder="Ingresar un transaccion"
-                className="peer block w-full rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md bg-[#757575] border border-[#757575] py-2 pl-10 text-sm outline-2 placeholder:text-white"
                 aria-describedby="transaccion-error"
               />
             </div>
@@ -191,13 +191,14 @@ import { useActionState } from 'react';
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link
-          href="/configuracion/clientes"
-          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+          href="/configuracion/pagos"
+          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium font-semibold text-gray-600 transition-colors hover:bg-gray-200"
         >
-          Cancel
+          Cancelar
         </Link>
         <Button type="submit">Cargar pago</Button>
       </div>
     </form>
+    </div>
   );
 }

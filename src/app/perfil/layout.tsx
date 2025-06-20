@@ -5,8 +5,8 @@ import NoAutenticado from "../ui/noAutenticado";
 export default async function Layout({  children,}: Readonly<{  children: React.ReactNode;}>) {
 
 
-      const session = await auth()
-      if (!session) return <NoAutenticado />
+  const session = await auth()
+  if (!session) return <NoAutenticado />
 
   return (
     <div className="flex flex-col md:flex-row h-100dvh"> 
@@ -20,8 +20,3 @@ export default async function Layout({  children,}: Readonly<{  children: React.
   );
 }
 
-
-//flex h-screen flex-col md:flex-row md:overflow-hidden
-
-//w-full md:w-64
-//grow md:overflow-y-auto md:p-12
