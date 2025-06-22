@@ -32,7 +32,7 @@ export default function misReservasForm( { latestReservas,customerId }: {  lates
                   {reserva.clase_id}
                 </div>
                 <div> 
-                  {reserva.hora} hs.
+                  {reserva.hora.toString().length > 2 ? reserva.hora.toString().slice(0,2)+":"+reserva.hora.toString().slice(2,4) : reserva.hora} hs.
                 </div>
                 <div className="hidden">
                   <input type="hidden" name="reservaId" value={reserva.id} />

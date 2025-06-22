@@ -54,7 +54,7 @@ import { useState } from 'react';
                     <div className="hidden">
                       <input type="hidden" name="diaseleccionado" value={diaSeleccionado.toDateString()} />
                     </div>
-                    <p>{clase.nombre} - {hora} hs.</p>
+                    <p>{clase.nombre} - {hora.toString().length > 2? hora.toString().slice(0, 2) + ':' + hora.toString().slice(2, 4) : hora} hs.</p>
                       <Button type="submit">Reservar</Button>
                   </div>
                   <div aria-live="polite" aria-atomic="true">
