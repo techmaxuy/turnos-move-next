@@ -15,7 +15,6 @@ export default async function Home() {
     <div className="items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col mb-5 items-center justify-center">
         <Image
-          className="dark:invert"
           src="/logonuevo.svg"
           alt="Move logo"
           width={400}
