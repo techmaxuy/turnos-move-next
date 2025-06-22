@@ -29,7 +29,7 @@ export default async function Page(props: {
               href="/perfil"
           > 
             <Image
-              className="dark:invert min-h-[100px] min-w-[100px]"
+              className="min-h-[100px] min-w-[100px]"
               src="/logonuevo.svg"
               alt="Move logo"
               width={100}

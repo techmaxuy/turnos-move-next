@@ -11,7 +11,6 @@ export default function SideNav() {
         href="/"
       >
           <Image
-                    className="dark:invert"
                     src="/logonuevo.svg"
                     alt="Move logo"
                     width={150}

@@ -12,7 +12,6 @@ export default function RegisterPage() {
         <div className="flex items-center justify-center">
           <Link href="/" >
             <Image
-                      className="dark:invert"
                       src="/logonuevo.svg"
                       alt="Move logo"
                       width={200}
