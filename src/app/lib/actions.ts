@@ -427,6 +427,7 @@ export async function createReserva(prevState: reservaState, formData: FormData)
     };
   }
   
+  console.log(`Creando reserva para clase: ${clase}, hora: ${hora}, customerId: ${customerId}, diaSeleccionado: ${diaSeleccionado}`);
   // Insert data into the database
   try {
     await sql`
